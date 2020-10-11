@@ -9,18 +9,18 @@
   <header class="flex-row">
     <h1>My Kitchen</h1>
     <nav>
-      <button>All Recipes</button>
-      <button>My Favorites</button>
-      <button>My Pantry</button>
-      <button>What's Cookin'</button>
+      <button class="nav-btn"><h3>All Recipes</h3></button>
+      <button class="nav-btn"><h3>My Favorites</h3></button>
+      <button class="nav-btn"><h3>My Pantry</h3></button>
+      <button class="nav-btn"><h3>What's Cookin'</h3></button>
     </nav>
   </header>
   <body>
     <main class="flex-row">
-      <section class="flex-column main">
-        <form class="flex-column">
-          <div class="search-bar">
-            <input type="text" placeholder="Search">
+      <section class="flex-column" id="main">
+        <form class="flex-column" id="search-container">
+          <div>
+            <input type="text" placeholder="Search" id="search-bar">
           </div>
           <div class="flex-row radio-filter">
             <input type="radio" id="side-dishes" name="" value="">
@@ -50,10 +50,10 @@
             <li>Ingredient</li>
           </ul>
           <p>Total cost of all ingredients: $0.00</p>
-          <button>View Instructions</button>
-          <div class="flex-row">
-            <button>Favorite</button>
-            <button>What's Cookin'</button>
+          <button id="preview-btn"><h3>View Instructions</h3></button>
+          <div class="flex-row aside-btns">
+            <button class="aside-btn"><img src="../assets/fav-recipe-white.png" class="icon"></button>
+            <button class="aside-btn"><img src="../assets/whats-cookin-white.png" class="icon"></button>
           </div>
         </article>
         <article class="flex-column hidden">
