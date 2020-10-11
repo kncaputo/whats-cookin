@@ -3,11 +3,53 @@
   <head>
     <meta charset="UTF-8">
     <title>What's Cookin'</title>
-
+    <link rel="stylesheet" href="styles.css">
   </head>
-  <body>
-
-
+  <header>
+    <h1></h1>
+    <nav>
+      <button>All Recipes</button>
+      <button>My Favorites</button>
+      <button>My Pantry</button>
+      <button>What's Cookin'</button>
+    </nav>
+  </header>
+  <main class="flex-row">
+    <section class="flex-column">
+      <form class="flex-column">
+        <div>
+          <input type="text" name="" value="">
+        </div>
+        <div>
+          <input type="radio" name="" value="">
+        </div>
+      </form>
+      <div class="flex-row recipes-container">
+      </div>
+    </section>
+    <aside>
+      <article class="flex-column">
+        <img src="../assets/main-background.jpg" alt="cutting board image">
+        <h2></h2>
+        <p></p>
+        <button></button>
+        <div class="flex-row">
+          <button></button>
+          <button></button>
+          <button></button>
+        </div>
+      </article>
+      <article class="flex-column hidden">
+        <div class="flex-column">
+          <h2></h2>
+          <p></p>
+        </div>
+        <div class="flex-column">
+          <h2></h2>
+          <p></p>
+        </div>
+      </article>
+    </aside>
     <script type="text/javascript" src="../data/users.js"></script>
     <script type="text/javascript" src="../data/recipes.js"></script>
     <script type="text/javascript" src="../data/ingredients.js"></script>
@@ -16,5 +58,5 @@
     <script type="text/javascript" src="./recipe.js"></script>
     <script type="text/javascript" src="./user.js"></script>
     <script type="text/javascript" src="./scripts.js"></script>
-  </body>
+  </main>
 </html>
