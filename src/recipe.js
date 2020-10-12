@@ -1,8 +1,10 @@
 const Ingredient = require('../src/ingredient');
 
 class Recipe {
-  constructor() {
-    
+  constructor(id, imgSrc, name ) {
+    this.id = id;
+    this.image = imgSrc;
+    this.name = name;
   }
 }
 
