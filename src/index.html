@@ -2,14 +2,89 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Whats Cookin</title>
+    <title>What's Cookin'</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
   </head>
+  <header class="flex-row">
+    <h1>My Kitchen</h1>
+    <nav>
+      <button class="nav-btn"><h3>All Recipes</h3></button>
+      <button class="nav-btn"><h3>My Favorites</h3></button>
+      <button class="nav-btn"><h3>My Pantry</h3></button>
+      <button class="nav-btn"><h3>What's Cookin'</h3></button>
+    </nav>
+  </header>
   <body>
-    <h1>Whats Cookin</h1>
-
-    <script type="text/javascript" src="../data/users.js"></script>
-    <script type="text/javascript" src="../data/recipes.js"></script>
-    <script type="text/javascript" src="../data/ingredients.js"></script>
-    <script type="text/javascript" src="./scripts.js"></script>
+    <main class="flex-row">
+      <section class="flex-column" id="main">
+        <form class="flex-column" id="search-container">
+          <div>
+            <input type="text" placeholder="Search" id="search-bar">
+          </div>
+          <div class="flex-row radio-filter">
+            <input type="radio" id="breakfast" name="" value="">
+            <label for="breakfast"><img src="../assets/fav-recipe-white.png" class="icon"><br>Breakfast</label>
+            <input type="radio" id="lunch" name="" value="">
+            <label for="lunch"><img src="../assets/fav-recipe-white.png" class="icon"><br>Lunch</label>
+            <input type="radio" id="dinner" name="" value="">
+            <label for="dinner"><img src="../assets/fav-recipe-white.png" class="icon"><br>Dinner</label>
+            <input type="radio" id="dessert" name="" value="">
+            <label for="dessert"><img src="../assets/fav-recipe-white.png" class="icon"><br>Dessert</label>
+            <input type="radio" id="dips" name="" value="">
+            <label for="dips"><img src="../assets/fav-recipe-white.png" class="icon"><br>Dips</label>
+            <input type="radio" id="appetizers" name="" value="">
+            <label for="appetizers"><img src="../assets/fav-recipe-white.png" class="icon"><br>Appetizers</label>
+            <input type="radio" id="sides" name="" value="">
+            <label for="sides"><img src="../assets/fav-recipe-white.png" class="icon"><br>Sides</label>
+          </div>
+        </form>
+        <div class="flex-row recipes-container">
+        </div>
+      </section>
+      <aside>
+        <article class="flex-column">
+          <img src="../assets/main-background.jpg" alt="cutting board image">
+          <h2>Recipe Title</h2>
+          <ul>
+            <li>Ingredient</li>
+            <li>Ingredient</li>
+            <li>Ingredient</li>
+            <li>Ingredient</li>
+            <li>Ingredient</li>
+          </ul>
+          <p>Total cost of all ingredients: $0.00</p>
+          <button id="preview-btn"><h3>View Instructions</h3></button>
+          <div class="flex-row aside-btns">
+            <button class="aside-btn"><img src="../assets/fav-recipe-white.png" class="icon"></button>
+            <button class="aside-btn"><img src="../assets/whats-cookin-white.png" class="icon"></button>
+          </div>
+        </article>
+        <article class="flex-column hidden">
+          <div class="flex-column">
+            <h2>Shopping List</h2>
+            <ul>
+              <li>Ingredient</li>
+              <li>Ingredient</li>
+              <li>Ingredient</li>
+              <li>Ingredient</li>
+              <li>Ingredient</li>
+            </ul>
+          </div>
+          <div class="flex-column">
+            <h2></h2>
+            <p></p>
+          </div>
+        </article>
+      </aside>
+    </main>
   </body>
+  <script type="text/javascript" src="../data/users.js"></script>
+  <script type="text/javascript" src="../data/recipes.js"></script>
+  <script type="text/javascript" src="../data/ingredients.js"></script>
+  <script type="text/javascript" src="./ingredient.js"></script>
+  <script type="text/javascript" src="./pantry.js"></script>
+  <script type="text/javascript" src="./recipe.js"></script>
+  <script type="text/javascript" src="./user.js"></script>
+  <script type="text/javascript" src="./scripts.js"></script>
 </html>

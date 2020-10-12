@@ -1,0 +1,162 @@
+/* COLOR PALETTE
+red: #c22611
+orange: #e5451d
+blue: #145b9c
+light grey: #c1c3c2
+grey: #747d90
+*/
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: 500;
+  flex-grow: 1;
+  padding-left: 20px;
+  color: white;
+}
+
+h2 {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+p {
+  font-size: 12px;
+  font-weight: 100;
+}
+
+header {
+  align-items: center;
+  background-color: #c22611;
+}
+
+nav {
+  padding-right: 20px;
+}
+
+img {
+  height: 200px;
+  width: 260px;
+}
+
+aside {
+  margin: 30px;
+}
+
+button {
+  border: none;
+  outline: none;
+}
+
+button, .radio-filter label:hover {
+  cursor: pointer
+}
+
+
+.hidden {
+  display: none !important;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-btn {
+  color: white;
+  background: none;
+  padding: 0 25px 0 25px;
+}
+
+#main {
+  flex-grow: 1;
+  margin: 30px;
+}
+
+#search-container {
+  background: #747d90;
+  height: 325px;
+  width: 470px;
+  align-content: space-around;
+  border-left: #145b9c 10px solid;
+  box-shadow: 2px 2px 4px black;
+}
+
+#search-bar {
+  width: 400px;
+  height: 40px;
+  margin: 30px 0 0 30px;
+}
+
+.radio-filter {
+  flex-wrap: wrap;
+  padding-top: 30px;
+  justify-content: center;
+}
+
+.radio-filter input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.radio-filter label {
+  padding: 10px;
+  margin: 10px;
+  color: white;
+  border: white 1px solid;
+  border-radius: 50%;
+  height: 65px;
+  width: 65px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.radio-filter label:hover {
+  background-color: black;
+}
+
+.aside-btns {
+  justify-content: space-around;
+  padding-top: 20px;
+}
+
+.aside-btn {
+  background-color: #747d90;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.aside-btn-clk {
+  background-color: #145b9c;
+}
+
+.icon {
+  height: 40px;
+  width: 40px;
+}
+
+#preview-btn {
+  background: #c1c3c2;
+  border-radius: 5px;
+  color: black;
+  width: 160px;
+  align-self: center;
+}
