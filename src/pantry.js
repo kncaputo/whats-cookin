@@ -1,6 +1,6 @@
 class Pantry {
-  constructor() {
-
+  constructor(pantry) {
+    this.items = pantry || [];
   }
 }
 
