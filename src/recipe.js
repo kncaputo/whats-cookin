@@ -9,6 +9,14 @@ class Recipe {
     this.instructions = recipe.instructions;
   }
 
+  getInstructions() {
+    return this.instructions.reduce((instructions, step) => {
+      instructions.push(`${step.number}. ${step.instruction}`);
+      return instructions;
+    }, []);
+  }
+
+
   calculateCost() {
     // start with this.ingredients (array)
     // this.ingredients[i] include id (#) & quantity object
@@ -17,9 +25,6 @@ class Recipe {
     // If they match, make a new empty array and push the cost into that
   }
 
-  getInstructions() {
-
-  }
 }
 
 if (typeof module !== 'undefined') {

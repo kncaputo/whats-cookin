@@ -34,11 +34,11 @@ describe('Recipe', () => {
   }],
   name: 'Pumpkin Juice',
   instructions: [{
-    "instruction": "In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.",
+    "instruction": "Get a cup.",
     "number": 1
   },
   {
-    "instruction": "Add egg and vanilla and mix until combined.",
+    "instruction": "Put in smashed pumpkin.",
     "number": 2
   }]};
 
@@ -84,5 +84,13 @@ describe('Recipe', () => {
   it('should contain an array of instructions', () => {
     expect(recipe.instructions).to.be.an('array');
   });
+
+  it('should have a method to get instructions', () => {
+    expect(recipe.getInstructions).to.be.an('function');
+  });
+
+  it('should return an array of instructions', () => {
+    expect(recipe.getInstructions()[0]).to.include('1. Get a cup.');
+  })
 
 });
