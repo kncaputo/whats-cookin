@@ -5,7 +5,7 @@ const Ingredient = require('../src/ingredient');
 
 describe('Ingredient', () => {
   let ingredient;
-  let sugar = {id: 1, name: 'sugar', cost: 250};
+  let sugar = {id: 1, name: 'sugar', estimatedCostInCents: 250};
 
   beforeEach(() => {
     ingredient = new Ingredient(sugar);
@@ -33,8 +33,9 @@ describe('Ingredient', () => {
   });
 
   it('should be a different ingredient', () => {
-    let lettuce = {id: 2, name: 'lettuce', cost: 125};
-    let ingredient2 = new Ingredient(lettuce)
+    let lettuce = {id: 2, name: 'lettuce', estimatedCostInCents: 125};
+    let ingredient2 = new Ingredient(lettuce);
+
     expect(ingredient2.id).to.deep.equal(2);
     expect(ingredient2.name).to.deep.equal('lettuce');
     expect(ingredient2.cost).to.deep.equal(125);
