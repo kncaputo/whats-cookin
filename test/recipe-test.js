@@ -1,7 +1,6 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-// const Ingredient = require('../src/ingredient');
 const Recipe = require('../src/recipe');
 
 describe('Recipe', () => {
@@ -91,6 +90,9 @@ describe('Recipe', () => {
 
   it('should calculate the total cost of ingredients', () => {
     expect(recipe.calculateCost(sampleIngredientsData)).to.deep.equal(1219);
-  })
+  });
 
+  it('should give an error when there are no arguments in calculateCost', () => {
+    expect(recipe.calculateCost()).to.deep.equal('Insufficient data available');
+  });
 });
