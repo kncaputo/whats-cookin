@@ -17,12 +17,23 @@ class Recipe {
   }
 
 
-  calculateCost() {
-    // start with this.ingredients (array)
-    // this.ingredients[i] include id (#) & quantity object
-      // Grab this.ingredients[i].id
-    // in ingredients dataset, check for presence of id numbe in value of each object's //
-    // If they match, make a new empty array and push the cost into that
+  calculateCost(ingredientsData) {
+    let totalCost = 0;
+
+    const ids = this.ingredients.reduce((ingredientIds, ingredient) => {
+      ingredientIds.push(ingredient.id);
+      return ingredientIds;
+    }, []);
+
+    ids.forEach(id => {
+      ingredientsData.filter(ingredient => {
+        if (ingredient.id === id) {
+          totalCost += ingredient.estimatedCostInCents
+        }
+      });
+    });
+
+    return totalCost;
   }
 
 }

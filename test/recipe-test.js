@@ -85,12 +85,12 @@ describe('Recipe', () => {
     expect(recipe.instructions).to.be.an('array');
   });
 
-  it('should have a method to get instructions', () => {
-    expect(recipe.getInstructions).to.be.an('function');
+  it('should be able to return an array of instructions', () => {
+    expect(recipe.getInstructions()[0]).to.include('1. Get a cup.');
   });
 
-  it('should return an array of instructions', () => {
-    expect(recipe.getInstructions()[0]).to.include('1. Get a cup.');
+  it('should calculate the total cost of ingredients', () => {
+    expect(recipe.calculateCost(sampleIngredientsData)).to.deep.equal(1219);
   })
 
 });
