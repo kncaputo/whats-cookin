@@ -29,15 +29,20 @@ class Pantry {
         })
       })
 
-      allIngredients.forEach(item => {
-        this.ingredients.filter(ingredient => {
-          if (ingredient.ingredient === item.id) {
-            item.amount = ingredient.amount;
-          }
-        })
-      })
+      this.updateIngredientAmount(allIngredients);
+
       this.ingredients = allIngredients;
     }
+  }
+
+  updateIngredientAmount(pantry) {
+    pantry.forEach(item => {
+      this.ingredients.filter(ingredient => {
+        if (ingredient.ingredient === item.id) {
+          item.amount = ingredient.amount;
+        }
+      })
+    })
   }
 
   checkStock(recipe) {
