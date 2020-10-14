@@ -48,13 +48,19 @@ class Pantry {
   checkStock(recipe) {
     let ingredientIds = this.extractValues(this.ingredients, 'id');
     let ingredientsInStock = []
-    recipe.ingredients.forEach(ingredient => {
-      if (ingredientIds.includes(ingredient.id)) {
-        ingredientsInStock.push(true);
+    recipe.ingredients.forEach(item => {
+      if (ingredientIds.includes(item.id)) {
+        this.ingredients.filter(ingredient => {
+          if ((ingredient.id === item.id) && (item.quantity.amount <= ingredient.amount)) {
+            ingredientsInStock.push(true);
+          }
+        })
       }
     })
-
+// ingredient.quantity.amount <=
     if (ingredientsInStock.length === recipe.ingredients.length) {
+      // this.ingredients[i].amount VS. recipe.ingredients[i].quantity.amount
+      // helper function to compare amounts
       return true;
     } else {
       return false;
