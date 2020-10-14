@@ -85,7 +85,12 @@ describe('Pantry', () => {
     pantry.makeIngredients(sampleIngredientsData);
 
     expect(pantry.ingredients[0]).to.be.an.instanceof(Ingredient);
-    expect(pantry.ingredients.length).to.deep.equal(2);
+  });
+
+  it('should have the same amount of items as ingredients', () => {
+    pantry.makeIngredients(sampleIngredientsData);
+    
+    expect(pantry.ingredients.length).to.deep.equal(pantry.items.length);
   });
 
   it('should create ingredients with an id, name and cost', () => {
