@@ -6,19 +6,19 @@ class Pantry {
     this.ingredients = [];
   }
 
-  extractIngredientIds(array, itemCriteria) {
+  extractValues(array, itemCriteria) {
     if (array !== undefined) {
-      let allIds = array.reduce((ids, item) => {
-        ids.push(item[itemCriteria]);
-        return ids;
+      let allValues = array.reduce((values, item) => {
+        values.push(item[itemCriteria]);
+        return values;
       }, []);
-      return allIds;
+      return allValues;
     }
   }
 
   makeIngredients(ingredientsData) {
     if (ingredientsData !== undefined) {
-      let ingredientIds = this.extractIngredientIds(this.items, 'ingredient');
+      let ingredientIds = this.extractValues(this.items, 'ingredient');
 
       ingredientIds.forEach(id => {
         ingredientsData.filter(ingredient => {
