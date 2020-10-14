@@ -24,7 +24,15 @@ class Pantry {
       ingredientIds.forEach(id => {
         ingredientsData.filter(ingredient => {
           if (ingredient.id === id) {
-            allIngredients.push(new Ingredient(ingredient, 2));
+            allIngredients.push(new Ingredient(ingredient, null));
+          }
+        })
+      })
+
+      allIngredients.forEach(item => {
+        this.ingredients.filter(ingredient => {
+          if (ingredient.ingredient === item.id) {
+            item.amount = ingredient.amount;
           }
         })
       })

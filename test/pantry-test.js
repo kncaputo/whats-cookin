@@ -103,7 +103,10 @@ describe('Pantry', () => {
     expect(pantry.ingredients[0]).to.not.be.an.instanceof(Ingredient);
   });
 
-  it('should check if pantry has enough ingredients to make a recipe', () => {
+  it('should add the correct amount to each ingredient', () => {
+    pantry.makeIngredients(sampleIngredientsData);
 
+    expect(pantry.ingredients[0].amount).to.deep.equal(3);
+    expect(pantry.ingredients[1].amount).to.deep.equal(7);
   });
 });
