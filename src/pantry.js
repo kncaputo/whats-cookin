@@ -46,10 +46,19 @@ class Pantry {
   }
 
   checkStock(recipe) {
+    let ingredientIds = this.extractValues(this.ingredients, 'id');
+    let ingredientsInStock = []
+    recipe.ingredients.forEach(ingredient => {
+      if (ingredientIds.includes(ingredient.id)) {
+        ingredientsInStock.push(true);
+      }
+    })
 
-    // take ids & amounts from recipe ingredients, push into new array objects
-    // compare new array to this.items.id at each index
-    // if pantry.items[i].amount >= recipe.ingredients[i].quantity.amount
+    if (ingredientsInStock.length === recipe.ingredients.length) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 

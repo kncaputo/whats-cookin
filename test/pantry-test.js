@@ -17,20 +17,43 @@ describe('Pantry', () => {
     "amount": 7
   }];
 
+  let pantryItems2 = [{
+    "ingredient": 444,
+    "amount": 3
+  },
+  {
+    "ingredient": 3,
+    "amount": 7
+  },
+  {
+    "ingredient": 1,
+    "amount": 10
+  }];
+
   let sampleIngredientsData = [{
     "id": 1,
-    "name": "eggs",
+    "name": "pumpkin",
     "estimatedCostInCents": 472
   },
   {
     "id": 2,
-    "name": "sucrose",
+    "name": "sugar",
     "estimatedCostInCents": 902
   },
   {
     "id": 3,
     "name": "bread",
     "estimatedCostInCents": 430
+  },
+  {
+    "id": 333,
+    "name": "pasta",
+    "estimatedCostInCents": 530
+  },
+  {
+    "id": 444,
+    "name": "tomato",
+    "estimatedCostInCents": 320
   }]
 
   let pumpkinJuice = {
@@ -60,9 +83,38 @@ describe('Pantry', () => {
       "number": 2
     }]};
 
+    let spaghetti = {
+      id: 12,
+      image: 'https://exampleimage.com/1/1/1',
+      ingredients: [{
+      "id": 333,
+      "quantity": {
+        "amount": 1,
+        "unit": "box"
+      }
+      },
+      {
+        "id": 444,
+        "quantity": {
+          "amount": 3,
+          "unit": ""
+        }
+      }],
+      name: 'Spaghetti',
+      instructions: [{
+        "instruction": "Cook pasta.",
+        "number": 1
+      },
+      {
+        "instruction": "Cover pasta in sauce.",
+        "number": 2
+      }]};
+
   beforeEach(() => {
     pantry = new Pantry(pantryItems);
+    pantry2 = new Pantry(pantryItems2);
     recipe = new Recipe(pumpkinJuice);
+    recipe2 = new Recipe(spaghetti);
   });
 
   it('should be a function', () => {
@@ -93,7 +145,7 @@ describe('Pantry', () => {
     pantry.makeIngredients(sampleIngredientsData);
 
     expect(pantry.ingredients[0].id).to.deep.equal(1);
-    expect(pantry.ingredients[0].name).to.deep.equal('eggs');
+    expect(pantry.ingredients[0].name).to.deep.equal('pumpkin');
     expect(pantry.ingredients[0].cost).to.deep.equal(472);
   });
 
@@ -109,4 +161,16 @@ describe('Pantry', () => {
     expect(pantry.ingredients[0].amount).to.deep.equal(3);
     expect(pantry.ingredients[1].amount).to.deep.equal(7);
   });
+
+  it('should check if there are enough ingredients to make a recipe', () => {
+    pantry.makeIngredients(sampleIngredientsData);
+
+    expect(pantry.checkStock(pumpkinJuice)).to.deep.equal(true);
+  });
+
+  it('should return false if there are not enough ingredients to make a recipe', () => {
+    pantry2.makeIngredients(sampleIngredientsData);
+
+    expect(pantry2.checkStock(spaghetti)).to.deep.equal(false);
+  })
 });
