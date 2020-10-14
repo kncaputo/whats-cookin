@@ -2,10 +2,12 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const Ingredient = require('../src/ingredient');
+const Recipe = require('../src/recipe');
 const Pantry = require('../src/pantry');
 
 describe('Pantry', () => {
   let pantry;
+  let recipe;
   let pantryItems = [{
     "ingredient": 1,
     "amount": 3
@@ -31,8 +33,36 @@ describe('Pantry', () => {
     "estimatedCostInCents": 430
   }]
 
+  let pumpkinJuice = {
+    id: 123,
+    image: 'https://exampleimage.com/1/1/1',
+    ingredients: [{
+    "id": 1,
+    "quantity": {
+      "amount": 2,
+      "unit": "c"
+    }
+    },
+    {
+      "id": 2,
+      "quantity": {
+        "amount": 1.5,
+        "unit": "tsp"
+      }
+    }],
+    name: 'Pumpkin Juice',
+    instructions: [{
+      "instruction": "Get a cup.",
+      "number": 1
+    },
+    {
+      "instruction": "Put in smashed pumpkin.",
+      "number": 2
+    }]};
+
   beforeEach(() => {
     pantry = new Pantry(pantryItems);
+    recipe = new Recipe(pumpkinJuice);
   });
 
   it('should be a function', () => {
@@ -47,8 +77,38 @@ describe('Pantry', () => {
     expect(pantry.items).to.be.an('array');
   });
 
-  it('should create an instance of Ingredient', () => {
+  it('should contain an empty array of ingredients', () => {
+    expect(pantry.ingredients).to.deep.equal([]);
+  });
+
+  it('should store instances of Ingredient in ingredients array', () => {
     pantry.makeIngredients(sampleIngredientsData);
+
     expect(pantry.ingredients[0]).to.be.an.instanceof(Ingredient);
+    expect(pantry.ingredients.length).to.deep.equal(2);
+  });
+
+  it('should create ingredients with an id, name and cost', () => {
+    pantry.makeIngredients(sampleIngredientsData);
+
+    expect(pantry.ingredients[0].id).to.deep.equal(1);
+    expect(pantry.ingredients[0].name).to.deep.equal('eggs');
+    expect(pantry.ingredients[0].cost).to.deep.equal(472);
+  });
+
+  it('should not make ingredients when no data is provided', () => {
+    pantry.makeIngredients();
+
+    expect(pantry.ingredients).to.deep.equal([]);
+  });
+
+  it('should have matching ids in ingredients and items', () => {
+    pantry.makeIngredients(sampleIngredientsData);
+
+    expect(pantry.items[0].ingredient === pantry.ingredients[0].id).to.deep.equal(true)
+  });
+
+  it('should check if pantry has enough ingredients to make a recipe', () => {
+
   });
 });
