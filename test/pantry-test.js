@@ -73,24 +73,20 @@ describe('Pantry', () => {
     expect(pantry).to.be.an.instanceof(Pantry);
   });
 
-  it('should contain an array of items', () => {
-    expect(pantry.items).to.be.an('array');
+  it('should contain an array of ingredients', () => {
+    expect(pantry.ingredients).to.be.an('array');
   });
 
-  it('should contain an empty array of ingredients', () => {
-    expect(pantry.ingredients).to.deep.equal([]);
+  it('should default to empty array if no pantry is passed in', () => {
+    let pantry2 = new Pantry();
+
+    expect(pantry2.ingredients).to.deep.equal([]);
   });
 
   it('should store instances of Ingredient in ingredients array', () => {
     pantry.makeIngredients(sampleIngredientsData);
 
     expect(pantry.ingredients[0]).to.be.an.instanceof(Ingredient);
-  });
-
-  it('should have the same amount of items as ingredients', () => {
-    pantry.makeIngredients(sampleIngredientsData);
-    
-    expect(pantry.ingredients.length).to.deep.equal(pantry.items.length);
   });
 
   it('should create ingredients with an id, name and cost', () => {
@@ -104,13 +100,7 @@ describe('Pantry', () => {
   it('should not make ingredients when no data is provided', () => {
     pantry.makeIngredients();
 
-    expect(pantry.ingredients).to.deep.equal([]);
-  });
-
-  it('should have matching ids in ingredients and items', () => {
-    pantry.makeIngredients(sampleIngredientsData);
-
-    expect(pantry.items[0].ingredient === pantry.ingredients[0].id).to.deep.equal(true)
+    expect(pantry.ingredients[0]).to.not.be.an.instanceof(Ingredient);
   });
 
   it('should check if pantry has enough ingredients to make a recipe', () => {

@@ -2,8 +2,7 @@ const Ingredient = require('../src/ingredient');
 
 class Pantry {
   constructor(pantry) {
-    this.items = pantry || [];
-    this.ingredients = [];
+    this.ingredients = pantry || [];
   }
 
   extractValues(array, itemCriteria) {
@@ -17,16 +16,19 @@ class Pantry {
   }
 
   makeIngredients(ingredientsData) {
-    if (ingredientsData !== undefined) {
-      let ingredientIds = this.extractValues(this.items, 'ingredient');
+    let allIngredients = [];
+    let ingredientIds = this.extractValues(this.ingredients, 'ingredient');
+    let ingredientAmounts = this.extractValues(this.ingredients, 'amount');
 
+    if (ingredientsData !== undefined) {
       ingredientIds.forEach(id => {
         ingredientsData.filter(ingredient => {
           if (ingredient.id === id) {
-            this.ingredients.push(new Ingredient(ingredient));
+            allIngredients.push(new Ingredient(ingredient, 2));
           }
         })
       })
+      this.ingredients = allIngredients;
     }
   }
 
