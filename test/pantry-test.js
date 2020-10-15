@@ -129,6 +129,10 @@ describe('Pantry', () => {
     expect(pantry.ingredients).to.be.an('array');
   });
 
+  it('should contain an empty array of ingredients needed', () => {
+    expect(pantry.ingredientsNeeded).to.deep.equal([]);
+  });
+
   it('should default to empty array if no pantry is passed in', () => {
     let pantry2 = new Pantry();
 
@@ -175,12 +179,15 @@ describe('Pantry', () => {
     expect(pantry.checkStock(spaghetti)).to.deep.equal(false);
   });
 
-  it.skip('should return amount of ingredients needed for a recipe', () => {
+  it.skip('should update ingredients not in pantry needed for a recipe', () => {
     pantry.makeIngredients(sampleIngredientsData);
     expect(pantry.checkStock(spaghetti)).to.deep.equal(false);
+    pantry.makeIngredientsNeeded(spaghetti);
 
-    expect(pantry.calculateIngredientsNeeded(spaghetti)[0].name).to.deep.equal('pasta');
-    expect(pantry.calculateIngredientsNeeded(spaghetti)[0].id).to.deep.equal(333);
-    expect(pantry.calculateIngredientsNeeded(spaghetti)[0].amount).to.deep.equal(1);
+    expect(pantry.ingredientsNeeded[0].name).to.deep.equal('pasta');
+    expect(pantry.ingredientsNeeded[0].id).to.deep.equal(333);
+    expect(pantry.ingredientsNeeded[0].amount).to.deep.equal(1);
+    expect(pantry.ingredientsNeeded[0]).to.be.an.instanceof(Ingredient);
   });
+
 });
