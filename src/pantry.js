@@ -24,7 +24,7 @@ class Pantry {
       ingredientIds.forEach(id => {
         ingredientsData.filter(ingredient => {
           if (ingredient.id === id) {
-            allIngredients.push(new Ingredient(ingredient, null));
+            allIngredients.push(new Ingredient(ingredient));
           }
         })
       })
@@ -47,23 +47,27 @@ class Pantry {
 
   checkStock(recipe) {
     let ingredientIds = this.extractValues(this.ingredients, 'id');
-    let ingredientsInStock = []
+    let ingredientsInStock = [];
+    let ingredientsNeeded = [];
     recipe.ingredients.forEach(item => {
       if (ingredientIds.includes(item.id)) {
         this.ingredients.filter(ingredient => {
           if ((ingredient.id === item.id) && (item.quantity.amount <= ingredient.amount)) {
             ingredientsInStock.push(true);
+          } else if ((ingredient.id === item.id) && (item.quantity.amount > ingredient.amount)) {
+              let amountNeeded = item.quantity.amount - ingredient.amount;
+              ingredientsNeeded.push({id: ingredient.id, name: ingredient.name, amount: amountNeeded});
+          } else {
+              ingredientsNeeded.push({id: ingredient.id, name: ingredient.name, amount: item.quantity.amount});
           }
         })
       }
     })
-// ingredient.quantity.amount <=
+
     if (ingredientsInStock.length === recipe.ingredients.length) {
-      // this.ingredients[i].amount VS. recipe.ingredients[i].quantity.amount
-      // helper function to compare amounts
-      return true;
+      return 'You have everything you need';
     } else {
-      return false;
+      return ingredientsNeeded;
     }
   }
 }
