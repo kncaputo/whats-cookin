@@ -48,20 +48,48 @@ class Pantry {
   checkStock(recipe) {
     let ingredientIds = this.extractValues(this.ingredients, 'id');
     let ingredientsInStock = [];
-    recipe.ingredients.forEach(item => {
-      if (ingredientIds.includes(item.id)) {
-        this.ingredients.filter(ingredient => {
-          if ((ingredient.id === item.id) && (item.quantity.amount <= ingredient.amount)) {
+    let ingredientsNeeded = [];
+    recipe.ingredients.forEach(recipeIngredient => {
+      if (ingredientIds.includes(recipeIngredient.id)) {
+        this.ingredients.filter(pantryIngredient => {
+          if ((pantryIngredient.id === recipeIngredient.id) && (recipeIngredient.quantity.amount <= pantryIngredient.amount)) {
             ingredientsInStock.push(true);
           }
         })
+      } else {
+          console.log("recipeIngredient: " + recipeIngredient.id)
+          ingredientsNeeded.push(recipeIngredient);
       }
     })
+
     if (ingredientsInStock.length === recipe.ingredients.length) {
       return true;
     } else {
       return false;
     }
+  }
+
+  calculateIngredientsNeeded(recipe, ingredientsData) {
+    let ingredientsNeeded = [];
+
+    recipe.ingredients.forEach(recipeIngredient => {
+      this.ingredients.filter(pantryIngredient => {
+        if (recipeIngredient.id == pantryIngredient.id) {
+          let amountNeeded = 0;
+          amountNeeded = recipeIngredient.quantity.amount - pantryIngredient.amount;
+          console.log(amountNeeded)
+        }
+        });
+    });
+
+
+    // have: recipe obj w/ id property and arr of ingredients w/ amnts needed
+    // output wanted: ingredient obj w/ id, name, amount needed - new instance?
+    // forEach recipe.ingredient.id
+    // find this.ingredients.id
+      // declare var for amount needed
+      //assign to value of recipe ingredient quantity amount - this. pantry ingredient amount
+      //
   }
 }
 

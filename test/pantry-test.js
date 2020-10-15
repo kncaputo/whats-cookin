@@ -170,8 +170,17 @@ describe('Pantry', () => {
 
   it('should put ingredients needed to make a recipe in an array', () => {
     pantry.makeIngredients(sampleIngredientsData);
-    let ingredientsNeeded = pantry2.checkStock(spaghetti);
+    let ingredientsNeeded = pantry.checkStock(spaghetti);
 
     expect(pantry.checkStock(spaghetti)).to.deep.equal(false);
-  })
+  });
+
+  it.skip('should return amount of ingredients needed for a recipe', () => {
+    pantry.makeIngredients(sampleIngredientsData);
+    expect(pantry.checkStock(spaghetti)).to.deep.equal(false);
+
+    expect(pantry.calculateIngredientsNeeded(spaghetti)[0].name).to.deep.equal('pasta');
+    expect(pantry.calculateIngredientsNeeded(spaghetti)[0].id).to.deep.equal(333);
+    expect(pantry.calculateIngredientsNeeded(spaghetti)[0].amount).to.deep.equal(1);
+  });
 });
