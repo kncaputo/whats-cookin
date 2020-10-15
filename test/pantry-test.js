@@ -165,12 +165,13 @@ describe('Pantry', () => {
   it('should check if there are enough ingredients to make a recipe', () => {
     pantry.makeIngredients(sampleIngredientsData);
 
-    expect(pantry.checkStock(pumpkinJuice)).to.deep.equal('You have everything you need');
+    expect(pantry.checkStock(pumpkinJuice)).to.deep.equal(true);
   });
 
-  it('should return false if there are not enough ingredients to make a recipe', () => {
-    pantry2.makeIngredients(sampleIngredientsData);
+  it('should put ingredients needed to make a recipe in an array', () => {
+    pantry.makeIngredients(sampleIngredientsData);
+    let ingredientsNeeded = pantry2.checkStock(spaghetti);
 
-    expect(pantry2.checkStock(spaghetti).length).to.deep.equal(2);
+    expect(pantry.checkStock(spaghetti)).to.deep.equal(false);
   })
 });
