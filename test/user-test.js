@@ -51,8 +51,43 @@ describe('User', () => {
     "estimatedCostInCents": 320
   }];
 
+  let burrito = {
+    id: 12,
+    image: 'https://exampleimage.com/1/1/1',
+    ingredients: [{
+    "id": 1,
+    "quantity": {
+      "amount": 0.75,
+      "unit": "cup"
+    }
+    },
+    {
+      "id": 3,
+      "quantity": {
+        "amount": 1,
+        "unit": "tortilla"
+      }
+    },
+    {
+      "id": 4,
+      "quantity": {
+        "amount": 0.5,
+        "unit": "cup"
+      }
+    }],
+    name: 'Burrito',
+    instructions: [{
+      "instruction": "Gather ingredients.",
+      "number": 1
+    },
+    {
+      "instruction": "Cook them.",
+      "number": 2
+    }]};
+
   beforeEach(() => {
     user = new User(bob);
+    burrito = new Recipe(burrito);
   });
 
   it('should be a function', () => {
@@ -95,5 +130,20 @@ describe('User', () => {
   it('should start with an empty array of recipes to cook', () => {
     expect(user.recipesToCook).to.be.an('array');
     expect(user.recipesToCook).to.deep.equal([]);
+  });
+
+  it('should add a recipe to favorites', () => {
+    user.addRecipeToFavorites(burrito);
+
+    expect(user.favoriteRecipes.length).to.deep.equal(1);
+    expect(user.favoriteRecipes[0]).to.be.an.instanceof(Recipe);
+  });
+
+  it('should add a recipe to cook', () => {
+    user.addRecipeToCook(burrito);
+
+    expect(user.recipesToCook.length).to.deep.equal(1);
+    expect(user.recipesToCook[0]).to.be.an.instanceof(Recipe);
+    expect(user.recipesToCook[0].name).to.deep.equal('Burrito');
   });
 });

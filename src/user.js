@@ -10,16 +10,22 @@ class User {
     this.recipesToCook = [];
   }
 
-  addRecipeToFavorites() {
-
+  addRecipeToFavorites(recipe) {
+    this.favoriteRecipes.push(recipe);
   }
 
-  addRecipeToCook() {
-
+  addRecipeToCook(recipe) {
+    this.recipesToCook.push(recipe);
   }
 
-  searchRecipes() {
+  searchRecipes(input, recipes) {
+    // input: user string from searchbar (INCLUDES name or ingredient)
+        // arr of all recipe objs
+    // output: an array of obj filtered to match search criteria/input
+    // methods to use: FOREACH recipe, FILTER name/ingredient,
+    // if INCLUDES input, return mutated array within method
 
+    //
   }
 
   filterRecipeByType() {
