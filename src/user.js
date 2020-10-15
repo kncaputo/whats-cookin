@@ -3,8 +3,10 @@ const Recipe = require('./recipe');
 const Pantry = require('./pantry');
 
 class User {
-  constructor() {
-
+  constructor(user) {
+    this.id = user.id;
+    this.name = user.name;
+    this.pantry = new Pantry(user.pantry);
   }
 
   addRecipeToFavorites() {
