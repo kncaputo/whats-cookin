@@ -16,7 +16,7 @@ describe('User', () => {
       "amount": 2
     },
     {
-      "ingredient": 2,
+      "ingredient": 5,
       "amount": 4
     },
     {
@@ -24,6 +24,32 @@ describe('User', () => {
       "amount": 10
     }]
   };
+
+  let sampleIngredientsData = [{
+    "id": 1,
+    "name": "cheese",
+    "estimatedCostInCents": 472
+  },
+  {
+    "id": 2,
+    "name": "watermelon",
+    "estimatedCostInCents": 902
+  },
+  {
+    "id": 3,
+    "name": "tortilla",
+    "estimatedCostInCents": 430
+  },
+  {
+    "id": 4,
+    "name": "beans",
+    "estimatedCostInCents": 530
+  },
+  {
+    "id": 5,
+    "name": "chicken",
+    "estimatedCostInCents": 320
+  }];
 
   beforeEach(() => {
     user = new User(bob);
@@ -47,5 +73,27 @@ describe('User', () => {
 
   it('should have a pantry', () => {
     expect(user.pantry).to.be.an.instanceof(Pantry);
+  });
+
+  it('should have instances of Ingredients in the pantry', () => {
+    user.pantry.makeIngredients(sampleIngredientsData);
+
+    expect(user.pantry.ingredients[0]).to.be.an.instanceof(Ingredient);
+  });
+
+  it('should have ingredients that match array in object passed as argument', () => {
+    user.pantry.makeIngredients(sampleIngredientsData);
+
+    expect(user.pantry.ingredients[0].name).to.deep.equal('cheese');
+  });
+
+  it('should start with an empty array of favorite recipes', () => {
+    expect(user.favoriteRecipes).to.be.an('array');
+    expect(user.favoriteRecipes).to.deep.equal([]);
+  });
+
+  it('should start with an empty array of recipes to cook', () => {
+    expect(user.recipesToCook).to.be.an('array');
+    expect(user.recipesToCook).to.deep.equal([]);
   });
 });

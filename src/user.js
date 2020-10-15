@@ -1,4 +1,3 @@
-const Ingredient = require('./ingredient');
 const Recipe = require('./recipe');
 const Pantry = require('./pantry');
 
@@ -7,6 +6,8 @@ class User {
     this.id = user.id;
     this.name = user.name;
     this.pantry = new Pantry(user.pantry);
+    this.favoriteRecipes = [];
+    this.recipesToCook = [];
   }
 
   addRecipeToFavorites() {
