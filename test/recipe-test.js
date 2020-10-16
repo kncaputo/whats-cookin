@@ -1,6 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 
+const Ingredient = require('../src/ingredient');
 const Recipe = require('../src/recipe');
 
 describe('Recipe', () => {
@@ -8,7 +9,7 @@ describe('Recipe', () => {
   const sampleIngredientsData = [
     {
       "id": 1,
-      "name": "instant vanilla pudding",
+      "name": "pumpkin",
       "estimatedCostInCents": 660
     },
     {
@@ -83,6 +84,12 @@ describe('Recipe', () => {
   it('should contain an array of instructions', () => {
     expect(recipe.instructions).to.be.an('array');
   });
+
+  it.skip('should replace ingredient objects with instances of Ingredient', () => {
+    recipe.makeIngredients(sampleIngredientsData);
+
+    expect(this.ingredients[0]).to.be.an.instanceof(Ingredient);
+  })
 
   it('should be able to return an array of instructions', () => {
     expect(recipe.getInstructions()[0]).to.include('1. Get a cup.');

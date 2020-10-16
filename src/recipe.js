@@ -1,3 +1,5 @@
+const Ingredient = require('../src/ingredient');
+
 class Recipe {
   constructor(recipe) {
     recipe = recipe || {}
@@ -17,8 +19,36 @@ class Recipe {
 
 
   makeIngredients(ingredientsData) {
-    // map this.ingredients to add keys: name, cost
-    // take mutated ingredient, use that obj as argument in new Ingredient()
+    let allIngredients = [];
+    console.log('before function:' + this.ingredients[0].name)
+
+    this.ingredients.map(recipeIngredient => {
+      ingredientsData.filter(ingredient => {
+        if (recipeIngredient.id === ingredient.id) {
+          recipeIngredient.name = ingredient.name;
+          recipeIngredient.cost = ingredient.estimatedCostInCents;
+          console.log('ingredient name: ' + recipeIngredient.name)
+          console.log('ingredient cost: ' + recipeIngredient.estimatedCostInCents)
+          allIngredients.push(new Ingredient(recipeIngredient))
+          return allIngredients;
+          console.log('ingredient cost: ' + recipeIngredient.cost);
+        }
+      })
+    })
+
+    console.log('after first map:' + this.ingredients[0].name)
+
+    this.ingredients = allIngredients;
+
+    // return this.ingredients.forEach(ingredient => {
+    //   console.log('ingredient inside forEach: ' + ingredient.id + ingredient.name + ingredient.cost + ingredient.quantity)
+    //   allIngredients.push(new Ingredient(ingredient))
+    //   return allIngredients;
+    // });
+
+
+
+    // console.log('should be brown sugar: ' + this.ingredients[1].name)
   }
 
 

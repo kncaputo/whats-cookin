@@ -54,7 +54,7 @@ describe('Pantry', () => {
     "id": 444,
     "name": "tomato",
     "estimatedCostInCents": 320
-  }]
+  }];
 
   let pumpkinJuice = {
     id: 123,
