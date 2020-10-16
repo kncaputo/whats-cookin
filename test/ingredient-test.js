@@ -120,7 +120,7 @@ describe('Ingredient', () => {
   it('should return updated ingredient amount for a pantry', () => {
     pantry.makeIngredients(sampleIngredientsData);
     pantry.ingredients.forEach(ingredient => {
-      ingredient.updateIngredientData(pantry.ingredients, 'amount');
+      ingredient.updateIngredientData(pantry.ingredients, 'amount', 'id');
     });
 
     expect(pantry.ingredients[0].name).to.deep.equal('pumpkin');

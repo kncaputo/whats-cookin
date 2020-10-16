@@ -7,10 +7,11 @@ class Ingredient {
     this.quantity = ingredient.quantity || null;
   }
 
-  updateIngredientData(array, key) {
+  updateIngredientData(array, key, id) {
     let ingredientName = array.find(ingredient => {
-      return ingredient.id === this.id;
+      return ingredient[id] === this[id];
     });
+    this.id = ingredientName.id;
     return this[key] = ingredientName[key];
   }
 }

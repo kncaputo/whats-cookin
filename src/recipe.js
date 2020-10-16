@@ -19,17 +19,19 @@ class Recipe {
 
 
   makeIngredients(ingredientsData) {
-    let allIngredients = []
-    this.ingredients.forEach(ingredient => {
-      allIngredients.push(new Ingredient(ingredient));
-    })
+    if (ingredientsData !== undefined) {
+      let allIngredients = []
+      this.ingredients.forEach(ingredient => {
+        allIngredients.push(new Ingredient(ingredient));
+      })
 
-    allIngredients.forEach(ingredient => {
-      ingredient.updateIngredientData(ingredientsData, 'name');
-      ingredient.updateIngredientData(ingredientsData, 'estimatedCostInCents');
-    })
+      allIngredients.forEach(ingredient => {
+        ingredient.updateIngredientData(ingredientsData, 'name', 'id');
+        ingredient.updateIngredientData(ingredientsData, 'estimatedCostInCents', 'id');
+      })
 
-    this.ingredients = allIngredients;
+      this.ingredients = allIngredients;
+    }
   }
 
 
