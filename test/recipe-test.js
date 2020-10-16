@@ -85,10 +85,10 @@ describe('Recipe', () => {
     expect(recipe.instructions).to.be.an('array');
   });
 
-  it.skip('should replace ingredient objects with instances of Ingredient', () => {
+  it('should replace ingredient objects with instances of Ingredient', () => {
     recipe.makeIngredients(sampleIngredientsData);
 
-    expect(this.ingredients[0]).to.be.an.instanceof(Ingredient);
+    expect(recipe.ingredients[0]).to.be.an.instanceof(Ingredient);
   })
 
   it('should be able to return an array of instructions', () => {

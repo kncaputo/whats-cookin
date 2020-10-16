@@ -150,7 +150,7 @@ describe('Pantry', () => {
 
     expect(pantry.ingredients[0].id).to.deep.equal(1);
     expect(pantry.ingredients[0].name).to.deep.equal('pumpkin');
-    expect(pantry.ingredients[0].cost).to.deep.equal(472);
+    expect(pantry.ingredients[0].estimatedCostInCents).to.deep.equal(472);
   });
 
   it('should not make ingredients when no data is provided', () => {

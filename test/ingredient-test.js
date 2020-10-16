@@ -96,7 +96,7 @@ describe('Ingredient', () => {
   });
 
   it('should have a cost in cents', () => {
-    expect(ingredient.cost).to.deep.equal(250);
+    expect(ingredient.estimatedCostInCents).to.deep.equal(250);
   });
 
   it('should be a different ingredient', () => {
@@ -105,7 +105,7 @@ describe('Ingredient', () => {
 
     expect(ingredient2.id).to.deep.equal(3);
     expect(ingredient2.name).to.deep.equal('lettuce');
-    expect(ingredient2.cost).to.deep.equal(125);
+    expect(ingredient2.estimatedCostInCents).to.deep.equal(125);
   });
 
   it('should return updated ingredient quantity for a recipe', () => {
