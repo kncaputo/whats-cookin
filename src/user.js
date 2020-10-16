@@ -25,7 +25,9 @@ class User {
     // methods to use: FOREACH recipe, FILTER name/ingredient,
     // if INCLUDES input, return mutated array within method
 
-    //
+    // recipes.forEach(recipe => {
+    //   if (recipe.name)
+    // })
   }
 
   filterRecipeByType() {

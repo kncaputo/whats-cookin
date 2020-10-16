@@ -16,7 +16,7 @@ const recipeData = [
           "amount": 0.5,
           "unit": "tsp"
         }
-      },  
+      },
       {
         "id": 1123,
         "quantity": {

@@ -16,6 +16,12 @@ class Recipe {
   }
 
 
+  makeIngredients(ingredientsData) {
+    // map this.ingredients to add keys: name, cost
+    // take mutated ingredient, use that obj as argument in new Ingredient()
+  }
+
+
   calculateCost(ingredientsData) {
     if (!ingredientsData) {
       return 'Insufficient data available';

@@ -5,10 +5,16 @@ const Ingredient = require('../src/ingredient');
 
 describe('Ingredient', () => {
   let ingredient;
+  let ingredient2;
   let sugar = {id: 1, name: 'sugar', estimatedCostInCents: 250};
+  let conch = {id: 2, name: 'conch', quantity: {
+    "amount": 1,
+    "unit": ""
+  }};
 
   beforeEach(() => {
     ingredient = new Ingredient(sugar);
+    ingredient2 = new Ingredient(conch);
   });
 
   it('should be a function', () => {
@@ -33,11 +39,16 @@ describe('Ingredient', () => {
   });
 
   it('should be a different ingredient', () => {
-    let lettuce = {id: 2, name: 'lettuce', estimatedCostInCents: 125};
-    let ingredient2 = new Ingredient(lettuce);
+    let lettuce = {id: 3, name: 'lettuce', estimatedCostInCents: 125};
+    let ingredient3 = new Ingredient(lettuce);
 
-    expect(ingredient2.id).to.deep.equal(2);
-    expect(ingredient2.name).to.deep.equal('lettuce');
-    expect(ingredient2.cost).to.deep.equal(125);
+    expect(ingredient3.id).to.deep.equal(3);
+    expect(ingredient3.name).to.deep.equal('lettuce');
+    expect(ingredient3.cost).to.deep.equal(125);
+  });
+
+  it('should have a quantity object with an amount and unit when the ingredient is in recipe', () => {
+    expect(ingredient2.quantity.amount).to.deep.equal(1);
+    expect(ingredient2.quantity.unit).to.deep.equal('');
   });
 });

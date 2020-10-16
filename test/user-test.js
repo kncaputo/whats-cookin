@@ -47,7 +47,7 @@ describe('User', () => {
   },
   {
     "id": 5,
-    "name": "chicken",
+    "name": "salt",
     "estimatedCostInCents": 320
   }];
 
@@ -85,9 +85,65 @@ describe('User', () => {
       "number": 2
     }]};
 
+    let cheeseQuesadilla = {
+      id: 13,
+      image: 'https://exampleimage.com/1/1/1',
+      ingredients: [{
+      "id": 1,
+      "quantity": {
+        "amount": 0.75,
+        "unit": "cup"
+      }
+      },
+      {
+        "id": 3,
+        "quantity": {
+          "amount": 1,
+          "unit": "tortilla"
+        }
+      }],
+      name: 'Cheese Quesadilla',
+      instructions: [{
+        "instruction": "Put cheese on tortilla.",
+        "number": 1
+      },
+      {
+        "instruction": "Fry in pan",
+        "number": 2
+      }]};
+
+      let watermelonJuice = {
+        id: 14,
+        image: 'https://exampleimage.com/1/1/1',
+        ingredients: [{
+        "id": 1,
+        "quantity": {
+          "amount": 1,
+          "unit": "cup"
+        }
+        },
+        {
+          "id": 5,
+          "quantity": {
+            "amount": 1,
+            "unit": "pinch"
+          }
+        }],
+        name: 'Watermelon Juice',
+        instructions: [{
+          "instruction": "Blend watermelon.",
+          "number": 1
+        },
+        {
+          "instruction": "Add a pinch of salt.",
+          "number": 2
+        }]};
+
   beforeEach(() => {
     user = new User(bob);
     burrito = new Recipe(burrito);
+    cheeseQuesadilla = new Recipe(cheeseQuesadilla);
+    watermelonJuice = new Recipe(watermelonJuice);
   });
 
   it('should be a function', () => {
@@ -146,4 +202,17 @@ describe('User', () => {
     expect(user.recipesToCook[0]).to.be.an.instanceof(Recipe);
     expect(user.recipesToCook[0].name).to.deep.equal('Burrito');
   });
+
+  it('should be able to search recipes via input', () => {
+    user.addRecipeToCook(burrito);
+    user.addRecipeToCook(cheeseQuesadilla);
+    user.addRecipeToCook(watermelonJuice);
+
+    let results = user.searchRecipes('cheese', user.recipesToCook);
+
+    expect(results[0].name).to.deep.equal('Burrito');
+    expect(results[1].name).to.deep.equal('Cheese Quesadilla');
+  });
+
+
 });
