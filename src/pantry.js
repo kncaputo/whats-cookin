@@ -47,44 +47,13 @@ class Pantry {
       }
     })
 
-    // this.makeIngredientsNeeded(recipe, ingredientsNeeded, ingredientsData);
-
     if (ingredientsInStock.length === recipe.ingredients.length) {
       return true;
     } else {
       return false;
     }
   }
-
-  // makeIngredientsNeeded(recipe, ingredientsNeeded, ingredientsData) {
-  //   // ingredientsNeeded = arr of obj from recipe which we needed
-  //   //  output wanted: arry of ingredient obj w/ id, name, amount needed - new instance
-  //   // parameters: recipe (recipe object), ingredientsNeeded (array of ids)
-  //   // if (ingredientsData !== undefined) {
-  //   //   ingredientsNeeded.forEach(recipeIngredient => {
-  //   //     ingredientsData.filter(ingredient => {
-  //   //       if (ingredient.id === recipeIngredient.id) {
-  //   //
-  //   //
-  //   //         allIngredients.push(new Ingredient(ingredient, recipeIngredient.quantity.amount.value));
-  //   //       }
-  //   //     })
-  //   //   })
-  //
-  //       // this.ingredientsNeeded updates with instances of Ingredient in an array
-  //   });
-
-
-    // have: recipe obj w/ id property and arr of ingredients w/ amnts needed
-    // output wanted: arry of ingredient obj w/ id, name, amount needed - new instance?
-    // forEach recipe.ingredient.id
-    // find this.ingredients.id
-      // declare var for amount needed
-      //assign to value of recipe ingredient quantity amount - this. pantry ingredient amount
-      //
 }
-
-
 
 if (typeof module !== 'undefined') {
   module.exports = Pantry;
