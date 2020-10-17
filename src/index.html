@@ -16,6 +16,9 @@
     </nav>
   </header>
   <body>
+    <section id="banner">
+      <img src="../assets/main-background.jpg" id="banner-img">
+    </section>
     <main class="flex-row">
       <section class="flex-column" id="main">
         <form class="flex-column" id="search-container">
@@ -24,40 +27,49 @@
           </div>
           <div class="flex-row radio-filter">
             <input type="radio" id="breakfast" name="" value="">
-            <label for="breakfast"><div class="grow"><img src="../assets/egg-avo-toast.png" class="img-icon"></div><span class="btn-labels">Breakfast</span></label>
+            <label for="breakfast"><div class="grow"><img src="../assets/egg-on-toast.png" class="img-icon"></div><span class="btn-labels"><br>Breakfast</span></label>
             <input type="radio" id="lunch" name="" value="">
-            <label for="lunch"><div class="grow"><img src="../assets/avo-dip-small.png" class="img-icon grow"></div><span class="btn-labels"><span class="btn-labels">Lunch</span></label>
+            <label for="lunch"><div class="grow"><img src="../assets/panini.png" class="img-icon grow"></div><span class="btn-labels"><span class="btn-labels"><br>Lunch</span></label>
             <input type="radio" id="dinner" name="" value="">
-            <label for="dinner"><div class="grow"><img src="../assets/avo-dip-small.png" class="img-icon grow"></div><br>Dinner</label>
+            <label for="dinner"><div class="grow"><img src="../assets/fish-dinner.png" class="img-icon grow"></div><br>Dinner</label>
             <input type="radio" id="dessert" name="" value="">
             <label for="dessert"><div class="grow"><img src="../assets/tiramisu.png" class="img-icon grow"></div><br>Dessert</label>
             <input type="radio" id="dips" name="" value="">
-            <label for="dips"><img src="../assets/hummus-dip.png" class="img-icon grow"><br>Dips</label>
+            <label for="dips"><div class="grow"><img src="../assets/hummus-dip.png" class="img-icon grow"></div><br>Dips</label>
             <input type="radio" id="appetizers" name="" value="">
-            <label for="appetizers"><img src="../assets/avo-dip-small.png" class="img-icon grow"><br>Appetizers</label>
+            <label for="appetizers"><div class="grow"><img src="../assets/appetizers.png" class="img-icon grow"></div><br>Appetizers</label>
             <input type="radio" id="sides" name="" value="">
-            <label for="sides"><img src="../assets/avo-dip-small.png" class="img-icon grow"><br>Sides</label>
+            <label for="sides"><div class="grow"><img src="../assets/avo-dip-small.png" class="img-icon grow"></div><br>Sides</label>
           </div>
         </form>
         <div class="flex-row recipes-container">
         </div>
       </section>
       <aside>
-        <article class="flex-column">
-          <img src="../assets/main-background.jpg" id="aside-img" alt="cutting board image">
-          <h2>Recipe Title</h2>
-          <ul>
-            <li>Ingredient</li>
-            <li>Ingredient</li>
-            <li>Ingredient</li>
-            <li>Ingredient</li>
-            <li>Ingredient</li>
-          </ul>
-          <p>Total cost of all ingredients: $0.00</p>
-          <button id="preview-btn"><h3>View Instructions</h3></button>
-          <div class="flex-row aside-btns">
-            <button class="aside-btn"><img src="../assets/fav-recipe-white.png" class="icon"></button>
-            <button class="aside-btn"><img src="../assets/whats-cookin-white.png" class="icon"></button>
+        <article class="flex-column" id="aside-recipe-box">
+          <div class="flex-column" id="aside-contents">
+            <img src="../assets/main-background.jpg" id="aside-img" alt="cutting board image">
+            <h2>Recipe Title</h2>
+            <ul>
+              <li>Ingredient</li>
+              <li>Ingredient</li>
+              <li>Ingredient</li>
+              <li>Ingredient</li>
+              <li>Ingredient</li>
+              <li>Ingredient</li>
+              <li>Ingredient</li>
+              <li>Ingredient</li>
+              <li>Ingredient</li>
+              <li>Ingredient</li>
+              <li>Ingredient</li>
+              <li>Ingredient</li>
+            </ul>
+            <p>Total cost of all ingredients: $0.00</p>
+            <button id="preview-btn"><h3>View Instructions</h3></button>
+            <div class="flex-row aside-btns">
+              <button class="aside-btn"><img src="../assets/fav-recipe-white.png" class="icon"></button>
+              <button class="aside-btn"><img src="../assets/whats-cookin-white.png" class="icon"></button>
+            </div>
           </div>
         </article>
         <article class="flex-column hidden">

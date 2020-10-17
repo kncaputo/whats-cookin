@@ -4,6 +4,7 @@ orange: #e5451d
 blue: #145b9c
 light grey: #c1c3c2
 grey: #747d90
+#d54215
 */
 
 * {
@@ -16,10 +17,10 @@ body {
 
 h1 {
   font-size: 30px;
-  font-weight: 500;
+  font-weight: 400;
   flex-grow: 1;
   padding-left: 20px;
-  color: white;
+  color: #d54215;
 }
 
 h2 {
@@ -39,22 +40,30 @@ p {
 
 header {
   align-items: center;
-  background-color: #d54215;
+  background-color: white;
 }
 
 nav {
   padding-right: 20px;
 }
 
+#banner {
+  display: flex;
+  position: relative;
+  height: 400px;
+  width: 100%;
+}
+
+#banner-img {
+  height: 400px;
+  width: 100%;
+  object-fit: cover;
+}
+
 #aside-img {
   height: 200px;
   width: 260px;
 }
-
-/* .aside-img {
-  height: 200px;
-  width: 260px;
-} */
 
 aside {
   margin: 30px;
@@ -85,7 +94,7 @@ button, .radio-filter label:hover {
 }
 
 .nav-btn {
-  color: white;
+  color: #d54215;
   background: none;
   padding: 0 25px 0 25px;
 }
@@ -96,16 +105,25 @@ button, .radio-filter label:hover {
 }
 
 #search-container {
-  background: lightgray;
-  height: 325px;
-  width: 470px;
+  background: #dedede;
+  height: 225px;
+  min-width: 419px;
   align-content: space-around;
-  border-left: turquoise 6px solid;
-  box-shadow: 2px 2px 4px bright turquoise;
+  border-left: #d54215 10px solid;
+  box-shadow: 6px 6px 6px darkgray;
+  margin-top: -200px;
+  z-index: 1;
+}
+
+@media only screen and (max-width: 1075px) {
+  #search-container {
+    height: 325px;
+    align-content: space-around;
+  }
 }
 
 #search-bar {
-  width: 400px;
+  width: 80%;
   height: 40px;
   margin: 30px 0 0 30px;
 }
@@ -125,8 +143,7 @@ button, .radio-filter label:hover {
 .radio-filter label {
   padding: 10px;
   margin: 0 5px 10px 5px;
-  color: white;
-  /* border: white 1px solid; */
+  color: black;
   border-radius: 50%;
   height: 65px;
   width: 65px;
@@ -138,13 +155,27 @@ button, .radio-filter label:hover {
   margin-top: 10px;
 }
 
+#aside-recipe-box {
+  border: lightgray 1px solid;
+  box-shadow: 6px 6px 6px darkgray;
+}
+
+#aside-contents {
+  padding: 10px;
+}
+
+ul {
+  font-weight: 300;
+  list-style-type: none;
+}
+
 .aside-btns {
   justify-content: space-around;
   padding-top: 20px;
 }
 
 .aside-btn {
-  background-color: #747d90;
+  background-color: #dedede;
   border-radius: 50%;
   padding: 10px;
 }
@@ -178,7 +209,7 @@ transition: .5s ease;
 }
 
 #preview-btn {
-  background: #c1c3c2;
+  background: #dedede;
   border-radius: 5px;
   color: black;
   width: 160px;
