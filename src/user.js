@@ -25,6 +25,11 @@ class User {
 
 
   searchRecipes(input, recipes) {
+    recipes.forEach(recipe => {
+      if (!recipe.name.includes(input)) {
+        // splice
+      }
+    });
     // input: user string from searchbar (INCLUDES name or ingredient)
         // arr of all recipe objs
     // output: an array of obj filtered to match search criteria/input
