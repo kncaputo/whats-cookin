@@ -1,9 +1,20 @@
 
 // querySelectors
 let recipeCardContainer = document.querySelector('.recipes-container');
+let myFavorites = document.querySelector('#my-favorites-nav');
+let allRecipes = document.querySelector('#all-recipes-nav');
+let myPantry = document.querySelector('#my-pantry-nav');
+let whatsCookin = document.querySelector('#whats-cookin-nav');
+
+let user = new User(usersData[0]);
+let allRecipes = [];
+
 // eventListeners
-// document.addEventListener('onload', loadPage());
 window.onload = loadPage();
+
+
+myFavorites.addEventListener('click', showFavorites);
+allRecipes.addEventListener('click', showAllRecipes);
 // onLoad
   // instantiate user
     // instantiate pantry
@@ -11,12 +22,14 @@ window.onload = loadPage();
   // instantiate all recipes
   // display all recipes on DOM
 function loadPage() {
-  let allRecipes = [];
   recipeData.forEach(recipe => {
     allRecipes.push(new Recipe(recipe));
   })
-  console.log(allRecipes);
-  allRecipes.forEach(recipe => {
+  displayRecipes(allRecipes);
+}
+
+function displayRecipes(recipes) {
+  recipes.forEach(recipe => {
     let recipeCard = `<div class="recipe-card">
       <div class="recipe-img-box">
         <img src=${recipe.image} alt="recipe image" class="recipe-display-img">
@@ -27,11 +40,18 @@ function loadPage() {
       </div>
       <h3>${recipe.name}</h3>
     </div>`
-
     return recipeCardContainer.insertAdjacentHTML('afterbegin', recipeCard);
   });
+}
 
-  let user = new User(usersData[0]);
+function showFavorites() {
+  recipeCardContainer.innerHTML = '';
+  displayRecipes(user.favoriteRecipes);
+}
+
+function showAllRecipes() {
+  recipeCardContainer.innerHTML = '';
+  displayRecipes(showAllRecipes);
 }
 // add hidden
 // remove hidden
