@@ -1,3 +1,5 @@
+const Ingredient = require('../src/ingredient');
+
 class Recipe {
   constructor(recipe) {
     recipe = recipe || {}
@@ -6,6 +8,8 @@ class Recipe {
     this.ingredients = recipe.ingredients;
     this.name = recipe.name;
     this.instructions = recipe.instructions;
+    this.isFavorite = false;
+    this.readyToCook = false;
   }
 
   getInstructions() {
@@ -13,6 +17,23 @@ class Recipe {
       instructions.push(`${step.number}. ${step.instruction}`);
       return instructions;
     }, []);
+  }
+
+
+  makeIngredients(ingredientsData) {
+    if (ingredientsData !== undefined) {
+      let allIngredients = []
+      this.ingredients.forEach(ingredient => {
+        allIngredients.push(new Ingredient(ingredient));
+      })
+
+      allIngredients.forEach(ingredient => {
+        ingredient.updateIngredientData(ingredientsData, 'name', 'id');
+        ingredient.updateIngredientData(ingredientsData, 'estimatedCostInCents', 'id');
+      })
+
+      this.ingredients = allIngredients;
+    }
   }
 
 
