@@ -39,17 +39,22 @@ p {
 
 header {
   align-items: center;
-  background-color: #c22611;
+  background-color: #d54215;
 }
 
 nav {
   padding-right: 20px;
 }
 
-img {
+#aside-img {
   height: 200px;
   width: 260px;
 }
+
+/* .aside-img {
+  height: 200px;
+  width: 260px;
+} */
 
 aside {
   margin: 30px;
@@ -91,12 +96,12 @@ button, .radio-filter label:hover {
 }
 
 #search-container {
-  background: #747d90;
+  background: lightgray;
   height: 325px;
   width: 470px;
   align-content: space-around;
-  border-left: #145b9c 10px solid;
-  box-shadow: 2px 2px 4px black;
+  border-left: turquoise 6px solid;
+  box-shadow: 2px 2px 4px bright turquoise;
 }
 
 #search-bar {
@@ -119,9 +124,9 @@ button, .radio-filter label:hover {
 
 .radio-filter label {
   padding: 10px;
-  margin: 10px;
+  margin: 0 5px 10px 5px;
   color: white;
-  border: white 1px solid;
+  /* border: white 1px solid; */
   border-radius: 50%;
   height: 65px;
   width: 65px;
@@ -129,8 +134,8 @@ button, .radio-filter label:hover {
   text-align: center;
 }
 
-.radio-filter label:hover {
-  background-color: black;
+.btn-labels {
+  margin-top: 10px;
 }
 
 .aside-btns {
@@ -147,6 +152,25 @@ button, .radio-filter label:hover {
 .aside-btn-clk {
   background-color: #145b9c;
 }
+
+.img-icon {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+/* ---- Grow Webkit ---- */
+.grow img{
+transition: 1s ease;
+}
+
+.grow img:hover{
+-webkit-transform: scale(1.2);
+-ms-transform: scale(1.2);
+transform: scale(1.2);
+transition: .5s ease;
+}
+
 
 .icon {
   height: 40px;
