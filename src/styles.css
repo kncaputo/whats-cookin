@@ -117,7 +117,7 @@ button, .radio-filter label:hover {
 
 @media only screen and (max-width: 1075px) {
   #search-container {
-    height: 325px;
+    height: 325px !important;
     align-content: space-around;
   }
 }
@@ -153,6 +153,37 @@ button, .radio-filter label:hover {
 
 .btn-labels {
   margin-top: 10px;
+}
+
+.recipes-container {
+  width: 700px;
+  flex-wrap: wrap;
+}
+
+.recipe-card {
+  width: 30%;
+  border: lightgray 1px solid;
+  box-shadow: 6px 6px 6px darkgray;
+  text-align: center;
+  margin: 15px 0px 15px 15px;
+  overflow: hidden;
+}
+
+.recipe-display-img {
+  object-fit: cover;
+  height: 150px;
+  width: 100%;
+}
+
+.recipe-action-btns {
+  margin: -150px 10px 85px 10px;
+  border-radius: 50%;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+#favorite-btn, #whats-cookin-btn {
+  background: none;
 }
 
 #whats-cookin-recipe-title {
