@@ -10,13 +10,19 @@ class User {
     this.recipesToCook = [];
   }
 
-  addRecipeToFavorites(recipe) {
-    this.favoriteRecipes.push(recipe);
+  toggleRecipeStatus(array, location, recipe) {
+    if (recipe[location] === false) {
+      array.push(recipe);
+    } else {
+      let recipeToRemove = array.find(element => {
+        return element.id === recipe.id;
+      });
+      return array.splice(recipeToRemove, 1);
+    }
+
+    recipe[location] = !recipe[location];
   }
 
-  addRecipeToCook(recipe) {
-    this.recipesToCook.push(recipe);
-  }
 
   searchRecipes(input, recipes) {
     // input: user string from searchbar (INCLUDES name or ingredient)

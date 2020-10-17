@@ -16,6 +16,16 @@ describe('Recipe', () => {
       "id": 2,
       "name": "brown sugar",
       "estimatedCostInCents": 559
+    },
+    {
+      "id": 3,
+      "name": "watermelon",
+      "estimatedCostInCents": 559
+    },
+    {
+      "id": 4,
+      "name": "salt",
+      "estimatedCostInCents": 559
     }];
 
   let pumpkinJuice = {id: 123, image: 'https://exampleimage.com/1/1/1', ingredients: [{
@@ -42,8 +52,33 @@ describe('Recipe', () => {
     "number": 2
   }]};
 
+  let watermelonJuice = {id: 123, image: 'https://exampleimage.com/1/1/1', ingredients: [{
+    "id": 3,
+    "quantity": {
+      "amount": 1,
+      "unit": "c"
+    }
+  },
+  {
+    "id": 4,
+    "quantity": {
+      "amount": 1.5,
+      "unit": "tsp"
+    }
+  }],
+  name: 'Watermelon Juice',
+  instructions: [{
+    "instruction": "Get a cup.",
+    "number": 1
+  },
+  {
+    "instruction": "Put in smashed watermelon.",
+    "number": 2
+  }]};
+
   beforeEach(() => {
     recipe = new Recipe(pumpkinJuice);
+    recipe2 = new Recipe(watermelonJuice);
   });
 
   it('should be a function', () => {
@@ -83,6 +118,14 @@ describe('Recipe', () => {
 
   it('should contain an array of instructions', () => {
     expect(recipe.instructions).to.be.an('array');
+  });
+
+  it('should indicate whether recipe is saved to favorites', () => {
+    expect(recipe.isFavorite).to.deep.equal(false);
+  });
+
+  it('should indicate whether recipe is ready to cook', () => {
+    expect(recipe.readyToCook).to.deep.equal(false);
   });
 
   it('should replace ingredient objects with instances of Ingredient', () => {

@@ -189,14 +189,14 @@ describe('User', () => {
   });
 
   it('should add a recipe to favorites', () => {
-    user.addRecipeToFavorites(burrito);
+    user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
 
     expect(user.favoriteRecipes.length).to.deep.equal(1);
     expect(user.favoriteRecipes[0]).to.be.an.instanceof(Recipe);
   });
 
   it('should add a recipe to cook', () => {
-    user.addRecipeToCook(burrito);
+    user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', burrito);
 
     expect(user.recipesToCook.length).to.deep.equal(1);
     expect(user.recipesToCook[0]).to.be.an.instanceof(Recipe);
@@ -204,9 +204,9 @@ describe('User', () => {
   });
 
   it.skip('should be able to search recipes via input', () => {
-    user.addRecipeToCook(burrito);
-    user.addRecipeToCook(cheeseQuesadilla);
-    user.addRecipeToCook(watermelonJuice);
+    user.toggleRecipeStatus(user.recipesToCook, burrito);
+    user.toggleRecipeStatus(user.recipesToCook, cheeseQuesadilla);
+    user.toggleRecipeStatus(user.recipesToCook, watermelonJuice);
 
     let results = user.searchRecipes('cheese', user.recipesToCook);
 
@@ -214,5 +214,31 @@ describe('User', () => {
     expect(results[1].name).to.deep.equal('Cheese Quesadilla');
   });
 
+  it('should indicate that recipe has been favorited when added to favorite recipes', () => {
+    user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
 
+    expect(user.favoriteRecipes[0].isFavorite).to.deep.equal(true);
+  });
+
+  it('should indicate that recipe is ready to cook when added to recipes to cook', () => {
+    user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', burrito);
+
+    expect(user.recipesToCook[0].readyToCook).to.deep.equal(true);
+  });
+
+  it('should be able to remove recipe from favorites', () => {
+    user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
+    expect(user.favoriteRecipes[0].isFavorite).to.deep.equal(true);
+    user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
+
+    expect(user.favoriteRecipes).to.deep.equal([]);
+  });
+
+  it('should be able to remove recipe from recipes to cook', () => {
+    user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', burrito);
+    expect(user.recipesToCook[0].readyToCook).to.deep.equal(true);
+    user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', burrito);
+
+    expect(user.recipesToCook).to.deep.equal([]);
+  });
 });

@@ -8,6 +8,8 @@ class Recipe {
     this.ingredients = recipe.ingredients;
     this.name = recipe.name;
     this.instructions = recipe.instructions;
+    this.isFavorite = false;
+    this.readyToCook = false;
   }
 
   getInstructions() {
