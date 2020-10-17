@@ -155,6 +155,17 @@ button, .radio-filter label:hover {
   margin-top: 10px;
 }
 
+#whats-cookin-recipe-title {
+  margin-top: 60px;
+  font-size: 30px;
+  font-weight: 300;
+}
+
+#whats-cookin-img {
+  height: 400px;
+  margin-top: 20px;
+}
+
 #aside-recipe-box {
   border: lightgray 1px solid;
   box-shadow: 6px 6px 6px darkgray;
