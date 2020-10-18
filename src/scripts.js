@@ -1,12 +1,13 @@
 
 // querySelectors
+let modal;
 const recipeCardContainer = document.querySelector('.recipes-container');
 const myFavoritesNav = document.querySelector('#my-favorites-nav');
 const allRecipesNav = document.querySelector('#all-recipes-nav');
 const myPantryNav = document.querySelector('#my-pantry-nav');
 const whatsCookinNav = document.querySelector('#whats-cookin-nav');
 const instructionsBtn = document.getElementById('preview-btn');
-const modal = document.querySelector('.modal');
+// const modal = document.querySelector('.modal');
 const closeModalBtn = document.querySelector('.close');
 const searchContainer = document.querySelector('#search-container')
 
@@ -26,12 +27,9 @@ allRecipesNav.addEventListener('click', showAllRecipes);
 myPantryNav.addEventListener('click', showMyPantry);
 whatsCookinNav.addEventListener('click', showWhatsCookin);
 
-modal.addEventListener('click', function() {
-  modal.style.display = 'block';
-});
-closeModalBtn.addEventListener('click', function() {
-  modal.style.display = "none";
-});
+// closeModalBtn.addEventListener('click', function() {
+//   modal.style.display = "none";
+// });
 recipeCardContainer.addEventListener('click', function() {
   addRecipeToFavorites(event.target);
   addRecipeToWhatsCookin(event.target);
@@ -60,10 +58,12 @@ function displayRecipes(recipes) {
         <div class="modal">
           <div class="modal-content">
             <div class="modal-header">
-              <span class="close">&times;</span>
-                 <h2>Recipe</h2>
+              <div>
+                <img src=${recipe.image} alt="recipe image" class="modal-banner">
+              </div>
             </div>
             <div class="modal-body">
+              <h2>${recipe.name}</h2>
               <h3>Insert instructions here</h3>
             </div>
            </div>
@@ -100,7 +100,7 @@ function showWhatsCookin() {
 function addRecipeToFavorites(target) {
   allRecipes.forEach(recipe => {
     if (event.target.id === `favorite-btn-${recipe.id}`) {
-      console.log(`added ${recipe} to favorites`)
+      console.log(`added ${recipe.name} to favorites`)
       user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', recipe);
     }
   })
@@ -118,9 +118,8 @@ function addRecipeToWhatsCookin(target) {
 function showModal() {
   allRecipes.forEach(recipe => {
     if (event.target.className === `show-recipe-btn-${recipe.id}`) {
-      modal.classList.add('modal-active')
-      console.log("This works");
-      // modal.style.display = 'block !important';
+      modal = document.querySelector('.modal');
+      modal.style.display = 'block';
     }
   })
 }
