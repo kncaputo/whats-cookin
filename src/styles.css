@@ -65,9 +65,9 @@ nav {
   width: 260px;
 }
 
-aside {
+/* aside {
   margin: 30px;
-}
+} */
 
 button {
   border: none;
@@ -100,17 +100,15 @@ button, .radio-filter label:hover {
 }
 
 #main {
-  flex-grow: 1;
   margin: 30px;
 }
 
 #search-container {
   background: #dedede;
-  height: 225px;
-  min-width: 419px;
+  height: auto;
+  /* max-width: 1000px; */
   align-content: space-around;
-  border-left: #d54215 10px solid;
-  box-shadow: 6px 6px 6px darkgray;
+  box-shadow: 6px 6px 6px darkgrey;
   margin-top: -200px;
   z-index: 1;
 }
@@ -123,15 +121,15 @@ button, .radio-filter label:hover {
 } */
 
 #search-bar {
-  width: 80%;
+  width: 90%;
   height: 40px;
   margin: 30px 0 0 30px;
 }
 
 .radio-filter {
   flex-wrap: wrap;
-  padding-top: 30px;
-  justify-content: center;
+  padding: 30px;
+  justify-content: space-between;
 }
 
 .radio-filter input[type="radio"] {

@@ -32,7 +32,8 @@ closeModalBtn.addEventListener('click', function() {
   modal.style.display = "none";
 });
 recipeCardContainer.addEventListener('click', function() {
-  determineRecipeClick(event.target);
+  addRecipeToFavorites(event.target);
+  addRecipeToWhatsCookin(event.target);
   showModal(event);
 });
 
@@ -87,14 +88,23 @@ function showMyPantry() {
 
 function showWhatsCookin() {
   recipeCardContainer.innerHTML = '';
-  displayRecipes(user.whatsCookin);
+  displayRecipes(user.recipesToCook);
 }
 
-function determineRecipeClick(target) {
+function addRecipeToFavorites(target) {
   allRecipes.forEach(recipe => {
     if (event.target.id === `favorite-btn-${recipe.id}`) {
-      console.log("you're in here")
+      console.log(`added ${recipe} to favorites`)
       user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', recipe);
+    }
+  })
+}
+
+function addRecipeToWhatsCookin(target) {
+  allRecipes.forEach(recipe => {
+    if (event.target.id === `whats-cookin-btn-${recipe.id}`) {
+      console.log(`added ${recipe.name} to whats cookin`)
+      user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', recipe);
     }
   })
 }
