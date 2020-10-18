@@ -106,10 +106,9 @@ button, .radio-filter label:hover {
 #search-container {
   background: #dedede;
   height: auto;
-  /* max-width: 1000px; */
   align-content: space-around;
   box-shadow: 6px 6px 6px darkgrey;
-  margin-top: -200px;
+  margin: -200px 15px 30px 15px;
   z-index: 1;
 }
 
@@ -127,6 +126,7 @@ button, .radio-filter label:hover {
 }
 
 .radio-filter {
+  width: 90%;
   flex-wrap: wrap;
   padding: 30px;
   justify-content: space-between;
@@ -143,8 +143,8 @@ button, .radio-filter label:hover {
   margin: 0 5px 10px 5px;
   color: black;
   border-radius: 50%;
-  height: 65px;
-  width: 65px;
+  height: 75px;
+  width: 75px;
   font-size: 13px;
   text-align: center;
 }
@@ -154,7 +154,6 @@ button, .radio-filter label:hover {
 }
 
 .recipes-container {
-  /* width: 700px; */
   flex-wrap: wrap;
 }
 
@@ -163,7 +162,7 @@ button, .radio-filter label:hover {
   border: lightgray 1px solid;
   box-shadow: 6px 6px 6px darkgray;
   text-align: center;
-  margin: 15px 0px 15px 15px;
+  margin: 15px 20px 15px 15px;
   overflow: hidden;
 }
 

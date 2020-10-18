@@ -1,13 +1,14 @@
 
 // querySelectors
-let recipeCardContainer = document.querySelector('.recipes-container');
-let myFavoritesNav = document.querySelector('#my-favorites-nav');
-let allRecipesNav = document.querySelector('#all-recipes-nav');
-let myPantryNav = document.querySelector('#my-pantry-nav');
-let whatsCookinNav = document.querySelector('#whats-cookin-nav');
-let instructionsBtn = document.getElementById('preview-btn');
-let modal = document.querySelector('.modal');
-let closeModalBtn = document.querySelector('.close');
+const recipeCardContainer = document.querySelector('.recipes-container');
+const myFavoritesNav = document.querySelector('#my-favorites-nav');
+const allRecipesNav = document.querySelector('#all-recipes-nav');
+const myPantryNav = document.querySelector('#my-pantry-nav');
+const whatsCookinNav = document.querySelector('#whats-cookin-nav');
+const instructionsBtn = document.getElementById('preview-btn');
+const modal = document.querySelector('.modal');
+const closeModalBtn = document.querySelector('.close');
+const searchContainer = document.querySelector('#search-container')
 
 let user = new User(usersData[0]);
 let allRecipes = [];
@@ -73,20 +74,25 @@ function displayRecipes(recipes) {
   }
 
 function showFavorites() {
+  searchContainer.classList.remove('hidden');
   recipeCardContainer.innerHTML = '';
   displayRecipes(user.favoriteRecipes);
 }
 
 function showAllRecipes() {
+  searchContainer.classList.remove('hidden');
+  recipeCardContainer.innerHTML = '';
   displayRecipes(allRecipes);
 }
 
 function showMyPantry() {
+  searchContainer.classList.remove('hidden');
   recipeCardContainer.innerHTML = '';
   displayRecipes(user.pantry);
 }
 
 function showWhatsCookin() {
+  searchContainer.classList.add('hidden');
   recipeCardContainer.innerHTML = '';
   displayRecipes(user.recipesToCook);
 }
@@ -118,9 +124,6 @@ function showModal() {
     }
   })
 }
-// add hidden
-// remove hidden
-// toggle hidden
 
 // addToFavorites
 // addToWhatsCookin
