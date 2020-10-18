@@ -1,4 +1,4 @@
-// const Ingredient = require('../src/ingredient');
+const Ingredient = require('../src/ingredient');
 
 class Pantry {
   constructor(pantry) {
@@ -49,7 +49,7 @@ class Pantry {
   checkStock(recipe, ingredientsData) {
     let ingredientIds = this.extractValues(this.ingredients, 'id');
     let ingredientsInStock = [];
-    let ingredientsNeeded = []
+    let ingredientsNeeded = [];
     recipe.ingredients.forEach(recipeIngredient => {
       if (ingredientIds.includes(recipeIngredient.id)) {
         this.ingredients.filter(pantryIngredient => {

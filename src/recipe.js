@@ -1,4 +1,4 @@
-// const Ingredient = require('../src/ingredient');
+const Ingredient = require('./ingredient.js');
 
 class Recipe {
   constructor(recipe) {
