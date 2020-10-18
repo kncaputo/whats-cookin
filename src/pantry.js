@@ -1,4 +1,4 @@
-const Ingredient = require('../src/ingredient');
+// const Ingredient = require('../src/ingredient');
 
 class Pantry {
   constructor(pantry) {
@@ -17,19 +17,27 @@ class Pantry {
   }
 
   makeIngredients(ingredientsData) {
-    if (ingredientsData !== undefined) {
-      let allIngredients = []
-      this.ingredients.forEach(ingredient => {
-        allIngredients.push(new Ingredient(ingredient));
-      })
-
-      allIngredients.forEach(ingredient => {
-        ingredient.updateIngredientData(ingredientsData, 'name', 'ingredient');
-        ingredient.updateIngredientData(ingredientsData, 'estimatedCostInCents', 'ingredient');
-      })
-      this.ingredients = allIngredients;
+      if (ingredientsData !== undefined) {
+        let allIngredients = []
+        let currentIngredient;
+        // console.log('this ingredeients: ', this.ingredients);
+        this.ingredients.forEach(ingredient => {
+          // console.log("This is the current ingredient: ", ingredient)
+          currentIngredient = ingredient;
+          // console.log("This is the currentIngredient var: ", currentIngredient)
+          allIngredients.push(new Ingredient(currentIngredient));
+          // console.log("In the forEach allIngredients arr: ", allIngredients)
+        })
+        console.log("All ingredients: ", allIngredients)
+        allIngredients.forEach(ingredient => {
+          debugger;
+          ingredient.updateIngredientData(ingredientsData, 'name', 'ingredient');
+          ingredient.updateIngredientData(ingredientsData, 'estimatedCostInCents', 'ingredient');
+          // console.log(ingredient.id)
+        })
+        this.ingredients = allIngredients;
+      }
     }
-  }
 
   makeIngredientsNeeded(ingredientsData, ingredientsNeeded) {
     if (ingredientsData !== undefined) {

@@ -121,9 +121,14 @@ describe('Ingredient', () => {
     pantry.makeIngredients(sampleIngredientsData);
     pantry.ingredients.forEach(ingredient => {
       ingredient.updateIngredientData(pantry.ingredients, 'amount', 'id');
+      ingredient.updateIngredientData(pantry.ingredients, 'name', 'id');
+      ingredient.updateIngredientData(pantry.ingredients, 'estimatedCostInCents', 'id');
     });
 
     expect(pantry.ingredients[0].name).to.deep.equal('pumpkin');
     expect(pantry.ingredients[0].amount).to.deep.equal(3);
+
+    expect(pantry.ingredients[1].name).to.deep.equal('conch');
+    expect(pantry.ingredients[1].amount).to.deep.equal(7);
   });
 });

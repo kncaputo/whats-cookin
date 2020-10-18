@@ -1,8 +1,7 @@
-const Ingredient = require('./ingredient.js');
+// const Ingredient = require('./ingredient.js');
 
 class Recipe {
   constructor(recipe) {
-    recipe = recipe || {}
     this.id = recipe.id || null;
     this.image = recipe.image;
     this.ingredients = recipe.ingredients;

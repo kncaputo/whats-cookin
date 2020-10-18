@@ -148,9 +148,13 @@ describe('Pantry', () => {
   it('should create ingredients with an id, name and cost', () => {
     pantry.makeIngredients(sampleIngredientsData);
 
-    expect(pantry.ingredients[0].id).to.deep.equal(1);
-    expect(pantry.ingredients[0].name).to.deep.equal('pumpkin');
-    expect(pantry.ingredients[0].estimatedCostInCents).to.deep.equal(472);
+    // expect(pantry.ingredients[0].id).to.deep.equal(1);
+    // expect(pantry.ingredients[0].name).to.deep.equal('pumpkin');
+    // expect(pantry.ingredients[0].estimatedCostInCents).to.deep.equal(472);
+
+    expect(pantry.ingredients[1].id).to.deep.equal(2);
+    expect(pantry.ingredients[1].name).to.deep.equal('sugar');
+    expect(pantry.ingredients[1].estimatedCostInCents).to.deep.equal(902);
   });
 
   it('should not make ingredients when no data is provided', () => {
