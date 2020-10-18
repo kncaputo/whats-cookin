@@ -77,8 +77,8 @@ describe('Recipe', () => {
   }]};
 
   beforeEach(() => {
-    recipe = new Recipe(pumpkinJuice);
-    recipe2 = new Recipe(watermelonJuice);
+    recipe = new Recipe(pumpkinJuice, sampleIngredientsData);
+    recipe2 = new Recipe(watermelonJuice, sampleIngredientsData);
   });
 
   it('should be a function', () => {

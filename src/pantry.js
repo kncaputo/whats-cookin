@@ -25,7 +25,7 @@ class Pantry {
       let foundIngredient = this.ingredientsInventory.findIngredient(ingredient.ingredient);
       this.ingredients.push(foundIngredient);
     });
-    
+
     this.ingredients.forEach(ingredient => {
       ingredient.updateIngredientData(this.ingredients, 'amount', 'ingredient');
     });

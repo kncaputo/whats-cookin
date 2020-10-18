@@ -140,10 +140,10 @@ describe('User', () => {
         }]};
 
   beforeEach(() => {
-    user = new User(bob);
-    burrito = new Recipe(burrito);
-    cheeseQuesadilla = new Recipe(cheeseQuesadilla);
-    watermelonJuice = new Recipe(watermelonJuice);
+    user = new User(bob, sampleIngredientsData);
+    burrito = new Recipe(burrito, sampleIngredientsData);
+    cheeseQuesadilla = new Recipe(cheeseQuesadilla, sampleIngredientsData);
+    watermelonJuice = new Recipe(watermelonJuice, sampleIngredientsData);
   });
 
   it('should be a function', () => {

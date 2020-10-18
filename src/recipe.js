@@ -1,4 +1,6 @@
 // const Ingredient = require('./ingredient.js');
+// const IngredientsInventory = require('./ingredientInventory.js');
+
 
 class Recipe {
   constructor(recipe, rawIngredientsData) {

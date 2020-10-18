@@ -74,8 +74,8 @@ describe('Ingredient', () => {
 
   beforeEach(() => {
     ingredient = new Ingredient(pumpkin);
-    recipe = new Recipe(pumpkinJuice);
-    pantry = new Pantry(pantryItems);
+    recipe = new Recipe(pumpkinJuice, sampleIngredientsData);
+    pantry = new Pantry(pantryItems, sampleIngredientsData);
   });
 
   it('should be a function', () => {

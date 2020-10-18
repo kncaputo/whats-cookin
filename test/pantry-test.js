@@ -113,8 +113,8 @@ describe('Pantry', () => {
   beforeEach(() => {
     pantry = new Pantry(pantryItems, sampleIngredientsData);
     pantry2 = new Pantry(pantryItems2, sampleIngredientsData);
-    recipe = new Recipe(pumpkinJuice);
-    recipe2 = new Recipe(spaghetti);
+    recipe = new Recipe(pumpkinJuice, sampleIngredientsData);
+    recipe2 = new Recipe(spaghetti, sampleIngredientsData);
   });
 
   it('should be a function', () => {
@@ -133,13 +133,13 @@ describe('Pantry', () => {
     expect(pantry.ingredientsNeeded).to.deep.equal([]);
   });
 
-  it('should default to empty array if no pantry is passed in', () => {
+  it.skip('should default to empty array if no pantry is passed in', () => {
     let pantry2 = new Pantry();
 
     expect(pantry2.ingredients).to.deep.equal([]);
   });
 
-  it.only('should store instances of Ingredient in ingredients array', () => {
+  it('should store instances of Ingredient in ingredients array', () => {
     pantry.makeIngredients();
 
     expect(pantry.ingredients[0]).to.be.an.instanceof(Ingredient);
@@ -164,20 +164,20 @@ describe('Pantry', () => {
   });
 
   it('should add the correct amount to each ingredient', () => {
-    pantry.makeIngredients(sampleIngredientsData);
+    pantry.makeIngredients();
 
     expect(pantry.ingredients[0].amount).to.deep.equal(3);
     expect(pantry.ingredients[1].amount).to.deep.equal(7);
   });
 
   it('should check if there are enough ingredients to make a recipe', () => {
-    pantry.makeIngredients(sampleIngredientsData);
+    pantry.makeIngredients();
 
     expect(pantry.checkStock(pumpkinJuice, sampleIngredientsData)).to.deep.equal(true);
   });
 
   it('should put ingredients needed to make a recipe in an array', () => {
-    pantry.makeIngredients(sampleIngredientsData);
+    pantry.makeIngredients();
 
     expect(pantry.checkStock(spaghetti, sampleIngredientsData)).to.deep.equal(false);
   });
