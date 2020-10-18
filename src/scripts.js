@@ -1,26 +1,36 @@
 
 // querySelectors
 let recipeCardContainer = document.querySelector('.recipes-container');
-let myFavorites = document.querySelector('#my-favorites-nav');
-let allRecipes = document.querySelector('#all-recipes-nav');
-let myPantry = document.querySelector('#my-pantry-nav');
-let whatsCookin = document.querySelector('#whats-cookin-nav');
+let myFavoritesNav = document.querySelector('#my-favorites-nav');
+let allRecipesNav = document.querySelector('#all-recipes-nav');
+let myPantryNav = document.querySelector('#my-pantry-nav');
+let whatsCookinNav = document.querySelector('#whats-cookin-nav');
+let instructionsBtn = document.getElementById('preview-btn');
+let instructionsModal = document.querySelector('.modal');
+let closeModalBtn = document.querySelector('.close');
 
 let user = new User(usersData[0]);
 let allRecipes = [];
 
 // eventListeners
 window.onload = loadPage();
+window.addEventListener('click', function(event) {
+  if (event.target == instructionsModal) {
+    instructionsModal.style.display = 'none';
+  }
+});
 
+myFavoritesNav.addEventListener('click', showFavorites);
+allRecipesNav.addEventListener('click', showAllRecipes);
+myPantryNav.addEventListener('click', showMyPantry);
+whatsCookinNav.addEventListener('click', showWhatsCookin);
+instructionsBtn.addEventListener('click', function() {
+  instructionsModal.style.display = 'block';
+});
+closeModalBtn.addEventListener('click', function() {
+  instructionsModal.style.display = "none";
+});
 
-myFavorites.addEventListener('click', showFavorites);
-allRecipes.addEventListener('click', showAllRecipes);
-// onLoad
-  // instantiate user
-    // instantiate pantry
-
-  // instantiate all recipes
-  // display all recipes on DOM
 function loadPage() {
   recipeData.forEach(recipe => {
     allRecipes.push(new Recipe(recipe));
@@ -50,8 +60,17 @@ function showFavorites() {
 }
 
 function showAllRecipes() {
-  recipeCardContainer.innerHTML = '';
   displayRecipes(showAllRecipes);
+}
+
+function showMyPantry() {
+  recipeCardContainer.innerHTML = '';
+  displayRecipes(user.pantry);
+}
+
+function showWhatsCookin() {
+  recipeCardContainer.innerHTML = '';
+  displayRecipes(user.whatsCookin);
 }
 // add hidden
 // remove hidden
