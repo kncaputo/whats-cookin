@@ -286,6 +286,15 @@ transition: .5s ease;
   color: white;
 }
 
+/* .modal-header-text {
+  font-size: 50px;
+  color: white;
+  box-shadow: 2px 2px 5px black;
+  z-index: 1;
+  justify-content: space-between;
+  margin-top: -100px;
+} */
+
 .modal-body {
   padding: 2px 16px;
 }

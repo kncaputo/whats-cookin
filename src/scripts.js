@@ -62,12 +62,18 @@ function displayRecipes(recipes) {
                 <img src=${recipe.image} alt="recipe image" class="modal-banner">
               </div>
             </div>
-            <div class="modal-body">
+            <div class="modal-body flex-column">
+            <div class="modal-header-text flex-row">
+              <button id="favorite-btn"><img src="../assets/heart-icon-before.png" id="favorite-btn-${recipe.id}" alt="favorite button"></button>
               <h1>${recipe.name}</h1>
+              <button id="whats-cookin-btn"><img src="../assets/plus-icon.png" id="whats-cookin-btn-${recipe.id}" alt="favorite button"></button>
+            </div>
               <div class="flex-row">
               <div class="card-effect"
                 <h2>Ingredients</h2>
-                <p class="ingredients-display">${recipe.makeIngredients(ingredientsData)}<p>
+                <p class="ingredients-display">${recipe.makeIngredients(ingredientsData)}</p>
+                <p><b>Total Cost of Ingredients</b></p>
+                <p class="ingredients-display">${recipe.calculateCost(ingredientsData)}</p>
               </div>
                 <div class="card-effect"
                   <h2>How To Cook This</h2>
