@@ -156,13 +156,3 @@ function closeModal(event) {
     modal.style.display = 'none';
   }
 }
-
-// addToFavorites
-// addToWhatsCookin
-// displayPantry
-// clicks a Nav button
-// display search results
-// preview Instructions
-// display whatsCookin
-// display allRecipes
-// display favoriteRecipes
