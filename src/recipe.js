@@ -1,4 +1,4 @@
-const Ingredient = require('../src/ingredient');
+// const Ingredient = require('../src/ingredient');
 
 class Recipe {
   constructor(recipe) {
@@ -33,6 +33,7 @@ class Recipe {
       })
 
       this.ingredients = allIngredients;
+      return this.ingredients;
     }
   }
 
