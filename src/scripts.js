@@ -1,4 +1,3 @@
-
 // querySelectors
 let modal;
 const recipeCardContainer = document.querySelector('.recipes-container');
@@ -7,7 +6,6 @@ const allRecipesNav = document.querySelector('#all-recipes-nav');
 const myPantryNav = document.querySelector('#my-pantry-nav');
 const whatsCookinNav = document.querySelector('#whats-cookin-nav');
 const instructionsBtn = document.getElementById('preview-btn');
-// const modal = document.querySelector('.modal');
 const closeModalBtn = document.querySelector('.close');
 const searchContainer = document.querySelector('#search-container')
 
@@ -23,9 +21,6 @@ allRecipesNav.addEventListener('click', showAllRecipes);
 myPantryNav.addEventListener('click', showMyPantry);
 whatsCookinNav.addEventListener('click', showWhatsCookin);
 
-// closeModalBtn.addEventListener('click', function() {
-//   modal.style.display = "none";
-// });
 recipeCardContainer.addEventListener('click', function() {
   addRecipeToFavorites(event.target);
   addRecipeToWhatsCookin(event.target);
@@ -84,28 +79,49 @@ function displayRecipes(recipes) {
     });
   }
 
+// function highlightPageOnMenu(id) {
+//   let navButton = document.getElementById(id);
+//
+//   if (navButton.disabled === true) {
+//     navButton.disabled = false;
+//   } else {
+//     navButton.disabled = true
+//   }
+//
+//   if (navButton.style.color === 'black') {
+//     document.getElementById(id).style.color = '#d54215';
+//   } else {
+//     navButton.style.color = 'black';
+//   }
+// }
+
+function showAllRecipes() {
+  highlightPageOnMenu('nav1');
+  searchContainer.classList.remove('hidden');
+  recipeCardContainer.innerHTML = '';
+  displayRecipes(allRecipes);
+  // highlightPageOnMenu('nav1');
+}
+
 function showFavorites() {
   searchContainer.classList.remove('hidden');
   recipeCardContainer.innerHTML = '';
   displayRecipes(user.favoriteRecipes);
-}
-
-function showAllRecipes() {
-  searchContainer.classList.remove('hidden');
-  recipeCardContainer.innerHTML = '';
-  displayRecipes(allRecipes);
+  // highlightPageOnMenu('nav2');
 }
 
 function showMyPantry() {
   searchContainer.classList.remove('hidden');
   recipeCardContainer.innerHTML = '';
-  displayRecipes(user.pantry);
+  // displayRecipes(user.pantry);
+  // highlightPageOnMenu('nav3');
 }
 
 function showWhatsCookin() {
   searchContainer.classList.add('hidden');
   recipeCardContainer.innerHTML = '';
   displayRecipes(user.recipesToCook);
+  // highlightPageOnMenu('nav4');
 }
 
 function addRecipeToFavorites(target) {
