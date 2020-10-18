@@ -11,9 +11,9 @@ const searchContainer = document.querySelector('#search-container');
 const pantryContainer = document.querySelector('.pantry-container');
 
 let user = new User(usersData[0], ingredientsData);
-let allRecipes = []
+// let allRecipes = []
 let ingredientsInventory = new IngredientsInventory(ingredientsData);
-let recipeBox = new RecipeBox(recipeData);
+let recipeBox = new RecipeBox(recipeData, ingredientsData);
 
 // eventListeners
 window.onload = loadPage();
@@ -31,12 +31,13 @@ recipeCardContainer.addEventListener('click', function() {
 });
 
 function loadPage() {
-  recipeData.forEach(recipe => {
-    allRecipes.push(new Recipe(recipe));
-  })
-  displayRecipes(allRecipes);
+  // recipeData.forEach(recipe => {
+  //   allRecipes.push(new Recipe(recipe));
+  // })
+  // displayRecipes(allRecipes);
 
-
+  recipeBox.makeRecipes()
+  displayRecipes(recipeBox.allRecipes);
 }
 
 function highlightPageOnMenu(id) {
@@ -113,7 +114,7 @@ function showAllRecipes() {
   searchContainer.classList.remove('hidden');
   recipeCardContainer.innerHTML = '';
   pantryContainer.innerHTML = '';
-  displayRecipes(allRecipes);
+  displayRecipes(recipeBox.allRecipes);
   highlightPageOnMenu('nav1');
 }
 
@@ -141,7 +142,7 @@ function showWhatsCookin() {
 }
 
 function addRecipeToFavorites(target) {
-  allRecipes.forEach(recipe => {
+  recipeBox.allRecipes.forEach(recipe => {
     if (event.target.id === `favorite-btn-${recipe.id}`) {
       console.log(`added ${recipe.name} to favorites`)
       user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', recipe);
@@ -150,7 +151,7 @@ function addRecipeToFavorites(target) {
 }
 
 function addRecipeToWhatsCookin(target) {
-  allRecipes.forEach(recipe => {
+  recipeBox.allRecipes.forEach(recipe => {
     if (event.target.id === `whats-cookin-btn-${recipe.id}`) {
       console.log(`added ${recipe.name} to whats cookin`)
       user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', recipe);
@@ -159,7 +160,7 @@ function addRecipeToWhatsCookin(target) {
 }
 
 function openModel() {
-  allRecipes.forEach(recipe => {
+  recipeBox.allRecipes.forEach(recipe => {
     if (event.target.className === `show-recipe-btn-${recipe.id}`) {
       modal = document.querySelector('.modal');
       modal.style.display = 'block';

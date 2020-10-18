@@ -1,20 +1,32 @@
 // const Recipe = require('./recipe');
 
 class RecipeBox {
-  constructor(rawRecipeData) {
-    this.allRecipes = rawRecipeData;
+  constructor(rawRecipeData, rawIngredientsData) {
+    this.rawRecipeData = rawRecipeData;
+    this.rawIngredientsData = rawIngredientsData;
+    this.allRecipes = [];
+    // this.ingredientsInventory = new IngredientsInventory(rawIngredientsData);
   }
 
-  makeRecipes(rawRecipeData) {
-    if (rawRecipeData !== undefined) {
-      let allRecipes = []
+  makeRecipes() {
+    if (this.rawRecipeData !== undefined) {
       recipeData.forEach(recipe => {
-        allRecipes.push(new Recipe(recipe));
+      this.allRecipes.push(new Recipe(recipe, this.rawIngredientsData));
       })
-      this.allRecipes = allRecipes;
-      }
+    this.allRecipes.forEach(recipe => {
+      recipe.makeIngredients();
+    })
     }
   }
+
+  // makeIngredients() {
+  //   this.ingredientsInventory.makeIngredients()
+  //   this.allRecipes.forEach(recipe => {
+  //     recipe.ingredients.map(ingredient => {
+  //       let foundIngredient = this.ingredientsInventory.findIngredient(ingredient.id)
+  //
+  //     })
+  //   })
 
   // makeIngredients(ingredientsData) {
   //   if (ingredientsData !== undefined) {
@@ -33,6 +45,8 @@ class RecipeBox {
   //     // this.ingredients = allIngredients;
   //   }
   // }
+
+}
 
 if (typeof module !== 'undefined') {
   module.exports = RecipeBox;

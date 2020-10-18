@@ -7,7 +7,6 @@ class IngredientsInventory {
   }
 
   makeIngredients() {
-    debugger
     if (this.rawIngredientsData !== undefined) {
       this.rawIngredientsData.forEach(ingredient => {
         this.allIngredients.push(new Ingredient(ingredient));

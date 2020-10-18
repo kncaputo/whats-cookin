@@ -14,7 +14,6 @@ class Ingredient {
     if (!foundIngredient) {
       debugger;
     }
-    // this.id = ingredientName.id;
     return this[key] = foundIngredient[key];
   }
 }
