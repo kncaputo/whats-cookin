@@ -16,11 +16,7 @@ let allRecipes = [];
 
 // eventListeners
 window.onload = loadPage();
-window.addEventListener('click', function(event) {
-  if (event.target === modal) {
-    modal.style.display = 'none';
-  }
-});
+window.addEventListener('click', closeModal);
 
 myFavoritesNav.addEventListener('click', showFavorites);
 allRecipesNav.addEventListener('click', showAllRecipes);
@@ -33,7 +29,7 @@ whatsCookinNav.addEventListener('click', showWhatsCookin);
 recipeCardContainer.addEventListener('click', function() {
   addRecipeToFavorites(event.target);
   addRecipeToWhatsCookin(event.target);
-  showModal(event);
+  openModel(event);
 });
 
 function loadPage() {
@@ -88,14 +84,6 @@ function displayRecipes(recipes) {
     });
   }
 
-  // function displayRecipeIngredients(recipe) {
-  //   recipe.makeIngredients(ingredientsData);
-  //   let ingredientsDisplay = document.querySelector('.ingredients-display');
-  //   recipe.ingredients.forEach(ingredient => {
-  //     ingredientsDisplay.insertAdjacentHTML('afterbegin', ingredient.name);
-  //   });
-  // }
-
 function showFavorites() {
   searchContainer.classList.remove('hidden');
   recipeCardContainer.innerHTML = '';
@@ -138,13 +126,19 @@ function addRecipeToWhatsCookin(target) {
   })
 }
 
-function showModal() {
+function openModel() {
   allRecipes.forEach(recipe => {
     if (event.target.className === `show-recipe-btn-${recipe.id}`) {
       modal = document.querySelector('.modal');
       modal.style.display = 'block';
     }
   })
+}
+
+function closeModal(event) {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
 }
 
 // addToFavorites
