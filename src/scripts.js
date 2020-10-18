@@ -6,7 +6,7 @@ let allRecipesNav = document.querySelector('#all-recipes-nav');
 let myPantryNav = document.querySelector('#my-pantry-nav');
 let whatsCookinNav = document.querySelector('#whats-cookin-nav');
 let instructionsBtn = document.getElementById('preview-btn');
-let instructionsModal = document.querySelector('.modal');
+let modal = document.querySelector('.modal');
 let closeModalBtn = document.querySelector('.close');
 
 let user = new User(usersData[0]);
@@ -15,8 +15,8 @@ let allRecipes = [];
 // eventListeners
 window.onload = loadPage();
 window.addEventListener('click', function(event) {
-  if (event.target == instructionsModal) {
-    instructionsModal.style.display = 'none';
+  if (event.target === modal) {
+    modal.style.display = 'none';
   }
 });
 
@@ -24,11 +24,16 @@ myFavoritesNav.addEventListener('click', showFavorites);
 allRecipesNav.addEventListener('click', showAllRecipes);
 myPantryNav.addEventListener('click', showMyPantry);
 whatsCookinNav.addEventListener('click', showWhatsCookin);
-instructionsBtn.addEventListener('click', function() {
-  instructionsModal.style.display = 'block';
+
+modal.addEventListener('click', function() {
+  modal.style.display = 'block';
 });
 closeModalBtn.addEventListener('click', function() {
-  instructionsModal.style.display = "none";
+  modal.style.display = "none";
+});
+recipeCardContainer.addEventListener('click', function() {
+  determineRecipeClick(event.target);
+  showModal(event);
 });
 
 function loadPage() {
@@ -45,14 +50,26 @@ function displayRecipes(recipes) {
         <img src=${recipe.image} alt="recipe image" class="recipe-display-img">
       </div>
       <div class="recipe-action-btns flex-row">
-        <button id="favorite-btn"><img src="../assets/heart-icon-before.png" alt="favorite button"></button>
-        <button id="whats-cookin-btn"><img src="../assets/plus-icon.png" alt="favorite button"></button>
+        <button id="favorite-btn"><img src="../assets/heart-icon-before.png" id="favorite-btn-${recipe.id}" alt="favorite button"></button>
+        <button id="whats-cookin-btn"><img src="../assets/plus-icon.png" id="whats-cookin-btn-${recipe.id}" alt="favorite button"></button>
       </div>
       <h3>${recipe.name}</h3>
-    </div>`
-    return recipeCardContainer.insertAdjacentHTML('afterbegin', recipeCard);
-  });
-}
+      <button class="show-recipe-btn-${recipe.id}" id="show-recipe-btn"><h3 class="show-recipe-btn-${recipe.id}">Show Recipe</h3></button>
+        <div class="modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <span class="close">&times;</span>
+                 <h2>Recipe</h2>
+            </div>
+            <div class="modal-body">
+              <h3>Insert instructions here</h3>
+            </div>
+           </div>
+         </div>
+      </div>`
+      return recipeCardContainer.insertAdjacentHTML('afterbegin', recipeCard);
+    });
+  }
 
 function showFavorites() {
   recipeCardContainer.innerHTML = '';
@@ -60,7 +77,7 @@ function showFavorites() {
 }
 
 function showAllRecipes() {
-  displayRecipes(showAllRecipes);
+  displayRecipes(allRecipes);
 }
 
 function showMyPantry() {
@@ -71,6 +88,25 @@ function showMyPantry() {
 function showWhatsCookin() {
   recipeCardContainer.innerHTML = '';
   displayRecipes(user.whatsCookin);
+}
+
+function determineRecipeClick(target) {
+  allRecipes.forEach(recipe => {
+    if (event.target.id === `favorite-btn-${recipe.id}`) {
+      console.log("you're in here")
+      user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', recipe);
+    }
+  })
+}
+
+function showModal() {
+  allRecipes.forEach(recipe => {
+    if (event.target.className === `show-recipe-btn-${recipe.id}`) {
+      modal.classList.add('modal-active')
+      console.log("This works");
+      // modal.style.display = 'block !important';
+    }
+  })
 }
 // add hidden
 // remove hidden

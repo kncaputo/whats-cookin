@@ -115,12 +115,12 @@ button, .radio-filter label:hover {
   z-index: 1;
 }
 
-@media only screen and (max-width: 1075px) {
+/* @media only screen and (max-width: 1075px) {
   #search-container {
     height: 325px !important;
     align-content: space-around;
   }
-}
+} */
 
 #search-bar {
   width: 80%;
@@ -156,12 +156,12 @@ button, .radio-filter label:hover {
 }
 
 .recipes-container {
-  width: 700px;
+  /* width: 700px; */
   flex-wrap: wrap;
 }
 
 .recipe-card {
-  width: 30%;
+  width: 275px;
   border: lightgray 1px solid;
   box-shadow: 6px 6px 6px darkgray;
   text-align: center;
