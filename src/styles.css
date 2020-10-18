@@ -247,13 +247,13 @@ transition: .5s ease;
   width: 40px;
 }
 
-#preview-btn {
+/* #preview-btn {
   background: #dedede;
   border-radius: 5px;
   color: black;
   width: 160px;
   align-self: center;
-}
+} */
 
 .modal {
   display: none;
@@ -288,6 +288,11 @@ transition: .5s ease;
 
 .modal-body {
   padding: 2px 16px;
+}
+
+.card-effect {
+  border: lightgray 1px solid;
+  box-shadow: 6px 6px 6px darkgray;
 }
 
 /* .close {

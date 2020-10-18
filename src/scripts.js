@@ -56,15 +56,24 @@ function displayRecipes(recipes) {
       <h3>${recipe.name}</h3>
       <button class="show-recipe-btn-${recipe.id}" id="show-recipe-btn"><h3 class="show-recipe-btn-${recipe.id}">Show Recipe</h3></button>
         <div class="modal">
-          <div class="modal-content">
+          <div class="modal-content flex-column">
             <div class="modal-header">
               <div>
                 <img src=${recipe.image} alt="recipe image" class="modal-banner">
               </div>
             </div>
             <div class="modal-body">
-              <h2>${recipe.name}</h2>
-              <h3>Insert instructions here</h3>
+              <h1>${recipe.name}</h1>
+              <div class="flex-row">
+              <div class="card-effect"
+                <h2>Ingredients</h2>
+                <p class="ingredients-display">${recipe.makeIngredients(ingredientsData)}<p>
+              </div>
+                <div class="card-effect"
+                  <h2>How To Cook This</h2>
+                  <p>${recipe.getInstructions()}<p>
+                </div>
+              </div>
             </div>
            </div>
          </div>
@@ -72,6 +81,14 @@ function displayRecipes(recipes) {
       return recipeCardContainer.insertAdjacentHTML('afterbegin', recipeCard);
     });
   }
+
+  // function displayRecipeIngredients(recipe) {
+  //   recipe.makeIngredients(ingredientsData);
+  //   let ingredientsDisplay = document.querySelector('.ingredients-display');
+  //   recipe.ingredients.forEach(ingredient => {
+  //     ingredientsDisplay.insertAdjacentHTML('afterbegin', ingredient.name);
+  //   });
+  // }
 
 function showFavorites() {
   searchContainer.classList.remove('hidden');

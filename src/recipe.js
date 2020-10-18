@@ -33,6 +33,7 @@ class Recipe {
       })
 
       this.ingredients = allIngredients;
+      return this.ingredients;
     }
   }
 
