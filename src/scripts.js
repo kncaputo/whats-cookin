@@ -96,7 +96,6 @@ function displayRecipes(recipes) {
 // }
 
 function showAllRecipes() {
-  highlightPageOnMenu('nav1');
   searchContainer.classList.remove('hidden');
   recipeCardContainer.innerHTML = '';
   displayRecipes(allRecipes);
