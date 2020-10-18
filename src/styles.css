@@ -153,7 +153,7 @@ button, .radio-filter label:hover {
   margin-top: 10px;
 }
 
-.recipes-container {
+.recipes-container, .pantry-container {
   flex-wrap: wrap;
 }
 
@@ -181,6 +181,24 @@ button, .radio-filter label:hover {
 
 #favorite-btn, #whats-cookin-btn {
   background: none;
+}
+
+.ingredient-card {
+  background: lightgray;
+  padding: 10px 20px;
+  margin: 30px;
+  width: 20%;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  box-shadow: 3px 3px 10px black;
+  border-radius: 10px;
+}
+
+.decorative-line {
+  height: 30px;
+  border-right: 6px solid;
+  border-radius: 20%;
+  color: #d54215;
 }
 
 #whats-cookin-recipe-title {
@@ -247,14 +265,6 @@ transition: .5s ease;
   width: 40px;
 }
 
-/* #preview-btn {
-  background: #dedede;
-  border-radius: 5px;
-  color: black;
-  width: 160px;
-  align-self: center;
-} */
-
 .modal {
   display: none;
   position: fixed;
@@ -286,15 +296,6 @@ transition: .5s ease;
   color: white;
 }
 
-/* .modal-header-text {
-  font-size: 50px;
-  color: white;
-  box-shadow: 2px 2px 5px black;
-  z-index: 1;
-  justify-content: space-between;
-  margin-top: -100px;
-} */
-
 .modal-body {
   padding: 2px 16px;
 }
@@ -303,17 +304,3 @@ transition: .5s ease;
   border: lightgray 1px solid;
   box-shadow: 6px 6px 6px darkgray;
 }
-
-/* .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-} */
