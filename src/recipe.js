@@ -1,15 +1,18 @@
-// const Ingredient = require('../src/ingredient');
+// const Ingredient = require('./ingredient.js');
+// const IngredientsInventory = require('./ingredientInventory.js');
+
 
 class Recipe {
-  constructor(recipe) {
-    recipe = recipe || {}
+  constructor(recipe, rawIngredientsData) {
     this.id = recipe.id || null;
     this.image = recipe.image;
-    this.ingredients = recipe.ingredients;
+    this.rawRecipeIngredientData = recipe.ingredients;
+    this.ingredients = []
     this.name = recipe.name;
     this.instructions = recipe.instructions;
     this.isFavorite = false;
     this.readyToCook = false;
+    this.ingredientsInventory = new IngredientsInventory(rawIngredientsData);
   }
 
   getInstructions() {
@@ -19,23 +22,35 @@ class Recipe {
     }, []);
   }
 
+  makeIngredients() {
+    this.ingredientsInventory.makeIngredients();
+    this.rawRecipeIngredientData.forEach(ingredient => {
+      let foundIngredient = this.ingredientsInventory.findIngredient(ingredient.id);
+      this.ingredients.push(foundIngredient);
+    });
 
-  makeIngredients(ingredientsData) {
-    if (ingredientsData !== undefined) {
-      let allIngredients = []
-      this.ingredients.forEach(ingredient => {
-        allIngredients.push(new Ingredient(ingredient));
-      })
-
-      allIngredients.forEach(ingredient => {
-        ingredient.updateIngredientData(ingredientsData, 'name', 'id');
-        ingredient.updateIngredientData(ingredientsData, 'estimatedCostInCents', 'id');
-      })
-
-      this.ingredients = allIngredients;
-      return this.ingredients;
-    }
+    this.ingredients.forEach(ingredient => {
+      ingredient.updateIngredientData(this.ingredients, 'quantity');
+    });
   }
+
+
+  // makeIngredients(ingredientsData) {
+  //   if (ingredientsData !== undefined) {
+  //     let allIngredients = []
+  //     this.ingredients.forEach(ingredient => {
+  //       allIngredients.push(new Ingredient(ingredient));
+  //     })
+  //
+  //     allIngredients.forEach(ingredient => {
+  //       ingredient.updateIngredientData(ingredientsData, 'name', 'id');
+  //       ingredient.updateIngredientData(ingredientsData, 'estimatedCostInCents', 'id');
+  //     })
+  //
+  //     this.ingredients = allIngredients;
+  //     return this.ingredients;
+  //   }
+  // }
 
 
   calculateCost(ingredientsData) {

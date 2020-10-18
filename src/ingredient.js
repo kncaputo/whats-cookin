@@ -1,18 +1,20 @@
 class Ingredient {
   constructor(ingredient) {
-    this.id = ingredient.id;
+    this.id = ingredient.id || ingredient.ingredient;
     this.name = ingredient.name || null;
     this.estimatedCostInCents = ingredient.estimatedCostInCents || null;
     this.amount = ingredient.amount || null;
     this.quantity = ingredient.quantity || null;
   }
 
-  updateIngredientData(array, key, id) {
-    let ingredientName = array.find(ingredient => {
-      return ingredient[id] === this[id];
+  updateIngredientData(array, key) {
+    let foundIngredient = array.find(ingredient => {
+      return ingredient.id === this.id;
     });
-    this.id = ingredientName.id;
-    return this[key] = ingredientName[key];
+    if (!foundIngredient) {
+      debugger;
+    }
+    return this[key] = foundIngredient[key];
   }
 }
 

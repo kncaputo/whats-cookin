@@ -1,9 +1,12 @@
 // const Ingredient = require('../src/ingredient');
+// const IngredientsInventory = require('./ingredientInventory.js');
 
 class Pantry {
-  constructor(pantry) {
-    this.ingredients = pantry || [];
+  constructor(pantry, ingredientsData) {
+    this.rawPantryData = pantry;
+    this.ingredients = [];
     this.ingredientsNeeded = [];
+    this.ingredientsInventory = new IngredientsInventory(ingredientsData);
   }
 
   extractValues(array, itemCriteria) {
@@ -16,40 +19,38 @@ class Pantry {
     }
   }
 
-  makeIngredients(ingredientsData) {
-    if (ingredientsData !== undefined) {
-      let allIngredients = []
-      this.ingredients.forEach(ingredient => {
-        allIngredients.push(new Ingredient(ingredient));
-      })
+  makeIngredients() {
+    this.ingredientsInventory.makeIngredients();
+    this.rawPantryData.forEach(ingredient => {
+      let foundIngredient = this.ingredientsInventory.findIngredient(ingredient.ingredient);
+      this.ingredients.push(foundIngredient);
+    });
 
-      allIngredients.forEach(ingredient => {
-        ingredient.updateIngredientData(ingredientsData, 'name', 'ingredient');
-        ingredient.updateIngredientData(ingredientsData, 'estimatedCostInCents', 'ingredient');
-      })
-      this.ingredients = allIngredients;
-    }
+    this.ingredients.forEach(ingredient => {
+      ingredient.updateIngredientData(this.ingredients, 'amount', 'ingredient');
+    });
   }
 
-  makeIngredientsNeeded(ingredientsData, ingredientsNeeded) {
-    if (ingredientsData !== undefined) {
-      let allIngredients = []
-      ingredientsNeeded.forEach(ingredient => {
-        allIngredients.push(new Ingredient(ingredient));
-      })
 
-      allIngredients.forEach(ingredient => {
-        ingredient.updateIngredientData(ingredientsData, 'name', 'ingredient');
-        ingredient.updateIngredientData(ingredientsData, 'estimatedCostInCents', 'ingredient');
-      })
-      this.ingredientsNeeded = allIngredients;
-    }
-  }
+  // makeIngredientsNeeded(ingredientsData, ingredientsNeeded) {
+  //   if (ingredientsData !== undefined) {
+  //     let allIngredients = []
+  //     ingredientsNeeded.forEach(ingredient => {
+  //       allIngredients.push(new Ingredient(ingredient));
+  //     })
+  //
+  //     allIngredients.forEach(ingredient => {
+  //       ingredient.updateIngredientData(ingredientsData, 'name', 'ingredient');
+  //       ingredient.updateIngredientData(ingredientsData, 'estimatedCostInCents', 'ingredient');
+  //     })
+  //     this.ingredientsNeeded = allIngredients;
+  //   }
+  // }
 
   checkStock(recipe, ingredientsData) {
     let ingredientIds = this.extractValues(this.ingredients, 'id');
     let ingredientsInStock = [];
-    let ingredientsNeeded = []
+    let ingredientsNeeded = [];
     recipe.ingredients.forEach(recipeIngredient => {
       if (ingredientIds.includes(recipeIngredient.id)) {
         this.ingredients.filter(pantryIngredient => {
