@@ -11,8 +11,6 @@ const searchContainer = document.querySelector('#search-container');
 const pantryContainer = document.querySelector('.pantry-container');
 
 let user = new User(usersData[0], ingredientsData);
-// // let allRecipes = []
-// let ingredientsInventory = new IngredientsInventory(ingredientsData);
 let recipeBox = new RecipeBox(recipeData, ingredientsData);
 
 // eventListeners
@@ -36,7 +34,7 @@ function determineClick(event) {
 
 function loadPage() {
   // recipeData.forEach(recipe => {
-  //   allRecipes.push(new Recipe(recipe));
+  //   recipeBox.allRecipes.push(new Recipe(recipe));
   // })
   // displayRecipes(allRecipes);
 
@@ -159,26 +157,26 @@ function showWhatsCookin() {
   highlightPageOnMenu('nav4');
 }
 
-function addRecipeToFavorites(target) {
-  recipeBox.allRecipes.forEach(recipe => {
-    if (event.target.id === `favorite-btn-${recipe.id}`) {
-      console.log(`added ${recipe.name} to favorites`)
-      user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', recipe);
-    }
-  })
-}
-
-function addRecipeToWhatsCookin(target) {
-  recipeBox.allRecipes.forEach(recipe => {
-    if (event.target.id === `whats-cookin-btn-${recipe.id}`) {
-      console.log(`added ${recipe.name} to whats cookin`)
-      user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', recipe);
-    }
-  })
-}
+// function addRecipeToFavorites(target) {
+//   recipeBox.allRecipes.forEach(recipe => {
+//     if (event.target.id === `favorite-btn-${recipe.id}`) {
+//       console.log(`added ${recipe.name} to favorites`)
+//       user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', recipe);
+//     }
+//   })
+// }
+//
+// function addRecipeToWhatsCookin(target) {
+//   recipeBox.allRecipes.forEach(recipe => {
+//     if (event.target.id === `whats-cookin-btn-${recipe.id}`) {
+//       console.log(`added ${recipe.name} to whats cookin`)
+//       user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', recipe);
+//     }
+//   })
+// }
 
 function addRemoveFavorites(target) {
-  allRecipes.forEach(recipe => {
+  recipeBox.allRecipes.forEach(recipe => {
     if ((event.target.id === `favorite-btn-${recipe.id}`) && (recipe.isFavorite === false)) {
       console.log(`added ${recipe.name} to favorites`)
       user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', recipe);
@@ -186,12 +184,13 @@ function addRemoveFavorites(target) {
     } else if ((event.target.id === `favorite-btn-${recipe.id}`) && (recipe.isFavorite === true)) {
       user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', recipe);
       removeRecipeCard(recipe);
-      allRecipes.push(recipe);
+      recipeBox.allRecipes.push(recipe);
     }
   })
 }
+
 function addRemoveWhatsCookin(target) {
-  allRecipes.forEach(recipe => {
+  recipeBox.allRecipes.forEach(recipe => {
     if ((event.target.id === `whats-cookin-btn-${recipe.id}`) && (recipe.readyToCook === false)) {
       console.log(`added ${recipe.name} to What's Cookin'`)
       user.toggleRecipeStatus(user.readyToCook, 'readyToCook', recipe);
@@ -199,7 +198,7 @@ function addRemoveWhatsCookin(target) {
     } else if ((event.target.id === `whats-cookin-btn-${recipe.id}`) && (recipe.readyToCook === true)) {
       user.toggleRecipeStatus(user.readyToCook, 'readyToCook', recipe);
       removeRecipeCard(recipe);
-      allRecipes.push(recipe);
+      recipeBox.allRecipes.push(recipe);
     }
   })
 }
@@ -226,7 +225,7 @@ function togglePlusImg(recipe) {
 }
 
 function addToWhatsCookin(target) {
-  allRecipes.forEach(recipe => {
+  recipeBox.allRecipes.forEach(recipe => {
     if (event.target.id === `whats-cookin-btn-${recipe.id}`) {
       console.log(`added ${recipe.name} to whats cookin`)
       user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', recipe);
