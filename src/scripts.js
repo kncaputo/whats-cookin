@@ -10,8 +10,10 @@ const closeModalBtn = document.querySelector('.close');
 const searchContainer = document.querySelector('#search-container');
 const pantryContainer = document.querySelector('.pantry-container');
 
-let user = new User(usersData[0]);
-let allRecipes = [];
+let user = new User(usersData[0], ingredientsData);
+let allRecipes = []
+let ingredientsInventory = new IngredientsInventory(ingredientsData);
+let recipeBox = new RecipeBox(recipeData);
 
 // eventListeners
 window.onload = loadPage();
@@ -33,6 +35,8 @@ function loadPage() {
     allRecipes.push(new Recipe(recipe));
   })
   displayRecipes(allRecipes);
+
+
 }
 
 function highlightPageOnMenu(id) {

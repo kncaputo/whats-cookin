@@ -1,20 +1,27 @@
 // const Ingredient = require('./ingredient');
 
 class IngredientsInventory {
-  constructor(ingredientsData) {
-    this.allIngredients = ingredientsData;
+  constructor(rawIngredientsData) {
+    this.allIngredients = [];
+    this.rawIngredientsData = rawIngredientsData;
   }
 
   makeIngredients() {
-      if (this.allIngredients !== undefined) {
-        let allIngredients = []
-        this.allIngredients.forEach(ingredient => {
-          allIngredients.push(new Ingredient(ingredient));
-        })
-        this.allIngredients = allIngredients;
-      }
+    debugger
+    if (this.rawIngredientsData !== undefined) {
+      this.rawIngredientsData.forEach(ingredient => {
+        this.allIngredients.push(new Ingredient(ingredient));
+      })
     }
   }
+
+  findIngredient(id) {
+    let foundIngredient = this.allIngredients.find(ingredient => {
+      return ingredient.id === id;
+    })
+    return foundIngredient;
+  }
+}
 
 
 if (typeof module !== 'undefined') {

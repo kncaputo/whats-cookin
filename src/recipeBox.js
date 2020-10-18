@@ -1,12 +1,12 @@
 // const Recipe = require('./recipe');
 
 class RecipeBox {
-  constructor(recipeData) {
-    this.allRecipes = recipeData;
+  constructor(rawRecipeData) {
+    this.allRecipes = rawRecipeData;
   }
 
-  makeRecipes(recipeData) {
-    if (recipeData !== undefined) {
+  makeRecipes(rawRecipeData) {
+    if (rawRecipeData !== undefined) {
       let allRecipes = []
       recipeData.forEach(recipe => {
         allRecipes.push(new Recipe(recipe));

@@ -2,10 +2,10 @@
 // const Pantry = require('./pantry.js');
 
 class User {
-  constructor(user) {
+  constructor(user, ingredientsData) {
     this.id = user.id;
     this.name = user.name;
-    this.pantry = new Pantry(user.pantry);
+    this.pantry = new Pantry(user.pantry, ingredientsData);
     this.favoriteRecipes = [];
     this.recipesToCook = [];
   }

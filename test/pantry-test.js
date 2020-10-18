@@ -111,8 +111,8 @@ describe('Pantry', () => {
       }]};
 
   beforeEach(() => {
-    pantry = new Pantry(pantryItems);
-    pantry2 = new Pantry(pantryItems2);
+    pantry = new Pantry(pantryItems, sampleIngredientsData);
+    pantry2 = new Pantry(pantryItems2, sampleIngredientsData);
     recipe = new Recipe(pumpkinJuice);
     recipe2 = new Recipe(spaghetti);
   });
@@ -139,14 +139,14 @@ describe('Pantry', () => {
     expect(pantry2.ingredients).to.deep.equal([]);
   });
 
-  it('should store instances of Ingredient in ingredients array', () => {
-    pantry.makeIngredients(sampleIngredientsData);
+  it.only('should store instances of Ingredient in ingredients array', () => {
+    pantry.makeIngredients();
 
     expect(pantry.ingredients[0]).to.be.an.instanceof(Ingredient);
   });
 
   it('should create ingredients with an id, name and cost', () => {
-    pantry.makeIngredients(sampleIngredientsData);
+    pantry.makeIngredients();
 
     // expect(pantry.ingredients[0].id).to.deep.equal(1);
     // expect(pantry.ingredients[0].name).to.deep.equal('pumpkin');
