@@ -5,7 +5,7 @@ const Ingredient = require('../src/ingredient');
 const Recipe = require('../src/recipe');
 const Pantry = require('../src/pantry');
 
-describe('Pantry', () => {
+describe.skip('Pantry', () => {
   let pantry;
   let recipe;
   let pantryItems = [{

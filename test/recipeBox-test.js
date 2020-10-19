@@ -5,7 +5,7 @@ const Ingredient = require('../src/ingredient');
 const Recipe = require('../src/recipe');
 const RecipeBox = require('../src/recipeBox');
 
-describe('RecipeBox', () => {
+describe.skip('RecipeBox', () => {
   let recipeBox;
 
   let sampleIngredientsData = [{

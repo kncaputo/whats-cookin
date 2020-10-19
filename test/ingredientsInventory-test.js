@@ -2,10 +2,12 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const Ingredient = require('../src/ingredient');
-const IngredientsInventory = require('../src/ingredientInventory');
+const Pantry = require('../src/pantry');
+const IngredientInventory = require('../src/ingredientInventory');
 
-describe('IngredientsInventory', () => {
-  let ingredientsInventory;
+describe.only('IngredientInventory', () => {
+  let ingredientInventory;
+  let pantry;
 
   let sampleIngredientsData = [{
     "id": 1,
@@ -33,42 +35,101 @@ describe('IngredientsInventory', () => {
     "estimatedCostInCents": 320
   }];
 
+  let samplePantryIngredients = [
+    {
+      "ingredient": 1,
+      "amount": 12
+    },
+    {
+      "ingredient": 2,
+      "amount": 7
+    },
+    {
+      "ingredient": 3,
+      "amount": 10
+    },
+    {
+      "ingredient": 4,
+      "amount": 16
+    },
+    {
+      "ingredient": 5,
+      "amount": 8
+    }]
+
+    let sampleRecipeIngredients = [
+      {
+        "id": 1,
+        "quantity": {
+          "amount": 1.5,
+          "unit": "c"
+        }
+      },
+      {
+        "id": 2,
+        "quantity": {
+          "amount": 0.5,
+          "unit": "tsp"
+        }
+      },
+      {
+        "id": 3,
+        "quantity": {
+          "amount": 15,
+          "unit": "large"
+        }
+      }]
+
   beforeEach(() => {
-    ingredientsInventory = new IngredientsInventory(sampleIngredientsData);
+    ingredientInventory = new IngredientInventory(sampleIngredientsData);
+    pantry = new Pantry(samplePantryIngredients, sampleIngredientsData);
   });
 
   describe('Constructor', () => {
     it('should be a function', () => {
-      expect(IngredientsInventory).to.be.a('function');
+      expect(IngredientInventory).to.be.a('function');
     });
 
-    it('should pass data into all ingredients', () => {
-      expect(ingredientsInventory.allIngredients).to.deep.equal(sampleIngredientsData);
+    it('should pass data into rawIngredientsData', () => {
+      expect(ingredientInventory.rawIngredientsData).to.deep.equal(sampleIngredientsData);
+    });
+
+    it('should start with no foundIngredient', () => {
+      expect(ingredientInventory.foundIngredient).to.deep.equal(null);
     });
   });
 
-  describe('makeIngredients', () => {
+  describe('Making Ingredients', () => {
     it('should create ingredients from data', () => {
-      ingredientsInventory.makeIngredients();
-      expect(ingredientsInventory.allIngredients[0]).to.be.an.instanceof(Ingredient);
+      ingredientInventory.makeIngredients();
+      expect(ingredientInventory.allIngredients[0]).to.be.an.instanceof(Ingredient);
+    });
+
+    it('should update the ingredient amount', () => {
+      ingredientInventory.makeIngredients();
+      ingredientInventory.updateIngredientData(samplePantryIngredients, 'amount', 'id');
+
+      expect(ingredientInventory.allIngredients[0].amount).to.deep.equal(12);
     });
   });
 
-  describe('findIngredient', () => {
+  describe('Finding Ingredients', () => {
     it('should be able to find an ingredient based on an integer id', () => {
-      let result = ingredientsInventory.findIngredient(1)
+      ingredientInventory.makeIngredients();
+      ingredientInventory.findIngredient(1)
 
-      expect(result.name).to.deep.equal('pumpkin');
-      expect(result.id).to.deep.equal(1);
-      expect(result.estimatedCostInCents).to.deep.equal(472);
+      expect(ingredientInventory.foundIngredient.name).to.deep.equal('pumpkin');
+      expect(ingredientInventory.foundIngredient.id).to.deep.equal(1);
+      expect(ingredientInventory.foundIngredient.estimatedCostInCents).to.deep.equal(472);
     });
 
     it('should be able to find another ingredient based on an integer id', () => {
-      let result = ingredientsInventory.findIngredient(4)
+      ingredientInventory.makeIngredients();
+      ingredientInventory.findIngredient(4)
 
-      expect(result.name).to.deep.equal('pasta');
-      expect(result.id).to.deep.equal(4);
-      expect(result.estimatedCostInCents).to.deep.equal(530);
+      expect(ingredientInventory.foundIngredient.name).to.deep.equal('pasta');
+      expect(ingredientInventory.foundIngredient.id).to.deep.equal(4);
+      expect(ingredientInventory.foundIngredient.estimatedCostInCents).to.deep.equal(530);
     });
   });
 

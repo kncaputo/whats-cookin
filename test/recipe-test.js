@@ -4,7 +4,7 @@ const expect = chai.expect;
 const Ingredient = require('../src/ingredient');
 const Recipe = require('../src/recipe');
 
-describe('Recipe', () => {
+describe.skip('Recipe', () => {
   let recipe;
   const sampleIngredientsData = [
     {

@@ -1,5 +1,5 @@
-// const Ingredient = require('../src/ingredient');
-// const IngredientsInventory = require('./ingredientInventory.js');
+const Ingredient = require('../src/ingredient');
+const IngredientsInventory = require('./ingredientInventory.js');
 
 class Pantry {
   constructor(pantry, ingredientsData) {
