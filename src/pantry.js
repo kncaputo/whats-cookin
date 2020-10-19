@@ -30,6 +30,12 @@ class Pantry {
     })
   }
 
+  updateIngredientData(array, key) {
+    this.ingredients.forEach(ingredient => {
+      this.ingredientsInventory.updateIngredientData(array, key);
+    });
+  }
+
   checkStock(recipe, ingredientsData) {
     let ingredientIds = this.extractValues(this.ingredients, 'id');
     let ingredientsInStock = [];

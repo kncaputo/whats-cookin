@@ -140,8 +140,16 @@ describe('Pantry', () => {
       pantry.makeIngredients();
 
       expect(pantry.ingredients[0]).to.be.an.instanceof(Ingredient);
+      expect(pantry.ingredients[0].name).to.deep.equal('pumpkin');
     });
 
+    it('should update the amount of each ingredient in the pantry', () => {
+      pantry.makeIngredients();
+      pantry.updateIngredientData(pantry.rawPantryData, 'amount');
+
+      expect(pantry.ingredients[0].name).to.deep.equal('pumpkin');
+      expect(pantry.ingredients[0].amount).to.deep.equal(3);
+    });
   });
 
   describe.skip('Check Stock For Recipe', () => {
