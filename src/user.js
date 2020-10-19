@@ -1,12 +1,12 @@
 const Pantry = require('./pantry.js');
+const RecipeBox = require('./recipeBox.js');
 
 class User {
-  constructor(user, ingredientsData) {
+  constructor(user, ingredientsData, recipeData) {
     this.id = user.id;
     this.name = user.name;
     this.pantry = new Pantry(user.pantry, ingredientsData);
-    this.favoriteRecipes = [];
-    this.recipesToCook = [];
+    this.recipeBox = new RecipeBox(recipeData, ingredientsData);
   }
 
   toggleRecipeStatus(array, location, recipe) {
@@ -18,8 +18,6 @@ class User {
       });
       return array.splice(recipeToRemove, 1);
     }
-
-    recipe[location] = !recipe[location];
   }
 
 

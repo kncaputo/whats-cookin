@@ -5,6 +5,8 @@ class RecipeBox {
     this.rawRecipeData = rawRecipeData;
     this.rawIngredientsData = rawIngredientsData;
     this.allRecipes = [];
+    this.favoriteRecipes = [];
+    this.whatsCookinRecipes = [];
   }
 
   makeRecipes() {
@@ -17,6 +19,15 @@ class RecipeBox {
         recipe.makeIngredients();
       })
     }
+  }
+
+  updateFavoriteRecipes() {
+    this.favoriteRecipes = [];
+    this.allRecipes.forEach(recipe => {
+      if (recipe.isFavorite === true) {
+        this.favoriteRecipes.push(recipe);
+      }
+    });
   }
 }
 

@@ -167,12 +167,12 @@ describe('User', () => {
       expect(user.pantry).to.be.an.instanceof(Pantry);
     });
 
-    it('should start with an empty array of favorite recipes', () => {
+    it.skip('should start with an empty array of favorite recipes', () => {
       expect(user.favoriteRecipes).to.be.an('array');
       expect(user.favoriteRecipes).to.deep.equal([]);
     });
 
-    it('should start with an empty array of recipes to cook', () => {
+    it.skip('should start with an empty array of recipes to cook', () => {
       expect(user.recipesToCook).to.be.an('array');
       expect(user.recipesToCook).to.deep.equal([]);
     });
@@ -192,7 +192,7 @@ describe('User', () => {
     });
   });
 
-  describe('Add Recipe To List', () => {
+  describe.skip('Add Recipe To List', () => {
     it('should add a recipe to favorites', () => {
       user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
 
@@ -221,7 +221,7 @@ describe('User', () => {
     });
   });
 
-  describe('Remove Recipe From List', () => {
+  describe.skip('Remove Recipe From List', () => {
     it('should be able to remove recipe from favorites', () => {
       user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
       expect(user.favoriteRecipes[0].isFavorite).to.deep.equal(true);

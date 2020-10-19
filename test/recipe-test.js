@@ -149,6 +149,7 @@ describe('Recipe', () => {
       let result = recipe.returnIngredients();
 
       expect(result[0]).to.deep.equal('pumpkin');
+      expect(result[1]).to.deep.equal('brown sugar');
     });
   });
 

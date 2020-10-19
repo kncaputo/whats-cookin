@@ -36,29 +36,33 @@ class Pantry {
     });
   }
 
-  checkStock(recipe, ingredientsData) {
-    let ingredientIds = this.extractValues(this.ingredients, 'id');
+  checkStock(recipe) {
     let ingredientsInStock = [];
     let ingredientsNeeded = [];
+    recipe.makeIngredients();
+    recipe.updateIngredientData(recipe.rawRecipeIngredientData, 'quantity');
     recipe.ingredients.forEach(recipeIngredient => {
-      if (ingredientIds.includes(recipeIngredient.id)) {
-        this.ingredients.filter(pantryIngredient => {
-          if ((pantryIngredient.id === recipeIngredient.id) && (recipeIngredient.quantity.amount <= pantryIngredient.amount)) {
-            ingredientsInStock.push(true);
-          }
-        })
-      } else {
-          ingredientsNeeded.push(recipeIngredient);
-      }
-    })
-    this.makeIngredientsNeeded(ingredientsData, ingredientsNeeded);
+      this.ingredients.forEach(pantryIngredient => {
+        if ((recipeIngredient.id === pantryIngredient.id) && (recipeIngredient.quantity.amount <= pantryIngredient.amount)) {
+          ingredientsInStock.push(true);
+        } else if (!this.ingredientsNeeded.includes(recipeIngredient)) {
+          this.ingredientsNeeded.push(recipeIngredient);
+        }
+      });
+    });
 
     if (ingredientsInStock.length === recipe.ingredients.length) {
-      return true;
-    } else {
-      return false;
-    }
+       return true;
+     } else {
+       return false;
+     }
   }
+
+  returnIngredientsNeeded(recipe) {
+    this.checkStock(recipe);
+    return this.ingredientsNeeded;
+  }
+
 }
 
 if (typeof module !== 'undefined') {

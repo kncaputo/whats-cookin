@@ -152,17 +152,28 @@ describe('Pantry', () => {
     });
   });
 
-  describe.skip('Check Stock For Recipe', () => {
+  describe.only('Check Stock For Recipe', () => {
     it('should check if there are enough ingredients to make a recipe', () => {
       pantry.makeIngredients();
+      pantry.updateIngredientData(pantry.rawPantryData, 'amount');
 
-      expect(pantry.checkStock(pumpkinJuice, sampleIngredientsData)).to.deep.equal(true);
+      let result = pantry.checkStock(recipe);
+      let result2 = pantry.checkStock(recipe2);
+
+      expect(result).to.deep.equal(true);
+      expect(result2).to.deep.equal(false);
     });
 
-    it('should put ingredients needed to make a recipe in an array', () => {
+    it('should return ingredients needed to make a recipe', () => {
       pantry.makeIngredients();
+      pantry.updateIngredientData(pantry.rawPantryData, 'amount');
 
-      expect(pantry.checkStock(spaghetti, sampleIngredientsData)).to.deep.equal(false);
+      let result = pantry.returnIngredientsNeeded(recipe2);
+
+      expect(result[0]).to.be.an.instanceof(Ingredient);
+      expect(result[0].name).to.deep.equal('pasta');
+      expect(result[1].name).to.deep.equal('tomato');
+      expect(result[2]).to.deep.equal(undefined);
     });
 
   });

@@ -14,6 +14,10 @@ class Recipe {
     this.ingredientsInventory = new IngredientsInventory(rawIngredientsData);
   }
 
+  toggleRecipeStatus(location) {
+    this[location] = !this[location]
+  }
+
   getInstructions() {
     return this.instructions.reduce((instructions, step) => {
       instructions.push(`${step.number}. ${step.instruction}`);
