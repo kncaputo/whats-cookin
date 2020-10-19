@@ -23,56 +23,28 @@ class Recipe {
   }
 
   makeIngredients() {
-    this.ingredientsInventory.makeIngredients();
-    this.rawRecipeIngredientData.forEach(ingredient => {
-      let foundIngredient = this.ingredientsInventory.findIngredient(ingredient.id);
-      this.ingredients.push(foundIngredient);
-    });
+    this.ingredientsInventory.makeIngredients()
+    this.ingredientsInventory.allIngredients.forEach(ingredient => {
+      this.rawRecipeIngredientData.forEach(recipeIngredient => {
+        if (recipeIngredient.id === ingredient.id) {
+          this.ingredients.push(ingredient);
+        }
+      })
+    })
+  }
 
+  updateIngredientData(array, key) {
     this.ingredients.forEach(ingredient => {
-      ingredient.updateIngredientData(this.ingredients, 'quantity');
+      this.ingredientsInventory.updateIngredientData(array, key);
     });
   }
 
 
-  // makeIngredients(ingredientsData) {
-  //   if (ingredientsData !== undefined) {
-  //     let allIngredients = []
-  //     this.ingredients.forEach(ingredient => {
-  //       allIngredients.push(new Ingredient(ingredient));
-  //     })
-  //
-  //     allIngredients.forEach(ingredient => {
-  //       ingredient.updateIngredientData(ingredientsData, 'name', 'id');
-  //       ingredient.updateIngredientData(ingredientsData, 'estimatedCostInCents', 'id');
-  //     })
-  //
-  //     this.ingredients = allIngredients;
-  //     return this.ingredients;
-  //   }
-  // }
-
-
-  calculateCost(ingredientsData) {
-    if (!ingredientsData) {
-      return 'Insufficient data available';
-    }
-
+  calculateCost() {
     let totalCost = 0;
-
-    const ids = this.ingredients.reduce((ingredientIds, ingredient) => {
-      ingredientIds.push(ingredient.id);
-      return ingredientIds;
-    }, []);
-
-    ids.forEach(id => {
-      ingredientsData.filter(ingredient => {
-        if (ingredient.id === id) {
-          totalCost += ingredient.estimatedCostInCents
-        }
-      })
+    this.ingredients.forEach(ingredient => {
+      return totalCost += ingredient.estimatedCostInCents;
     })
-
     return totalCost;
   }
 }
