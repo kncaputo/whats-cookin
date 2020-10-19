@@ -6,6 +6,7 @@ const Recipe = require('../src/recipe');
 
 describe('Recipe', () => {
   let recipe;
+  let recipe2;
   const sampleIngredientsData = [
     {
       "id": 1,
@@ -28,57 +29,64 @@ describe('Recipe', () => {
       "estimatedCostInCents": 559
     }];
 
-  let pumpkinJuice = {id: 123, image: 'https://exampleimage.com/1/1/1', ingredients: [{
+  const sampleRecipeData = [
+  {
+    id: 123,
+    image: 'https://exampleimage.com/1/1/1',
+    ingredients: [{
     "id": 1,
     "quantity": {
       "amount": 2,
       "unit": "c"
-    }
-  },
-  {
+      }
+    },
+    {
     "id": 2,
     "quantity": {
       "amount": 1.5,
       "unit": "tsp"
-    }
-  }],
-  name: 'Pumpkin Juice',
-  instructions: [{
+      }
+    }],
+    name: 'Pumpkin Juice',
+    instructions: [{
     "instruction": "Get a cup.",
     "number": 1
-  },
-  {
+    },
+    {
     "instruction": "Put in smashed pumpkin.",
     "number": 2
-  }]};
-
-  let watermelonJuice = {id: 123, image: 'https://exampleimage.com/1/1/1', ingredients: [{
-    "id": 3,
-    "quantity": {
-      "amount": 1,
-      "unit": "c"
-    }
-  },
+  }]},
   {
-    "id": 4,
-    "quantity": {
-      "amount": 1.5,
-      "unit": "tsp"
-    }
-  }],
-  name: 'Watermelon Juice',
-  instructions: [{
-    "instruction": "Get a cup.",
-    "number": 1
-  },
-  {
-    "instruction": "Put in smashed watermelon.",
-    "number": 2
-  }]};
+    id: 123,
+    image: 'https://exampleimage.com/1/1/1',
+    ingredients: [{
+      "id": 3,
+      "quantity": {
+        "amount": 1,
+        "unit": "c"
+      }
+    },
+    {
+      "id": 4,
+      "quantity": {
+        "amount": 1.5,
+        "unit": "tsp"
+      }
+    }],
+    name: 'Watermelon Juice',
+    instructions: [{
+      "instruction": "Get a cup.",
+      "number": 1
+    },
+    {
+      "instruction": "Put in smashed watermelon.",
+      "number": 2
+    }]
+  }];
 
   beforeEach(() => {
-    recipe = new Recipe(pumpkinJuice, sampleIngredientsData);
-    recipe2 = new Recipe(watermelonJuice, sampleIngredientsData);
+    recipe = new Recipe(sampleRecipeData[0], sampleIngredientsData);
+    recipe2 = new Recipe(sampleRecipeData[1], sampleIngredientsData);
   });
 
   describe('Constructor', () => {
