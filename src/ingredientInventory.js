@@ -15,6 +15,13 @@ class IngredientInventory {
     }
   }
 
+  findIngredient(id) {
+    this.foundIngredient = this.allIngredients.find(ingredient => {
+      return ingredient.id === id;
+    })
+    return this.foundIngredient;
+  }
+
   updateIngredientData(array, key) {
     this.allIngredients.forEach(ingredient => {
       this.findIngredient(ingredient.id);
@@ -24,13 +31,6 @@ class IngredientInventory {
         }
       })
     })
-  }
-
-  findIngredient(id) {
-    this.foundIngredient = this.allIngredients.find(ingredient => {
-      return ingredient.id === id;
-    })
-    return this.foundIngredient;
   }
 }
 

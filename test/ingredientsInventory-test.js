@@ -2,7 +2,6 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const Ingredient = require('../src/ingredient');
-const Pantry = require('../src/pantry');
 const IngredientInventory = require('../src/ingredientInventory');
 
 describe('IngredientInventory', () => {
@@ -82,7 +81,6 @@ describe('IngredientInventory', () => {
 
   beforeEach(() => {
     ingredientInventory = new IngredientInventory(sampleIngredientsData);
-    pantry = new Pantry(samplePantryIngredients, sampleIngredientsData);
   });
 
   describe('Constructor', () => {
@@ -96,20 +94,6 @@ describe('IngredientInventory', () => {
 
     it('should start with no foundIngredient', () => {
       expect(ingredientInventory.foundIngredient).to.deep.equal(null);
-    });
-  });
-
-  describe('Making Ingredients', () => {
-    it('should create ingredients from data', () => {
-      ingredientInventory.makeIngredients();
-      expect(ingredientInventory.allIngredients[0]).to.be.an.instanceof(Ingredient);
-    });
-
-    it('should update the ingredient amount for a pantry ingredient', () => {
-      ingredientInventory.makeIngredients();
-      ingredientInventory.updateIngredientData(samplePantryIngredients, 'amount');
-
-      expect(ingredientInventory.allIngredients[0].amount).to.deep.equal(12);
     });
   });
 
@@ -130,6 +114,28 @@ describe('IngredientInventory', () => {
       expect(ingredientInventory.foundIngredient.name).to.deep.equal('pasta');
       expect(ingredientInventory.foundIngredient.id).to.deep.equal(4);
       expect(ingredientInventory.foundIngredient.estimatedCostInCents).to.deep.equal(530);
+    });
+  });
+
+  describe('Making Ingredients', () => {
+    it('should create ingredients from data', () => {
+      ingredientInventory.makeIngredients();
+      expect(ingredientInventory.allIngredients[0]).to.be.an.instanceof(Ingredient);
+    });
+
+    it('should update the ingredient amount for a pantry ingredient', () => {
+      ingredientInventory.makeIngredients();
+      ingredientInventory.updateIngredientData(samplePantryIngredients, 'amount');
+
+      expect(ingredientInventory.allIngredients[0].amount).to.deep.equal(12);
+    });
+
+    it('should update the ingredient amount for a recipe ingredient', () => {
+      ingredientInventory.makeIngredients();
+      ingredientInventory.updateIngredientData(sampleRecipeIngredients, 'quantity');
+
+      expect(ingredientInventory.allIngredients[0].quantity.amount).to.deep.equal(1.5);
+      expect(ingredientInventory.allIngredients[0].quantity.unit).to.deep.equal('c');
     });
   });
 
