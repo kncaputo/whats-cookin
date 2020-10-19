@@ -20,32 +20,15 @@ class Pantry {
   }
 
   makeIngredients() {
-    this.ingredientsInventory.makeIngredients();
-    this.rawPantryData.forEach(ingredient => {
-      let foundIngredient = this.ingredientsInventory.findIngredient(ingredient.ingredient);
-      this.ingredients.push(foundIngredient);
-    });
-
-    this.ingredients.forEach(ingredient => {
-      ingredient.updateIngredientData(this.ingredients, 'amount', 'ingredient');
-    });
+    this.ingredientsInventory.makeIngredients()
+    this.ingredientsInventory.allIngredients.forEach(ingredient => {
+      this.rawPantryData.forEach(pantryIngredient => {
+        if (pantryIngredient.ingredient === ingredient.id) {
+          this.ingredients.push(ingredient);
+        }
+      })
+    })
   }
-
-
-  // makeIngredientsNeeded(ingredientsData, ingredientsNeeded) {
-  //   if (ingredientsData !== undefined) {
-  //     let allIngredients = []
-  //     ingredientsNeeded.forEach(ingredient => {
-  //       allIngredients.push(new Ingredient(ingredient));
-  //     })
-  //
-  //     allIngredients.forEach(ingredient => {
-  //       ingredient.updateIngredientData(ingredientsData, 'name', 'ingredient');
-  //       ingredient.updateIngredientData(ingredientsData, 'estimatedCostInCents', 'ingredient');
-  //     })
-  //     this.ingredientsNeeded = allIngredients;
-  //   }
-  // }
 
   checkStock(recipe, ingredientsData) {
     let ingredientIds = this.extractValues(this.ingredients, 'id');

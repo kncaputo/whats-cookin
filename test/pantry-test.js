@@ -5,7 +5,7 @@ const Ingredient = require('../src/ingredient');
 const Recipe = require('../src/recipe');
 const Pantry = require('../src/pantry');
 
-describe.skip('Pantry', () => {
+describe('Pantry', () => {
   let pantry;
   let recipe;
   let pantryItems = [{
@@ -117,80 +117,46 @@ describe.skip('Pantry', () => {
     recipe2 = new Recipe(spaghetti, sampleIngredientsData);
   });
 
-  it('should be a function', () => {
-    expect(Pantry).to.be.a('function');
+  describe('Constructor',() => {
+    it('should be a function', () => {
+      expect(Pantry).to.be.a('function');
+    });
+
+    it('should create an instance of pantry', () => {
+      expect(pantry).to.be.an.instanceof(Pantry);
+    });
+
+    it('should contain an array of ingredients', () => {
+      expect(pantry.ingredients).to.be.an('array');
+    });
+
+    it('should contain an empty array of ingredients needed', () => {
+      expect(pantry.ingredientsNeeded).to.deep.equal([]);
+    });
   });
 
-  it('should create an instance of pantry', () => {
-    expect(pantry).to.be.an.instanceof(Pantry);
+  describe('Making Ingredients', () => {
+    it('should store instances of Ingredient in ingredients array', () => {
+      pantry.makeIngredients();
+
+      expect(pantry.ingredients[0]).to.be.an.instanceof(Ingredient);
+    });
+
   });
 
-  it('should contain an array of ingredients', () => {
-    expect(pantry.ingredients).to.be.an('array');
-  });
+  describe.skip('Check Stock For Recipe', () => {
+    it('should check if there are enough ingredients to make a recipe', () => {
+      pantry.makeIngredients();
 
-  it('should contain an empty array of ingredients needed', () => {
-    expect(pantry.ingredientsNeeded).to.deep.equal([]);
-  });
+      expect(pantry.checkStock(pumpkinJuice, sampleIngredientsData)).to.deep.equal(true);
+    });
 
-  it.skip('should default to empty array if no pantry is passed in', () => {
-    let pantry2 = new Pantry();
+    it('should put ingredients needed to make a recipe in an array', () => {
+      pantry.makeIngredients();
 
-    expect(pantry2.ingredients).to.deep.equal([]);
-  });
+      expect(pantry.checkStock(spaghetti, sampleIngredientsData)).to.deep.equal(false);
+    });
 
-  it('should store instances of Ingredient in ingredients array', () => {
-    pantry.makeIngredients();
-
-    expect(pantry.ingredients[0]).to.be.an.instanceof(Ingredient);
-  });
-
-  it('should create ingredients with an id, name and cost', () => {
-    pantry.makeIngredients();
-
-    // expect(pantry.ingredients[0].id).to.deep.equal(1);
-    // expect(pantry.ingredients[0].name).to.deep.equal('pumpkin');
-    // expect(pantry.ingredients[0].estimatedCostInCents).to.deep.equal(472);
-
-    expect(pantry.ingredients[1].id).to.deep.equal(2);
-    expect(pantry.ingredients[1].name).to.deep.equal('sugar');
-    expect(pantry.ingredients[1].estimatedCostInCents).to.deep.equal(902);
-  });
-
-  it('should not make ingredients when no data is provided', () => {
-    pantry.makeIngredients();
-
-    expect(pantry.ingredients[0]).to.not.be.an.instanceof(Ingredient);
-  });
-
-  it('should add the correct amount to each ingredient', () => {
-    pantry.makeIngredients();
-
-    expect(pantry.ingredients[0].amount).to.deep.equal(3);
-    expect(pantry.ingredients[1].amount).to.deep.equal(7);
-  });
-
-  it('should check if there are enough ingredients to make a recipe', () => {
-    pantry.makeIngredients();
-
-    expect(pantry.checkStock(pumpkinJuice, sampleIngredientsData)).to.deep.equal(true);
-  });
-
-  it('should put ingredients needed to make a recipe in an array', () => {
-    pantry.makeIngredients();
-
-    expect(pantry.checkStock(spaghetti, sampleIngredientsData)).to.deep.equal(false);
-  });
-
-  it.skip('should update ingredients not in pantry needed for a recipe', () => {
-    pantry.makeIngredients(sampleIngredientsData);
-    expect(pantry.checkStock(spaghetti, sampleIngredientsData)).to.deep.equal(false);
-    // pantry.makeIngredientsNeeded(sampleIngredientsData, spaghetti);
-
-    expect(pantry.ingredientsNeeded[0].name).to.deep.equal('pasta');
-    expect(pantry.ingredientsNeeded[0].id).to.deep.equal(333);
-    expect(pantry.ingredientsNeeded[0].amount).to.deep.equal(1);
-    expect(pantry.ingredientsNeeded[0]).to.be.an.instanceof(Ingredient);
   });
 
 });
