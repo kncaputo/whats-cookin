@@ -1,6 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 
+const Ingredient = require('../src/ingredient');
 const Recipe = require('../src/recipe');
 const RecipeBox = require('../src/recipeBox');
 
@@ -114,7 +115,7 @@ describe('RecipeBox', () => {
     ];
 
   beforeEach(() => {
-    recipeBox = new RecipeBox(sampleRecipeData)
+    recipeBox = new RecipeBox(sampleRecipeData, sampleIngredientsData);
   });
 
   describe('Constructor', () => {
@@ -141,6 +142,13 @@ describe('RecipeBox', () => {
 
       expect(recipeBox.allRecipes[0].name).to.deep.equal('Pumpkin Juice');
       expect(recipeBox.allRecipes[1].name).to.deep.equal('Spaghetti');
+    });
+
+    it('should contain instances of Ingredients within each recipe', () => {
+      recipeBox.makeRecipes();
+
+      expect(recipeBox.allRecipes[0].ingredients[0]).to.be.an.instanceof(Ingredient);
+      expect(recipeBox.allRecipes[1].ingredients[0]).to.be.an.instanceof(Ingredient);
     });
   });
 });
