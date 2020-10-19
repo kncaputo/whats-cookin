@@ -6,7 +6,7 @@ const Recipe = require('../src/recipe');
 const Pantry = require('../src/pantry');
 const User = require('../src/user.js');
 
-describe.skip('User', () => {
+describe('User', () => {
   let user;
   let bob = {"name": "Bob",
   "id": 1,
@@ -146,99 +146,109 @@ describe.skip('User', () => {
     watermelonJuice = new Recipe(watermelonJuice, sampleIngredientsData);
   });
 
-  it('should be a function', () => {
-    expect(User).to.be.a('function');
+  describe('Constructor', () => {
+    it('should be a function', () => {
+      expect(User).to.be.a('function');
+    });
+
+    it('should create an instance of User', () => {
+      expect(user).to.be.an.instanceof(User);
+    });
+
+    it('should have an id', () => {
+      expect(user.id).to.deep.equal(1);
+    });
+
+    it('should have a name', () => {
+      expect(user.name).to.deep.equal('Bob');
+    });
+
+    it('should have a pantry', () => {
+      expect(user.pantry).to.be.an.instanceof(Pantry);
+    });
+
+    it('should start with an empty array of favorite recipes', () => {
+      expect(user.favoriteRecipes).to.be.an('array');
+      expect(user.favoriteRecipes).to.deep.equal([]);
+    });
+
+    it('should start with an empty array of recipes to cook', () => {
+      expect(user.recipesToCook).to.be.an('array');
+      expect(user.recipesToCook).to.deep.equal([]);
+    });
   });
 
-  it('should create an instance of User', () => {
-    expect(user).to.be.an.instanceof(User);
+  describe('Making Ingredients', () => {
+    it('should have instances of Ingredients in the pantry', () => {
+      user.pantry.makeIngredients();
+
+      expect(user.pantry.ingredients[0]).to.be.an.instanceof(Ingredient);
+    });
+
+    it('should have ingredients that match array in object passed as argument', () => {
+      user.pantry.makeIngredients();
+
+      expect(user.pantry.ingredients[0].name).to.deep.equal('cheese');
+    });
   });
 
-  it('should have an id', () => {
-    expect(user.id).to.deep.equal(1);
+  describe('Adding Recipe To List', () => {
+    it('should add a recipe to favorites', () => {
+      user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
+
+      expect(user.favoriteRecipes.length).to.deep.equal(1);
+      expect(user.favoriteRecipes[0]).to.be.an.instanceof(Recipe);
+    });
+
+    it('should add a recipe to cook', () => {
+      user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', burrito);
+
+      expect(user.recipesToCook.length).to.deep.equal(1);
+      expect(user.recipesToCook[0]).to.be.an.instanceof(Recipe);
+      expect(user.recipesToCook[0].name).to.deep.equal('Burrito');
+    });
+
+    it('should indicate that recipe has been favorited when added to favorite recipes', () => {
+      user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
+
+      expect(user.favoriteRecipes[0].isFavorite).to.deep.equal(true);
+    });
+
+    it('should indicate that recipe is ready to cook when added to recipes to cook', () => {
+      user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', burrito);
+
+      expect(user.recipesToCook[0].readyToCook).to.deep.equal(true);
+    });
   });
 
-  it('should have a name', () => {
-    expect(user.name).to.deep.equal('Bob');
-  });
+  describe('Removing Recipe From List', () => {
+    it('should be able to remove recipe from favorites', () => {
+      user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
+      expect(user.favoriteRecipes[0].isFavorite).to.deep.equal(true);
+      user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
 
-  it('should have a pantry', () => {
-    expect(user.pantry).to.be.an.instanceof(Pantry);
-  });
+      expect(user.favoriteRecipes).to.deep.equal([]);
+    });
 
-  it('should have instances of Ingredients in the pantry', () => {
-    user.pantry.makeIngredients(sampleIngredientsData);
+    it('should be able to remove recipe from recipes to cook', () => {
+      user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', burrito);
+      expect(user.recipesToCook[0].readyToCook).to.deep.equal(true);
+      user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', burrito);
 
-    expect(user.pantry.ingredients[0]).to.be.an.instanceof(Ingredient);
-  });
+      expect(user.recipesToCook).to.deep.equal([]);
+    });
+  })
 
-  it('should have ingredients that match array in object passed as argument', () => {
-    user.pantry.makeIngredients(sampleIngredientsData);
+  describe.skip('Searching Recipes', () => {
+    it('should be able to search recipes via input', () => {
+      user.toggleRecipeStatus(user.recipesToCook, burrito);
+      user.toggleRecipeStatus(user.recipesToCook, cheeseQuesadilla);
+      user.toggleRecipeStatus(user.recipesToCook, watermelonJuice);
 
-    expect(user.pantry.ingredients[0].name).to.deep.equal('cheese');
-  });
+      let results = user.searchRecipes('cheese', user.recipesToCook);
 
-  it('should start with an empty array of favorite recipes', () => {
-    expect(user.favoriteRecipes).to.be.an('array');
-    expect(user.favoriteRecipes).to.deep.equal([]);
-  });
-
-  it('should start with an empty array of recipes to cook', () => {
-    expect(user.recipesToCook).to.be.an('array');
-    expect(user.recipesToCook).to.deep.equal([]);
-  });
-
-  it('should add a recipe to favorites', () => {
-    user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
-
-    expect(user.favoriteRecipes.length).to.deep.equal(1);
-    expect(user.favoriteRecipes[0]).to.be.an.instanceof(Recipe);
-  });
-
-  it('should add a recipe to cook', () => {
-    user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', burrito);
-
-    expect(user.recipesToCook.length).to.deep.equal(1);
-    expect(user.recipesToCook[0]).to.be.an.instanceof(Recipe);
-    expect(user.recipesToCook[0].name).to.deep.equal('Burrito');
-  });
-
-  it.skip('should be able to search recipes via input', () => {
-    user.toggleRecipeStatus(user.recipesToCook, burrito);
-    user.toggleRecipeStatus(user.recipesToCook, cheeseQuesadilla);
-    user.toggleRecipeStatus(user.recipesToCook, watermelonJuice);
-
-    let results = user.searchRecipes('cheese', user.recipesToCook);
-
-    expect(results[0].name).to.deep.equal('Burrito');
-    expect(results[1].name).to.deep.equal('Cheese Quesadilla');
-  });
-
-  it('should indicate that recipe has been favorited when added to favorite recipes', () => {
-    user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
-
-    expect(user.favoriteRecipes[0].isFavorite).to.deep.equal(true);
-  });
-
-  it('should indicate that recipe is ready to cook when added to recipes to cook', () => {
-    user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', burrito);
-
-    expect(user.recipesToCook[0].readyToCook).to.deep.equal(true);
-  });
-
-  it('should be able to remove recipe from favorites', () => {
-    user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
-    expect(user.favoriteRecipes[0].isFavorite).to.deep.equal(true);
-    user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
-
-    expect(user.favoriteRecipes).to.deep.equal([]);
-  });
-
-  it('should be able to remove recipe from recipes to cook', () => {
-    user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', burrito);
-    expect(user.recipesToCook[0].readyToCook).to.deep.equal(true);
-    user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', burrito);
-
-    expect(user.recipesToCook).to.deep.equal([]);
+      expect(results[0].name).to.deep.equal('Burrito');
+      expect(results[1].name).to.deep.equal('Cheese Quesadilla');
+    });
   });
 });
