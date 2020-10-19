@@ -126,6 +126,14 @@ describe('RecipeBox', () => {
     it('should create an instance of a recipe box', () => {
       expect(recipeBox).to.be.an.instanceof(RecipeBox);
     });
+
+    it('should store recipe data', () => {
+      expect(recipeBox.rawRecipeData).to.deep.equal(sampleRecipeData);
+    });
+
+    it('should store ingredients data', () => {
+      expect(recipeBox.rawIngredientsData).to.deep.equal(sampleIngredientsData);
+    });
   });
 
   describe('Making Recipes', () => {
