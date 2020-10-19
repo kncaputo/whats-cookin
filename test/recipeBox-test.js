@@ -136,7 +136,7 @@ describe('RecipeBox', () => {
     });
   });
 
-  describe('Making Recipes', () => {
+  describe('Make Recipes', () => {
     it('should be able to make recipes', () => {
       recipeBox.makeRecipes();
 

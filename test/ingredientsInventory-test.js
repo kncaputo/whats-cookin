@@ -97,7 +97,7 @@ describe('IngredientInventory', () => {
     });
   });
 
-  describe('Finding Ingredients', () => {
+  describe('Find Ingredients', () => {
     it('should be able to find an ingredient based on an integer id', () => {
       ingredientInventory.makeIngredients();
       ingredientInventory.findIngredient(1)
@@ -117,7 +117,7 @@ describe('IngredientInventory', () => {
     });
   });
 
-  describe('Making Ingredients', () => {
+  describe('Make Ingredients', () => {
     it('should create ingredients from data', () => {
       ingredientInventory.makeIngredients();
       expect(ingredientInventory.allIngredients[0]).to.be.an.instanceof(Ingredient);
@@ -130,7 +130,7 @@ describe('IngredientInventory', () => {
       expect(ingredientInventory.allIngredients[0].amount).to.deep.equal(12);
     });
 
-    it('should update the ingredient amount for a recipe ingredient', () => {
+    it('should update the ingredient quantity for a recipe ingredient', () => {
       ingredientInventory.makeIngredients();
       ingredientInventory.updateIngredientData(sampleRecipeIngredients, 'quantity');
 

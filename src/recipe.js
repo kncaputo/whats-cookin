@@ -21,6 +21,13 @@ class Recipe {
     }, []);
   }
 
+  returnIngredients() {
+    return this.ingredients.reduce((ingredients, ingredient) => {
+      ingredients.push(`${ingredient.name}`);
+      return ingredients;
+    }, []);
+  }
+
   makeIngredients() {
     this.ingredientsInventory.makeIngredients()
     this.ingredientsInventory.allIngredients.forEach(ingredient => {

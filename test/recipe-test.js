@@ -120,7 +120,7 @@ describe('Recipe', () => {
     });
   })
 
-  describe('Making Ingredients', () => {
+  describe('Make Ingredients', () => {
     it('should replace ingredient objects with instances of Ingredient', () => {
       recipe.makeIngredients();
 
@@ -143,14 +143,24 @@ describe('Recipe', () => {
     });
   })
 
-  describe('Returning Instructions', () => {
+  describe('Return Ingredients', () => {
+    it('should be able to return an array of ingredients', () => {
+      recipe.makeIngredients();
+      let result = recipe.returnIngredients();
+
+      expect(result[0]).to.deep.equal('pumpkin');
+    });
+  });
+
+  describe('Return Instructions', () => {
     it('should be able to return an array of instructions', () => {
-      let result = recipe.getInstructions()
+      let result = recipe.getInstructions();
+
       expect(result[0]).to.include('1. Get a cup.');
     });
   })
 
-  describe('Calculating Cost', () => {
+  describe('Calculate Cost', () => {
     it('should calculate the total cost of ingredients', () => {
       recipe.makeIngredients();
       let result = recipe.calculateCost();

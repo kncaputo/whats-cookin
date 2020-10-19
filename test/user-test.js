@@ -178,7 +178,7 @@ describe('User', () => {
     });
   });
 
-  describe('Making Ingredients', () => {
+  describe('Make Ingredients', () => {
     it('should have instances of Ingredients in the pantry', () => {
       user.pantry.makeIngredients();
 
@@ -192,7 +192,7 @@ describe('User', () => {
     });
   });
 
-  describe('Adding Recipe To List', () => {
+  describe('Add Recipe To List', () => {
     it('should add a recipe to favorites', () => {
       user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
 
@@ -221,7 +221,7 @@ describe('User', () => {
     });
   });
 
-  describe('Removing Recipe From List', () => {
+  describe('Remove Recipe From List', () => {
     it('should be able to remove recipe from favorites', () => {
       user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
       expect(user.favoriteRecipes[0].isFavorite).to.deep.equal(true);
@@ -239,7 +239,7 @@ describe('User', () => {
     });
   })
 
-  describe.skip('Searching Recipes', () => {
+  describe.skip('Search Recipes', () => {
     it('should be able to search recipes via input', () => {
       user.toggleRecipeStatus(user.recipesToCook, burrito);
       user.toggleRecipeStatus(user.recipesToCook, cheeseQuesadilla);

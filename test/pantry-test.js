@@ -135,7 +135,7 @@ describe('Pantry', () => {
     });
   });
 
-  describe('Making Ingredients', () => {
+  describe('Make Ingredients', () => {
     it('should store instances of Ingredient in ingredients array', () => {
       pantry.makeIngredients();
 
