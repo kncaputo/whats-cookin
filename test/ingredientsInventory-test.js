@@ -5,7 +5,7 @@ const Ingredient = require('../src/ingredient');
 const Pantry = require('../src/pantry');
 const IngredientInventory = require('../src/ingredientInventory');
 
-describe.only('IngredientInventory', () => {
+describe('IngredientInventory', () => {
   let ingredientInventory;
   let pantry;
 
@@ -105,9 +105,9 @@ describe.only('IngredientInventory', () => {
       expect(ingredientInventory.allIngredients[0]).to.be.an.instanceof(Ingredient);
     });
 
-    it('should update the ingredient amount', () => {
+    it('should update the ingredient amount for a pantry ingredient', () => {
       ingredientInventory.makeIngredients();
-      ingredientInventory.updateIngredientData(samplePantryIngredients, 'amount', 'id');
+      ingredientInventory.updateIngredientData(samplePantryIngredients, 'amount');
 
       expect(ingredientInventory.allIngredients[0].amount).to.deep.equal(12);
     });

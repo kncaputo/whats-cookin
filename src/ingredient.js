@@ -7,15 +7,15 @@ class Ingredient {
     this.quantity = ingredient.quantity || null;
   }
 
-  // updateIngredientData(array, key, id) {
-  //   let foundIngredient = array.find(ingredient => {
-  //     return ingredient[id] === this.id;
-  //   });
-  //   if (!foundIngredient) {
-  //     debugger;
-  //   }
-  //   return this[key] = foundIngredient[key];
-  // }
+  updateIngredientData(array, key, id) {
+    let foundIngredient = array.find(ingredient => {
+      return ingredient[id] === this.id;
+    });
+    if (!foundIngredient) {
+      debugger;
+    }
+    return this[key] = foundIngredient[key];
+  }
 }
 
 if (typeof module !== 'undefined') {
