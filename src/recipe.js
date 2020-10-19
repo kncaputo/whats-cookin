@@ -1,4 +1,3 @@
-const Ingredient = require('./ingredient.js');
 const IngredientsInventory = require('./ingredientInventory.js');
 
 

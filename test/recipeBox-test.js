@@ -1,11 +1,10 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const Ingredient = require('../src/ingredient');
 const Recipe = require('../src/recipe');
 const RecipeBox = require('../src/recipeBox');
 
-describe.skip('RecipeBox', () => {
+describe('RecipeBox', () => {
   let recipeBox;
 
   let sampleIngredientsData = [{
@@ -118,30 +117,30 @@ describe.skip('RecipeBox', () => {
     recipeBox = new RecipeBox(sampleRecipeData)
   });
 
-  it('should be a function', () => {
-    expect(RecipeBox).to.be.a('function');
+  describe('Constructor', () => {
+    it('should be a function', () => {
+      expect(RecipeBox).to.be.a('function');
+    });
+
+    it('should create an instance of a recipe box', () => {
+      expect(recipeBox).to.be.an.instanceof(RecipeBox);
+    });
   });
 
-  it('should create an instance of a recipe box', () => {
-    expect(recipeBox).to.be.an.instanceof(RecipeBox);
-  });
+  describe('Making Recipes', () => {
+    it('should be able to make recipes', () => {
+      recipeBox.makeRecipes();
 
-  it('should have all recipes in an array', () => {
-    expect(recipeBox.allRecipes).to.be.an('array');
-    expect(recipeBox.allRecipes[0].name).to.deep.equal('Pumpkin Juice');
-  });
+      expect(recipeBox.allRecipes[0]).to.be.an.instanceof(Recipe);
+      expect(recipeBox.allRecipes[1]).to.be.an.instanceof(Recipe);
+      expect(recipeBox.allRecipes[2]).to.be.an.instanceof(Recipe);
+    });
 
-  it('should be able to make recipes', () => {
-    recipeBox.makeRecipes(sampleRecipeData);
-    expect(recipeBox.allRecipes[0]).to.be.an.instanceof(Recipe);
-    expect(recipeBox.allRecipes[1]).to.be.an.instanceof(Recipe);
-    expect(recipeBox.allRecipes[2]).to.be.an.instanceof(Recipe);
-  });
+    it('should have all recipes in an array', () => {
+      recipeBox.makeRecipes();
 
-  it('should make ingredients in each recipe', () => {
-    recipeBox.makeRecipes(sampleRecipeData);
-    recipeBox.makeIngredients(sampleIngredientsData);
-
-    expect(recipeBox.allRecipes[0].ingredients[0]).to.be.an.instanceof(Ingredient);
+      expect(recipeBox.allRecipes[0].name).to.deep.equal('Pumpkin Juice');
+      expect(recipeBox.allRecipes[1].name).to.deep.equal('Spaghetti');
+    });
   });
 });

@@ -150,11 +150,11 @@ describe('Recipe', () => {
     });
   })
 
-  describe('Calculating Cost of Ingredients', () => {
+  describe('Calculating Cost', () => {
     it('should calculate the total cost of ingredients', () => {
       recipe.makeIngredients();
       let result = recipe.calculateCost();
-      
+
       expect(result).to.deep.equal(1219);
     });
 
