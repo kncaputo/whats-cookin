@@ -19,7 +19,7 @@ describe('Pantry', () => {
 
   let pantryItems2 = [{
     "ingredient": 444,
-    "amount": 3
+    "amount": 2
   },
   {
     "ingredient": 3,
@@ -152,7 +152,7 @@ describe('Pantry', () => {
     });
   });
 
-  describe.only('Check Stock For Recipe', () => {
+  describe('Check Stock For Recipe', () => {
     it('should check if there are enough ingredients to make a recipe', () => {
       pantry.makeIngredients();
       pantry.updateIngredientData(pantry.rawPantryData, 'amount');
@@ -163,19 +163,29 @@ describe('Pantry', () => {
       expect(result).to.deep.equal(true);
       expect(result2).to.deep.equal(false);
     });
-
-    it('should return ingredients needed to make a recipe', () => {
-      pantry.makeIngredients();
-      pantry.updateIngredientData(pantry.rawPantryData, 'amount');
-
-      let result = pantry.returnIngredientsNeeded(recipe2);
-
-      expect(result[0]).to.be.an.instanceof(Ingredient);
-      expect(result[0].name).to.deep.equal('pasta');
-      expect(result[1].name).to.deep.equal('tomato');
-      expect(result[2]).to.deep.equal(undefined);
-    });
-
   });
 
+    describe.skip('Return Shopping List', () => {
+      it('should return ingredients needed to make a recipe', () => {
+        pantry.makeIngredients();
+        pantry.updateIngredientData(pantry.rawPantryData, 'amount');
+
+        let result = pantry.returnIngredientsNeeded(recipe2);
+
+        expect(result).to.be.an('array');
+        expect(result[0]).to.deep.equal('pasta: 1 box');
+        expect(result[1]).to.deep.equal('tomato: 3 ');
+        expect(result[2]).to.deep.equal(undefined);
+      });
+
+      it('should only show the amount needed on the shopping list', () => {
+        pantry.makeIngredients();
+        pantry.updateIngredientData(pantry.rawPantryData, 'amount');
+
+        let result = pantry.returnIngredientsNeeded(recipe2);
+
+        expect(result[0]).to.deep.equal('pasta: 1 box');
+        expect(result[1]).to.deep.equal('tomato: 1 ');
+    });
+  });
 });

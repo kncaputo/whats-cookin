@@ -3,10 +3,11 @@ const expect = chai.expect;
 
 const Ingredient = require('../src/ingredient');
 const Recipe = require('../src/recipe');
+const RecipeBox = require('../src/recipeBox');
 const Pantry = require('../src/pantry');
-const User = require('../src/user.js');
+const User = require('../src/user');
 
-describe('User', () => {
+describe.skip('User', () => {
   let user;
   let bob = {"name": "Bob",
   "id": 1,
@@ -51,41 +52,42 @@ describe('User', () => {
     "estimatedCostInCents": 320
   }];
 
-  let burrito = {
-    id: 12,
-    image: 'https://exampleimage.com/1/1/1',
-    ingredients: [{
-    "id": 1,
-    "quantity": {
-      "amount": 0.75,
-      "unit": "cup"
-    }
-    },
+  let sampleRecipeData = [
     {
-      "id": 3,
+      id: 12,
+      image: 'https://exampleimage.com/1/1/1',
+      ingredients: [{
+      "id": 1,
       "quantity": {
-        "amount": 1,
-        "unit": "tortilla"
-      }
-    },
-    {
-      "id": 4,
-      "quantity": {
-        "amount": 0.5,
+        "amount": 0.75,
         "unit": "cup"
       }
-    }],
-    name: 'Burrito',
-    instructions: [{
-      "instruction": "Gather ingredients.",
-      "number": 1
+      },
+      {
+        "id": 3,
+        "quantity": {
+          "amount": 1,
+          "unit": "tortilla"
+        }
+      },
+      {
+        "id": 4,
+        "quantity": {
+          "amount": 0.5,
+          "unit": "cup"
+        }
+      }],
+      name: 'Burrito',
+      instructions: [{
+        "instruction": "Gather ingredients.",
+        "number": 1
+      },
+      {
+        "instruction": "Cook them.",
+        "number": 2
+      }]
     },
     {
-      "instruction": "Cook them.",
-      "number": 2
-    }]};
-
-    let cheeseQuesadilla = {
       id: 13,
       image: 'https://exampleimage.com/1/1/1',
       ingredients: [{
@@ -110,40 +112,42 @@ describe('User', () => {
       {
         "instruction": "Fry in pan",
         "number": 2
-      }]};
-
-      let watermelonJuice = {
-        id: 14,
-        image: 'https://exampleimage.com/1/1/1',
-        ingredients: [{
-        "id": 1,
+      }]
+    },
+    {
+      id: 13,
+      image: 'https://exampleimage.com/1/1/1',
+      ingredients: [{
+      "id": 1,
+      "quantity": {
+        "amount": 0.75,
+        "unit": "cup"
+      }
+      },
+      {
+        "id": 3,
         "quantity": {
           "amount": 1,
-          "unit": "cup"
+          "unit": "tortilla"
         }
-        },
-        {
-          "id": 5,
-          "quantity": {
-            "amount": 1,
-            "unit": "pinch"
-          }
-        }],
-        name: 'Watermelon Juice',
-        instructions: [{
-          "instruction": "Blend watermelon.",
-          "number": 1
-        },
-        {
-          "instruction": "Add a pinch of salt.",
-          "number": 2
-        }]};
+      }],
+      name: 'Cheese Quesadilla',
+      instructions: [{
+        "instruction": "Put cheese on tortilla.",
+        "number": 1
+      },
+      {
+        "instruction": "Fry in pan",
+        "number": 2
+      }]
+    }
+  ];
 
   beforeEach(() => {
-    user = new User(bob, sampleIngredientsData);
-    burrito = new Recipe(burrito, sampleIngredientsData);
-    cheeseQuesadilla = new Recipe(cheeseQuesadilla, sampleIngredientsData);
-    watermelonJuice = new Recipe(watermelonJuice, sampleIngredientsData);
+    user = new User(bob, sampleIngredientsData, sampleRecipeData);
+    // burrito = new Recipe(burrito, sampleIngredientsData);
+    // cheeseQuesadilla = new Recipe(cheeseQuesadilla, sampleIngredientsData);
+    // watermelonJuice = new Recipe(watermelonJuice, sampleIngredientsData);
   });
 
   describe('Constructor', () => {
@@ -167,14 +171,8 @@ describe('User', () => {
       expect(user.pantry).to.be.an.instanceof(Pantry);
     });
 
-    it.skip('should start with an empty array of favorite recipes', () => {
-      expect(user.favoriteRecipes).to.be.an('array');
-      expect(user.favoriteRecipes).to.deep.equal([]);
-    });
-
-    it.skip('should start with an empty array of recipes to cook', () => {
-      expect(user.recipesToCook).to.be.an('array');
-      expect(user.recipesToCook).to.deep.equal([]);
+    it('should have a recipe box', () => {
+      expect(user.recipeBox).to.be.an.instanceof(RecipeBox);
     });
   });
 
@@ -192,63 +190,37 @@ describe('User', () => {
     });
   });
 
-  describe.skip('Add Recipe To List', () => {
+  describe('Add Recipe To List', () => {
     it('should add a recipe to favorites', () => {
-      user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
 
-      expect(user.favoriteRecipes.length).to.deep.equal(1);
-      expect(user.favoriteRecipes[0]).to.be.an.instanceof(Recipe);
     });
 
     it('should add a recipe to cook', () => {
-      user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', burrito);
 
-      expect(user.recipesToCook.length).to.deep.equal(1);
-      expect(user.recipesToCook[0]).to.be.an.instanceof(Recipe);
-      expect(user.recipesToCook[0].name).to.deep.equal('Burrito');
     });
 
     it('should indicate that recipe has been favorited when added to favorite recipes', () => {
-      user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
 
-      expect(user.favoriteRecipes[0].isFavorite).to.deep.equal(true);
     });
 
     it('should indicate that recipe is ready to cook when added to recipes to cook', () => {
-      user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', burrito);
 
-      expect(user.recipesToCook[0].readyToCook).to.deep.equal(true);
     });
   });
 
-  describe.skip('Remove Recipe From List', () => {
+  describe('Remove Recipe From List', () => {
     it('should be able to remove recipe from favorites', () => {
-      user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
-      expect(user.favoriteRecipes[0].isFavorite).to.deep.equal(true);
-      user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', burrito);
 
-      expect(user.favoriteRecipes).to.deep.equal([]);
     });
 
     it('should be able to remove recipe from recipes to cook', () => {
-      user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', burrito);
-      expect(user.recipesToCook[0].readyToCook).to.deep.equal(true);
-      user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', burrito);
 
-      expect(user.recipesToCook).to.deep.equal([]);
     });
   })
 
-  describe.skip('Search Recipes', () => {
+  describe('Search Recipes', () => {
     it('should be able to search recipes via input', () => {
-      user.toggleRecipeStatus(user.recipesToCook, burrito);
-      user.toggleRecipeStatus(user.recipesToCook, cheeseQuesadilla);
-      user.toggleRecipeStatus(user.recipesToCook, watermelonJuice);
 
-      let results = user.searchRecipes('cheese', user.recipesToCook);
-
-      expect(results[0].name).to.deep.equal('Burrito');
-      expect(results[1].name).to.deep.equal('Cheese Quesadilla');
     });
   });
 });

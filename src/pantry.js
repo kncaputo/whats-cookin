@@ -6,7 +6,7 @@ class Pantry {
     this.rawPantryData = pantry;
     this.ingredients = [];
     this.ingredientsNeeded = [];
-    this.ingredientsInventory = new IngredientsInventory(ingredientsData);
+    this.ingredientInventory = new IngredientsInventory(ingredientsData);
   }
 
   extractValues(array, itemCriteria) {
@@ -20,8 +20,8 @@ class Pantry {
   }
 
   makeIngredients() {
-    this.ingredientsInventory.makeIngredients()
-    this.ingredientsInventory.allIngredients.forEach(ingredient => {
+    this.ingredientInventory.makeIngredients()
+    this.ingredientInventory.allIngredients.forEach(ingredient => {
       this.rawPantryData.forEach(pantryIngredient => {
         if (pantryIngredient.ingredient === ingredient.id) {
           this.ingredients.push(ingredient);
@@ -32,20 +32,19 @@ class Pantry {
 
   updateIngredientData(array, key) {
     this.ingredients.forEach(ingredient => {
-      this.ingredientsInventory.updateIngredientData(array, key);
+      this.ingredientInventory.updateIngredientData(array, key);
     });
   }
 
   checkStock(recipe) {
     let ingredientsInStock = [];
-    let ingredientsNeeded = [];
     recipe.makeIngredients();
     recipe.updateIngredientData(recipe.rawRecipeIngredientData, 'quantity');
     recipe.ingredients.forEach(recipeIngredient => {
       this.ingredients.forEach(pantryIngredient => {
         if ((recipeIngredient.id === pantryIngredient.id) && (recipeIngredient.quantity.amount <= pantryIngredient.amount)) {
           ingredientsInStock.push(true);
-        } else if (!this.ingredientsNeeded.includes(recipeIngredient)) {
+        } else {
           this.ingredientsNeeded.push(recipeIngredient);
         }
       });
@@ -58,9 +57,30 @@ class Pantry {
      }
   }
 
+  findIngredient(id) {
+    this.foundIngredient = this.ingredients.find(ingredient => {
+      return ingredient.id === id;
+    })
+    return this.foundIngredient;
+  }
+
   returnIngredientsNeeded(recipe) {
     this.checkStock(recipe);
-    return this.ingredientsNeeded;
+    let amountNeeded;
+    return this.ingredientsNeeded.reduce((shoppingList, ingredient) => {
+      this.ingredients.forEach(pantryIngredient => {
+        if ((!this.ingredientsNeeded.includes(pantryIngredient)) && (pantryIngredient.id === ingredient.id)) {
+          return amountNeeded = ingredient.quantity.amount - pantryIngredient.amount;
+        } else {
+          return amountNeeded = ingredient.quantity.amount;
+        }
+      })
+      let ingredientNeeded = `${ingredient.name}: ${amountNeeded} ${ingredient.quantity.unit}`
+      if (!shoppingList.includes(ingredientNeeded)) {
+        shoppingList.push(ingredientNeeded);
+      }
+      return shoppingList;
+    }, []);
   }
 
 }
