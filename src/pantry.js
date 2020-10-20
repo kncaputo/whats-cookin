@@ -1,12 +1,12 @@
-// const Ingredient = require('../src/ingredient');
-// const IngredientsInventory = require('./ingredientInventory.js');
+const Ingredient = require('../src/ingredient');
+const IngredientsInventory = require('./ingredientInventory.js');
 
 class Pantry {
   constructor(pantry, ingredientsData) {
     this.rawPantryData = pantry;
     this.ingredients = [];
     this.ingredientsNeeded = [];
-    this.ingredientsInventory = new IngredientsInventory(ingredientsData);
+    this.ingredientInventory = new IngredientsInventory(ingredientsData);
   }
 
   extractValues(array, itemCriteria) {
@@ -20,56 +20,63 @@ class Pantry {
   }
 
   makeIngredients() {
-    this.ingredientsInventory.makeIngredients();
-    this.rawPantryData.forEach(ingredient => {
-      let foundIngredient = this.ingredientsInventory.findIngredient(ingredient.ingredient);
-      this.ingredients.push(foundIngredient);
-    });
+    this.ingredientInventory.makeIngredients()
+    this.ingredientInventory.allIngredients.forEach(ingredient => {
+      this.rawPantryData.forEach(pantryIngredient => {
+        if (pantryIngredient.ingredient === ingredient.id) {
+          this.ingredients.push(ingredient);
+        }
+      })
+    })
+  }
 
+  updateIngredientData(array, key) {
     this.ingredients.forEach(ingredient => {
-      ingredient.updateIngredientData(this.ingredients, 'amount', 'ingredient');
+      this.ingredientInventory.updateIngredientData(array, key);
     });
   }
 
-
-  // makeIngredientsNeeded(ingredientsData, ingredientsNeeded) {
-  //   if (ingredientsData !== undefined) {
-  //     let allIngredients = []
-  //     ingredientsNeeded.forEach(ingredient => {
-  //       allIngredients.push(new Ingredient(ingredient));
-  //     })
-  //
-  //     allIngredients.forEach(ingredient => {
-  //       ingredient.updateIngredientData(ingredientsData, 'name', 'ingredient');
-  //       ingredient.updateIngredientData(ingredientsData, 'estimatedCostInCents', 'ingredient');
-  //     })
-  //     this.ingredientsNeeded = allIngredients;
-  //   }
-  // }
-
-  checkStock(recipe, ingredientsData) {
-    let ingredientIds = this.extractValues(this.ingredients, 'id');
+  checkStock(recipe) {
     let ingredientsInStock = [];
-    let ingredientsNeeded = [];
+    recipe.makeIngredients();
+    recipe.updateIngredientData(recipe.rawRecipeIngredientData, 'quantity');
     recipe.ingredients.forEach(recipeIngredient => {
-      if (ingredientIds.includes(recipeIngredient.id)) {
-        this.ingredients.filter(pantryIngredient => {
-          if ((pantryIngredient.id === recipeIngredient.id) && (recipeIngredient.quantity.amount <= pantryIngredient.amount)) {
-            ingredientsInStock.push(true);
-          }
-        })
-      } else {
-          ingredientsNeeded.push(recipeIngredient);
-      }
-    })
-    this.makeIngredientsNeeded(ingredientsData, ingredientsNeeded);
+      this.ingredients.forEach(pantryIngredient => {
+        if ((recipeIngredient.id === pantryIngredient.id) && (recipeIngredient.quantity.amount <= pantryIngredient.amount)) {
+          ingredientsInStock.push(true);
+        } else {
+          this.ingredientsNeeded.push(recipeIngredient);
+        }
+      });
+    });
 
     if (ingredientsInStock.length === recipe.ingredients.length) {
-      return true;
-    } else {
-      return false;
-    }
+       return true;
+     } else {
+       return false;
+     }
   }
+
+  returnIngredientsNeeded(recipe) {
+    this.checkStock(recipe);
+    let amountNeeded;
+    return this.ingredientsNeeded.reduce((shoppingList, recipeIngredient) => {
+      this.ingredients.forEach(pantryIngredient => {
+
+        if (recipeIngredient.name.includes(pantryIngredient.name)) {
+          return amountNeeded = recipeIngredient.quantity.amount - pantryIngredient.amount;
+        } else {
+          return amountNeeded = recipeIngredient.quantity.amount;
+        }
+      })
+      let ingredientNeeded = `${recipeIngredient.name}: ${amountNeeded} ${recipeIngredient.quantity.unit}`
+      if (!shoppingList.includes(ingredientNeeded)) {
+        shoppingList.push(ingredientNeeded);
+      }
+      return shoppingList;
+    }, []);
+  }
+
 }
 
 if (typeof module !== 'undefined') {
