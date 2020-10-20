@@ -10,11 +10,11 @@ class Recipe {
     this.name = recipe.name;
     this.instructions = recipe.instructions;
     this.isFavorite = false;
-    this.readyToCook = false;
+    this.isReadyToCook = false;
     this.ingredientsInventory = new IngredientsInventory(rawIngredientsData);
   }
 
-  toggleRecipeStatus(location) {
+  indicateList(location) {
     this[location] = !this[location]
   }
 

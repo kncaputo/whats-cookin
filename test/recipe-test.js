@@ -124,7 +124,7 @@ describe('Recipe', () => {
     });
 
     it('should indicate whether recipe is ready to cook', () => {
-      expect(recipe.readyToCook).to.deep.equal(false);
+      expect(recipe.isReadyToCook).to.deep.equal(false);
     });
   })
 
@@ -149,7 +149,28 @@ describe('Recipe', () => {
       expect(recipe.ingredients[0].quantity.amount).to.deep.equal(2);
       expect(recipe.ingredients[0].quantity.unit).to.deep.equal('c');
     });
-  })
+  });
+
+  describe('Indicate List', () => {
+    it('should mark a recipe as favorite', () => {
+      recipe.indicateList('isFavorite');
+
+      expect(recipe.isFavorite).to.deep.equal(true);
+    });
+
+    it('should mark a recipe as ready to cook', () => {
+      recipe.indicateList('isReadyToCook');
+
+      expect(recipe.isReadyToCook).to.deep.equal(true);
+    });
+
+    it('should toggle boolean', () => {
+      recipe.indicateList('isFavorite');
+      recipe.indicateList('isFavorite');
+
+      expect(recipe.isFavorite).to.deep.equal(false);
+    });
+  });
 
   describe('Return Ingredients', () => {
     it('should be able to return an array of ingredients', () => {
