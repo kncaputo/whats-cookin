@@ -9,17 +9,9 @@ class User {
     this.recipeBox = new RecipeBox(recipeData, ingredientsData);
   }
 
-  toggleRecipeStatus(array, location, recipe) {
-    if (recipe[location] === false) {
-      array.push(recipe);
-    } else {
-      let recipeToRemove = array.find(element => {
-        return element.id === recipe.id;
-      });
-      return array.splice(recipeToRemove, 1);
-    }
+  updateRecipeBoolean(recipe, property) {
+    recipe[property] = !recipe[property];
   }
-
 
   searchRecipes(input) {
     this.recipeBox.allRecipes.filter(recipe => {

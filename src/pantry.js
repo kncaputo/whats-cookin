@@ -57,25 +57,19 @@ class Pantry {
      }
   }
 
-  findIngredient(id) {
-    this.foundIngredient = this.ingredients.find(ingredient => {
-      return ingredient.id === id;
-    })
-    return this.foundIngredient;
-  }
-
   returnIngredientsNeeded(recipe) {
     this.checkStock(recipe);
     let amountNeeded;
-    return this.ingredientsNeeded.reduce((shoppingList, ingredient) => {
+    return this.ingredientsNeeded.reduce((shoppingList, recipeIngredient) => {
       this.ingredients.forEach(pantryIngredient => {
-        if ((!this.ingredientsNeeded.includes(pantryIngredient)) && (pantryIngredient.id === ingredient.id)) {
-          return amountNeeded = ingredient.quantity.amount - pantryIngredient.amount;
+
+        if (recipeIngredient.name.includes(pantryIngredient.name)) {
+          return amountNeeded = recipeIngredient.quantity.amount - pantryIngredient.amount;
         } else {
-          return amountNeeded = ingredient.quantity.amount;
+          return amountNeeded = recipeIngredient.quantity.amount;
         }
       })
-      let ingredientNeeded = `${ingredient.name}: ${amountNeeded} ${ingredient.quantity.unit}`
+      let ingredientNeeded = `${recipeIngredient.name}: ${amountNeeded} ${recipeIngredient.quantity.unit}`
       if (!shoppingList.includes(ingredientNeeded)) {
         shoppingList.push(ingredientNeeded);
       }

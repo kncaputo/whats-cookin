@@ -168,7 +168,12 @@ describe('Recipe', () => {
       recipe.indicateList('isFavorite');
       recipe.indicateList('isFavorite');
 
+      recipe.indicateList('isReadyToCook');
+      recipe.indicateList('isReadyToCook');
+      recipe.indicateList('isReadyToCook');
+
       expect(recipe.isFavorite).to.deep.equal(false);
+      expect(recipe.isReadyToCook).to.deep.equal(true);
     });
   });
 
