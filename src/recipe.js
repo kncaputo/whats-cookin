@@ -1,4 +1,4 @@
-const IngredientsInventory = require('./ingredientInventory.js');
+// const ingredientInventory = require('./ingredientInventory.js');
 
 
 class Recipe {
@@ -11,7 +11,7 @@ class Recipe {
     this.instructions = recipe.instructions;
     this.isFavorite = false;
     this.isReadyToCook = false;
-    this.ingredientsInventory = new IngredientsInventory(rawIngredientsData);
+    this.ingredientInventory = new IngredientInventory(rawIngredientsData);
   }
 
   indicateList(location) {
@@ -33,8 +33,8 @@ class Recipe {
   }
 
   makeIngredients() {
-    this.ingredientsInventory.makeIngredients()
-    this.ingredientsInventory.allIngredients.forEach(ingredient => {
+    this.ingredientInventory.makeIngredients()
+    this.ingredientInventory.allIngredients.forEach(ingredient => {
       this.rawRecipeIngredientData.forEach(recipeIngredient => {
         if (recipeIngredient.id === ingredient.id) {
           this.ingredients.push(ingredient);
@@ -45,7 +45,7 @@ class Recipe {
 
   updateIngredientData(array, key) {
     this.ingredients.forEach(ingredient => {
-      this.ingredientsInventory.updateIngredientData(array, key);
+      this.ingredientInventory.updateIngredientData(array, key);
     });
   }
 

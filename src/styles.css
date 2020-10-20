@@ -106,6 +106,8 @@ button, .radio-filter label:hover {
 #search-container {
   background: #dedede;
   height: auto;
+  max-width: 1000px;
+  min-width: 700px;
   align-content: space-around;
   box-shadow: 6px 6px 6px darkgrey;
   margin: -200px 15px 30px 15px;
@@ -153,7 +155,7 @@ button, .radio-filter label:hover {
   margin-top: 10px;
 }
 
-.recipes-container, .pantry-container {
+.recipes-container, .pantry-container, .all-recipes-container {
   flex-wrap: wrap;
 }
 

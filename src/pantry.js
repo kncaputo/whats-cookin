@@ -1,12 +1,12 @@
-const Ingredient = require('../src/ingredient');
-const IngredientsInventory = require('./ingredientInventory.js');
+// const Ingredient = require('../src/ingredient');
+// const ingredientInventory = require('./ingredientInventory.js');
 
 class Pantry {
   constructor(pantry, ingredientsData) {
     this.rawPantryData = pantry;
     this.ingredients = [];
     this.ingredientsNeeded = [];
-    this.ingredientInventory = new IngredientsInventory(ingredientsData);
+    this.ingredientInventory = new IngredientInventory(ingredientsData);
   }
 
   extractValues(array, itemCriteria) {
