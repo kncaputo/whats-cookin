@@ -11,6 +11,7 @@ const closeModalBtn = document.querySelector('.close');
 const searchContainer = document.querySelector('#search-container');
 const pantryContainer = document.querySelector('.pantry-container');
 const allRecipesContainer = document.querySelector('.all-recipes-container');
+const form = document.querySelector('.form');
 
 let user = new User(usersData[0], ingredientsData, recipeData);
 
@@ -22,6 +23,7 @@ myFavoritesNav.addEventListener('click', showFavorites);
 allRecipesNav.addEventListener('click', showAllRecipes);
 myPantryNav.addEventListener('click', showMyPantry);
 whatsCookinNav.addEventListener('click', showWhatsCookin);
+form.addEventListener('click', getValues);
 
 allRecipesContainer.addEventListener('click', () => {
   determineClickOnAllRecipes(event);
@@ -42,14 +44,14 @@ function determineClickOnAllRecipes(event) {
 }
 
 function determineClickInFavorites(event) {
+  openModal(event);
+  markUnmarkReadyToCook(event);
   user.recipeBox.allRecipes.forEach(recipe => {
     if (event.target.id === `favorite-btn-${recipe.id}`) {
       markUnmarkAsFavorite(event);
       removeRecipeCard(event);
     }
   })
-  markUnmarkReadyToCook(event);
-  openModal(event);
 }
 
 function determineClickInWhatsCookin(event) {
@@ -70,11 +72,14 @@ function determineClickInWhatsCookin(event) {
 // }
 // // removeRecipeCard(event);
 
+function getValues() {
+
+}
+
 function markUnmarkAsFavorite(event) {
   user.recipeBox.allRecipes.forEach(recipe => {
     if (event.target.id === `favorite-btn-${recipe.id}`) {
       user.updateRecipeBoolean(recipe, 'isFavorite');
-      // debugger
       toggleHeartImg(recipe);
     }
   })
@@ -88,15 +93,6 @@ function markUnmarkReadyToCook(event) {
     }
   })
 }
-//
-// function loadPage() {
-//   user.recipeBox.makeRecipes()
-//   user.pantry.makeIngredients();
-//   user.pantry.ingredients.forEach(ingredient => {
-//     ingredient.updateIngredientData(user.pantry.ingredients, 'amount');
-//   })
-//   displayAllRecipes(user.recipeBox.allRecipes);
-// }
 
 function loadPage() {
   user.recipeBox.makeRecipes()
@@ -115,8 +111,6 @@ function displayAllRecipes(recipes) {
   })
 }
 
-
-
 function createRecipes(recipe) {
 let recipeCard = `<div class="recipe-card recipe-${recipe.id}" id="recipe-${recipe.id}">
   <div class="recipe-img-box">
@@ -127,14 +121,14 @@ let recipeCard = `<div class="recipe-card recipe-${recipe.id}" id="recipe-${reci
     <button class="whats-cookin-btn" id="whats-cookin-btn"><img class="whats-cookin-btn" src="../assets/plus-icon-${recipe.isReadyToCook}.png" id="whats-cookin-btn-${recipe.id}" alt="save button"></button>
   </div>
   <h3>${recipe.name}</h3>
-  <button class="show-recipe-btn-${recipe.id}" id="show-recipe-btn"><h3 class="show-recipe-btn-${recipe.id}">Show Recipe</h3></button>
+  <button class="show-recipe-btn-${recipe.id}" id="show-recipe-btn-${recipe.id}"><h3 class="show-recipe-btn-${recipe.id}" id="show-recipe-btn-${recipe.id}">Show Recipe</h3></button>
   ${createModals(recipe)}
   </div>`
   return recipeCard;
 }
 
 function createModals(recipe) {
-  let recipeModal = `<div class="modal">
+  let recipeModal = `<div class="modal" id="modal-${recipe.id}">
     <div class="modal-content flex-column">
       <div class="modal-header">
         <div>
@@ -166,18 +160,17 @@ function createModals(recipe) {
 function displayIngredients() {
   user.pantry.updateIngredientData(user.pantry.rawPantryData, 'amount');
   user.pantry.ingredients.forEach(ingredient => {
-    var ingredientCard = `<div class="ingredient-card flex-row">
+    let ingredientCard = `<div class="ingredient-card flex-row">
     <div>
       <p id="ingredient-name">${ingredient.name.toUpperCase()}</p>
       <p>Amount: ${ingredient.amount}</p>
     </div>
-    <div class="decorative-line"></div>
+    <div class='decorative-line decorative-line-${ingredient.amount}'></div>
   </div>
   `;
   pantryContainer.insertAdjacentHTML('afterbegin', ingredientCard);
   });
 }
-
 
 function showAllRecipes() {
   allRecipesContainer.classList.remove('hidden');
@@ -199,6 +192,8 @@ function showFavorites() {
   user.recipeBox.allRecipes.forEach(recipe => {
     if (recipe.isFavorite === true) {
       displaySavedRecipes(recipe, 'favoritesContainer');
+      // document.querySelector(`#show-recipe-btn-${recipe.id}`).insertAdjacentHTML('afterbegin', createModals(recipe));
+
     }
   })
 }
@@ -211,11 +206,6 @@ function displaySavedRecipes(recipe, container) {
     whatsCookinContainer.insertAdjacentHTML('afterbegin', recipeCard);
   }
 }
-
-// function displaySavedRecipes(recipe) {
-//   let recipeCard = createRecipes(recipe)
-//   recipeCardContainer.insertAdjacentHTML('afterbegin', recipeCard);
-// }
 
 function showMyPantry() {
   allRecipesContainer.classList.add('hidden');
@@ -279,8 +269,8 @@ function addToWhatsCookin(target) {
 
 function openModal(event) {
   user.recipeBox.allRecipes.forEach(recipe => {
-    if (event.target.className === `show-recipe-btn-${recipe.id}`) {
-      modal = document.querySelector('.modal');
+    if (event.target.id === `show-recipe-btn-${recipe.id}`) {
+      modal = document.querySelector(`#modal-${recipe.id}`);
       modal.style.display = 'block';
     }
   })
