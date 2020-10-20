@@ -1,4 +1,4 @@
-// const ingredientInventory = require('./ingredientInventory.js');
+// const IngredientInventory = require('./ingredientInventory.js');
 
 
 class Recipe {
@@ -9,6 +9,7 @@ class Recipe {
     this.ingredients = []
     this.name = recipe.name;
     this.instructions = recipe.instructions;
+    this.tags = recipe.tags;
     this.isFavorite = false;
     this.isReadyToCook = false;
     this.ingredientInventory = new IngredientInventory(rawIngredientsData);

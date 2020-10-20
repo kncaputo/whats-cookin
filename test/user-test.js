@@ -6,7 +6,7 @@ const RecipeBox = require('../src/recipeBox');
 const Pantry = require('../src/pantry');
 const User = require('../src/user');
 
-describe.skip('User', () => {
+describe('User', () => {
   let user;
   let bob = {"name": "Bob",
   "id": 1,
@@ -84,7 +84,12 @@ describe.skip('User', () => {
       {
         "instruction": "Cook them.",
         "number": 2
-      }]
+      }],
+      "tags": [
+        "lunch",
+        "side dish",
+        "appetizer"
+      ]
     },
     {
       id: 13,
@@ -111,35 +116,47 @@ describe.skip('User', () => {
       {
         "instruction": "Fry in pan",
         "number": 2
-      }]
-    },
-    {
-      id: 13,
-      image: 'https://exampleimage.com/1/1/1',
-      ingredients: [{
-      "id": 1,
-      "quantity": {
-        "amount": 0.75,
-        "unit": "cup"
-      }
-      },
-      {
-        "id": 3,
-        "quantity": {
-          "amount": 1,
-          "unit": "tortilla"
-        }
       }],
-      name: 'Cheese Quesadilla',
-      instructions: [{
-        "instruction": "Put cheese on tortilla.",
-        "number": 1
-      },
-      {
-        "instruction": "Fry in pan",
-        "number": 2
-      }]
+      "tags": [
+        "lunch",
+        "main course",
+        "main dish",
+        "dinner"
+      ]
     }
+    // , {
+    //   id: 13,
+    //   image: 'https://exampleimage.com/1/1/1',
+    //   ingredients: [{
+    //   "id": 1,
+    //   "quantity": {
+    //     "amount": 0.75,
+    //     "unit": "cup"
+    //   }
+    //   },
+    //   {
+    //     "id": 3,
+    //     "quantity": {
+    //       "amount": 1,
+    //       "unit": "tortilla"
+    //     }
+    //   }],
+    //   name: 'Cheese Quesadilla',
+    //   instructions: [{
+    //     "instruction": "Put cheese on tortilla.",
+    //     "number": 1
+    //   },
+    //   {
+    //     "instruction": "Fry in pan",
+    //     "number": 2
+    //   }],
+    //   "tags": [
+    //     "lunch",
+    //     "main course",
+    //     "main dish",
+    //     "dinner"
+    //   ]
+    // }
   ];
 
   beforeEach(() => {
@@ -222,4 +239,14 @@ describe.skip('User', () => {
 
     });
   });
+
+  describe('Filter Recipes', () => {
+    it.only('should be able to filter recipe by input', () => {
+
+    user.recipeBox.makeRecipes();  
+    expect(user.filterRecipeByType('side dish')).to.be.an('array');
+    expect(user.filterRecipeByType('side dish').length).to.deep.equal(1);
+    })
+  });
+
 });

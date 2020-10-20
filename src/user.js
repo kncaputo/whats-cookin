@@ -13,32 +13,41 @@ class User {
     recipe[property] = !recipe[property];
   }
 
-  searchRecipes(input) {
-    this.recipeBox.allRecipes.filter(recipe => {
-      if (recipe.name.includes(input)) {
-        // show those recipes
-      }
-
-      recipe.ingredients.forEach(ingredient => {
-        if (ingredient.name.includes(input)) {
-          // show those recipes
-        }
-      })
+  // searchRecipes(input) {
+  //   this.recipeBox.allRecipes.filter(recipe => {
+  //     if (recipe.name.includes(input)) {
+  //       // show those recipes
+  //     }
+  //
+  //     recipe.ingredients.forEach(ingredient => {
+  //       if (ingredient.name.includes(input)) {
+  //         // show those recipes
+  //       }
+  //     })
       // return mutated array to show on the DOM
-    })
+    // })
 
     // input: user string from searchbar (INCLUDES name or ingredient)
         // arr of all recipe objs
     // output: an array of obj filtered to match search criteria/input
     // methods to use: FOREACH recipe, FILTER name/ingredient,
     // if INCLUDES input, return mutated array within method
+  //
+  // }
 
+  filterRecipeByType(input) {
+    return this.recipeBox.allRecipes.filter(recipe => {
+      console.log("recipe: ", recipe)
+      console.log("tags: ", recipe.tags)
+      console.log(input);
+      return recipe.tags.includes(input.toLowerCase())
+    })
+    // i will have one input word
+    // iterate over the RecipeBox
+      // for each recipe.tags
+        // if the array includes input
+        // return that recipe.
   }
-
-  filterRecipeByType() {
-
-  }
-
 }
 
 if (typeof module !== 'undefined') {
