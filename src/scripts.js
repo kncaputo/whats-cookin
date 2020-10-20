@@ -128,34 +128,39 @@ let recipeCard = `<div class="recipe-card recipe-${recipe.id}" id="recipe-${reci
   </div>
   <h3>${recipe.name}</h3>
   <button class="show-recipe-btn-${recipe.id}" id="show-recipe-btn"><h3 class="show-recipe-btn-${recipe.id}">Show Recipe</h3></button>
-    <div class="modal">
-      <div class="modal-content flex-column">
-        <div class="modal-header">
-          <div>
-            <img src=${recipe.image} alt="recipe image" class="modal-banner">
-          </div>
-        </div>
-        <div class="modal-body flex-column">
-        <div class="modal-header-text flex-row">
-          <h1>${recipe.name}</h1>
-        </div>
-          <div class="flex-row">
-          <div class="card-effect"
-            <h2>Ingredients</h2>
-            <p class="ingredients-display">${recipe.returnIngredients()}</p>
-            <p><b>Total Cost of Ingredients</b></p>
-            <p class="ingredients-display">${recipe.calculateCost(ingredientsData)}</p>
-          </div>
-            <div class="card-effect"
-              <h2>How To Cook This</h2>
-              <p>${recipe.getInstructions()}<p>
-            </div>
-          </div>
-        </div>
-       </div>
-     </div>
+  ${createModals(recipe)}
   </div>`
-  return recipeCard
+  return recipeCard;
+}
+
+function createModals(recipe) {
+  let recipeModal = `<div class="modal">
+    <div class="modal-content flex-column">
+      <div class="modal-header">
+        <div>
+          <img src=${recipe.image} alt="recipe image" class="modal-banner">
+        </div>
+      </div>
+      <div class="modal-body flex-column">
+      <div class="modal-header-text flex-row">
+        <h1>${recipe.name}</h1>
+      </div>
+        <div class="flex-row">
+        <div class="card-effect"
+          <h2>Ingredients</h2>
+          <p class="ingredients-display">${recipe.returnIngredients()}</p>
+          <p><b>Total Cost of Ingredients</b></p>
+          <p class="ingredients-display">${recipe.calculateCost(ingredientsData)}</p>
+        </div>
+          <div class="card-effect"
+            <h2>How To Cook This</h2>
+            <p>${recipe.getInstructions()}<p>
+          </div>
+        </div>
+      </div>
+     </div>
+   </div>`
+   return recipeModal;
 }
 
 function displayIngredients() {
