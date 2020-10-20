@@ -1,4 +1,4 @@
-// const Recipe = require('./recipe');
+const Recipe = require('./recipe');
 
 class RecipeBox {
   constructor(rawRecipeData, rawIngredientsData) {

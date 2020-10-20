@@ -1,5 +1,5 @@
-// const Pantry = require('./pantry.js');
-// const RecipeBox = require('./recipeBox.js');
+const Pantry = require('./pantry.js');
+const RecipeBox = require('./recipeBox.js');
 
 class User {
   constructor(user, ingredientsData, recipeData) {
@@ -35,10 +35,19 @@ class User {
   //
   // }
 
-  filterRecipeByType() {
-
+  filterRecipeByType(input) {
+    return this.recipeBox.allRecipes.filter(recipe => {
+      console.log("recipe: ", recipe)
+      console.log("tags: ", recipe.tags)
+      console.log(input);
+      return recipe.tags.includes(input.toLowerCase())
+    })
+    // i will have one input word
+    // iterate over the RecipeBox
+      // for each recipe.tags
+        // if the array includes input
+        // return that recipe.
   }
-
 }
 
 if (typeof module !== 'undefined') {
