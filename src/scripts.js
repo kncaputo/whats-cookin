@@ -159,7 +159,7 @@ let recipeCard = `<div class="recipe-card recipe-${recipe.id}" id="recipe-${reci
 }
 
 function displayIngredients() {
-  user.pantry.makeIngredients(ingredientsData);
+  user.pantry.updateIngredientData(user.pantry.rawPantryData, 'amount');
   user.pantry.ingredients.forEach(ingredient => {
     var ingredientCard = `<div class="ingredient-card flex-row">
     <div>
