@@ -187,7 +187,9 @@ input[type=checkbox]:checked + label {
 }
 
 #favorite-btn, #whats-cookin-btn {
-  background: none;
+  background: white;
+  opacity: 0.8;
+  border-radius: 50%;
 }
 
 .ingredient-card {
@@ -207,6 +209,7 @@ input[type=checkbox]:checked + label {
   border-right: 8px solid;
   border-radius: 20%;
 }
+
 .decorative-line-1 {
   color: #d54215;
 }
