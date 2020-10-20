@@ -67,13 +67,50 @@ function determineClickInWhatsCookin(event) {
 
 // if (event.target.id === ) {
 //   markUnmarkisReadyToCook(event);
-//   // debugger
+//   //
 //   removeRecipeCard(event);
 // }
 // // removeRecipeCard(event);
 
 function getValues() {
+  clearRecipeContainers();
 
+  let selection = document.getElementById('filter-search').elements['filter-search'].value;
+
+  const appetizers = ["antipasti", "starter", "snack", "appetizer", "antipasto", "hor d'oeuvre"];
+  const breakfast = ["morning meal", "brunch", "breakfast", "morning meal", "brunch", "breakfast"];
+  const dessert = [];
+  const dinner = ["main course", "main dish", "dinner"];
+  const dips = ["condiment", "dip", "spread", "sauce"];
+  const lunch = ["lunch", "main course", "main dish", "salad", "dinner"];
+  const sides = ["salad", "side", "side dish", "snack"];
+
+  let filteredRecipes = [];
+
+  if (selection === 'appetizers') {appetizers.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === 'breakfast') {breakfast.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === 'dessert') {dessert.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === 'dinner') {dinner.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === 'dips') {dips.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === 'lunch') {lunch.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === 'sides') {sides.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+
+  clearRecipeContainers();
+  displayAllRecipes(filteredRecipes.flat());
+ // var randomSelection;
+  // assign a var 'selection' to a query selector of the form
+  // get values
+  // declare arrys based on the value name
+    // with strings of corresponding tag names inside
+  // if value === arr name,
+      // declare a var recipes to display asign to an empty arr
+      // (forEach) iterate over the array of tags
+        // user.filterRecipes(tag) .. push these into empty arr
+      // flatten result arr
+      // invoke clearRecipeContainers
+      // forEach recipe in variable arr
+        // create recipes
+        // display recipes
 }
 
 function markUnmarkAsFavorite(event) {
@@ -172,12 +209,16 @@ function displayIngredients() {
   });
 }
 
-function showAllRecipes() {
-  allRecipesContainer.classList.remove('hidden');
-  searchContainer.classList.remove('hidden');
+function clearRecipeContainers() {
   favoritesContainer.innerHTML = '';
   pantryContainer.innerHTML = '';
   whatsCookinContainer.innerHTML = '';
+}
+
+function showAllRecipes() {
+  allRecipesContainer.classList.remove('hidden');
+  searchContainer.classList.remove('hidden');
+  clearRecipeContainers();
   displayAllRecipes(user.recipeBox.allRecipes);
   // highlightPageOnMenu('nav1');
 }
@@ -185,9 +226,7 @@ function showAllRecipes() {
 function showFavorites() {
   allRecipesContainer.classList.add('hidden');
   searchContainer.classList.remove('hidden');
-  favoritesContainer.innerHTML = '';
-  pantryContainer.innerHTML = '';
-  whatsCookinContainer.innerHTML = '';
+  clearRecipeContainers();
 
   user.recipeBox.allRecipes.forEach(recipe => {
     if (recipe.isFavorite === true) {
@@ -210,9 +249,7 @@ function displaySavedRecipes(recipe, container) {
 function showMyPantry() {
   allRecipesContainer.classList.add('hidden');
   searchContainer.classList.remove('hidden');
-  favoritesContainer.innerHTML = '';
-  pantryContainer.innerHTML = '';
-  whatsCookinContainer.innerHTML = '';
+  clearRecipeContainers();
   displayIngredients();
   // highlightPageOnMenu('nav3');
 }
@@ -220,9 +257,7 @@ function showMyPantry() {
 function showWhatsCookin() {
   allRecipesContainer.classList.add('hidden');
   searchContainer.classList.add('hidden');
-  favoritesContainer.innerHTML = '';
-  pantryContainer.innerHTML = '';
-  whatsCookinContainer.innerHTML = '';
+  clearRecipeContainers();
   user.recipeBox.allRecipes.forEach(recipe => {
     if (recipe.isReadyToCook === true) {
       displaySavedRecipes(recipe, 'whatsCookinContainer');

@@ -74,7 +74,7 @@ button {
   outline: none;
 }
 
-button, .checkbox-filter label:hover {
+button, .radio-filter label:hover {
   cursor: pointer
 }
 
@@ -127,20 +127,20 @@ button, .checkbox-filter label:hover {
   margin: 30px 0 0 30px;
 }
 
-.checkbox-filter {
+.radio-filter {
   width: 90%;
   flex-wrap: wrap;
   padding: 30px;
   justify-content: space-between;
 }
 
-.checkbox-filter input[type="checkbox"] {
+.radio-filter input[type="radio"] {
   opacity: 100;
   position: fixed;
   width: 0;
 }
 
-.checkbox-filter label {
+.radio-filter label {
   padding: 10px;
   margin: 0 5px 10px 5px;
   color: black;
@@ -151,7 +151,7 @@ button, .checkbox-filter label:hover {
   text-align: center;
 }
 
-input[type=checkbox]:checked + label {
+input[type=radio]:checked + label {
   color: #f00;
   font-style: normal;
 }
