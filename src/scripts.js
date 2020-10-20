@@ -1,6 +1,7 @@
 // querySelectors
 let modal;
-const recipeCardContainer = document.querySelector('.recipes-container');
+const favoritesContainer = document.querySelector('.favorites-container');
+const whatsCookinContainer = document.querySelector('.whats-cookin-container');
 const myFavoritesNav = document.querySelector('#my-favorites-nav');
 const allRecipesNav = document.querySelector('#all-recipes-nav');
 const myPantryNav = document.querySelector('#my-pantry-nav');
@@ -9,6 +10,7 @@ const instructionsBtn = document.getElementById('preview-btn');
 const closeModalBtn = document.querySelector('.close');
 const searchContainer = document.querySelector('#search-container');
 const pantryContainer = document.querySelector('.pantry-container');
+const allRecipesContainer = document.querySelector('.all-recipes-container');
 
 let user = new User(usersData[0], ingredientsData);
 let recipeBox = new RecipeBox(recipeData, ingredientsData);
@@ -22,93 +24,133 @@ allRecipesNav.addEventListener('click', showAllRecipes);
 myPantryNav.addEventListener('click', showMyPantry);
 whatsCookinNav.addEventListener('click', showWhatsCookin);
 
-recipeCardContainer.addEventListener('click', () => {
-  determineClick(event);
+allRecipesContainer.addEventListener('click', () => {
+  determineClickOnAllRecipes(event);
 });
 
-function determineClick(event) {
-  addRemoveFavorites(event.target);
-  addToWhatsCookin(event.target);
-  openModel(event);
+favoritesContainer.addEventListener('click', () => {
+  determineClickInFavorites(event);
+});
+
+whatsCookinContainer.addEventListener('click', () => {
+  determineClickInWhatsCookin(event);
+});
+
+function determineClickOnAllRecipes(event) {
+  markUnmarkAsFavorite(event);
+  markUnmarkReadyToCook(event);
+  openModal(event);
+}
+
+function determineClickInFavorites(event) {
+  recipeBox.allRecipes.forEach(recipe => {
+    if (event.target.id === `favorite-btn-${recipe.id}`) {
+      markUnmarkAsFavorite(event);
+      removeRecipeCard(event);
+    }
+  })
+  markUnmarkReadyToCook(event);
+  openModal(event);
+}
+
+function determineClickInWhatsCookin(event) {
+  recipeBox.allRecipes.forEach(recipe => {
+    if (event.target.id === `whats-cookin-btn-${recipe.id}`) {
+      markUnmarkReadyToCook(event);
+      removeRecipeCard(event);
+    }
+  })
+  markUnmarkAsFavorite(event);
+  openModal(event);
+}
+
+// if (event.target.id === ) {
+//   markUnmarkReadyToCook(event);
+//   // debugger
+//   removeRecipeCard(event);
+// }
+// // removeRecipeCard(event);
+
+function markUnmarkAsFavorite(event) {
+  recipeBox.allRecipes.forEach(recipe => {
+    if (event.target.id === `favorite-btn-${recipe.id}`) {
+      updateRecipeBoolean(recipe, 'isFavorite');
+      // debugger
+      toggleHeartImg(recipe);
+    }
+  })
+}
+
+function markUnmarkReadyToCook(event) {
+  recipeBox.allRecipes.forEach(recipe => {
+    if (event.target.id === `whats-cookin-btn-${recipe.id}`) {
+      updateRecipeBoolean(recipe, 'readyToCook');
+      togglePlusImg(recipe);
+    }
+  })
+}
+
+function updateRecipeBoolean(recipe, property) {
+  recipe[property] = !recipe[property];
 }
 
 function loadPage() {
-  // recipeData.forEach(recipe => {
-  //   recipeBox.allRecipes.push(new Recipe(recipe));
-  // })
-  // displayRecipes(allRecipes);
-
   recipeBox.makeRecipes()
   user.pantry.makeIngredients();
   user.pantry.ingredients.forEach(ingredient => {
     ingredient.updateIngredientData(user.pantry.ingredients, 'amount');
   })
-  displayRecipes(recipeBox.allRecipes);
+  displayAllRecipes(recipeBox.allRecipes);
 }
 
-function highlightPageOnMenu(id) {
-  let navButton = document.getElementById(id);
-
-  if (navButton.style.color === 'black') {
-    navButton.style.color = '#d54215';
-  } else {
-    navButton.style.color = 'black';
-  }
-}
-
-
-// function highlightPageOnMenu(eventId) {
-//   let navButton = document.getElementById(eventId);
-//   const navButtons = ['nav1', 'nav2', 'nav3', 'nav4'];
-//   navButtons.forEach(id => {
-//     if (navId === eventId) {
-//       [id].style.color = '#145b9c'
-//     } else {
-//       [id].style.color = '#d54215'
-//   })
-// }
-
-function displayRecipes(recipes) {
+function displayAllRecipes(recipes) {
   recipes.forEach(recipe => {
-    let recipeCard = `<div class="recipe-card recipe-${recipe.id}">
-      <div class="recipe-img-box">
-        <img src=${recipe.image} alt="recipe image" class="recipe-display-img">
-      </div>
-      <div class="recipe-action-btns flex-row">
-        <button id="favorite-btn"><img src="../assets/heart-icon-${recipe.isFavorite}.png" id="favorite-btn-${recipe.id}" alt="favorite button"></button>
-        <button id="whats-cookin-btn"><img src="../assets/plus-icon-${recipe.readyToCook}.png" id="whats-cookin-btn-${recipe.id}" alt="save button"></button>
-      </div>
-      <h3>${recipe.name}</h3>
-      <button class="show-recipe-btn-${recipe.id}" id="show-recipe-btn"><h3 class="show-recipe-btn-${recipe.id}">Show Recipe</h3></button>
-        <div class="modal">
-          <div class="modal-content flex-column">
-            <div class="modal-header">
-              <div>
-                <img src=${recipe.image} alt="recipe image" class="modal-banner">
-              </div>
+    if (!user.favoriteRecipes.includes(recipe) && !user.recipesToCook.includes(recipe)) {
+      let recipeCard = createRecipes(recipe)
+      allRecipesContainer.insertAdjacentHTML('afterbegin', recipeCard);
+    }
+  })
+}
+
+  function createRecipes(recipe) {
+  let recipeCard = `<div class="recipe-card recipe-${recipe.id}" id="recipe-${recipe.id}">
+    <div class="recipe-img-box">
+      <img src=${recipe.image} alt="recipe image" class="recipe-display-img">
+    </div>
+    <div class="recipe-action-btns flex-row">
+      <button id="favorite-btn"><img src="../assets/heart-icon-${recipe.isFavorite}.png" id="favorite-btn-${recipe.id}" alt="favorite button"></button>
+      <button class="whats-cookin-btn" id="whats-cookin-btn"><img class="whats-cookin-btn" src="../assets/plus-icon-${recipe.readyToCook}.png" id="whats-cookin-btn-${recipe.id}" alt="save button"></button>
+    </div>
+    <h3>${recipe.name}</h3>
+    <button class="show-recipe-btn-${recipe.id}" id="show-recipe-btn"><h3 class="show-recipe-btn-${recipe.id}">Show Recipe</h3></button>
+      <div class="modal">
+        <div class="modal-content flex-column">
+          <div class="modal-header">
+            <div>
+              <img src=${recipe.image} alt="recipe image" class="modal-banner">
             </div>
-            <div class="modal-body flex-column">
-            <div class="modal-header-text flex-row">
-              <h1>${recipe.name}</h1>
+          </div>
+          <div class="modal-body flex-column">
+          <div class="modal-header-text flex-row">
+            <h1>${recipe.name}</h1>
+          </div>
+            <div class="flex-row">
+            <div class="card-effect"
+              <h2>Ingredients</h2>
+              <p class="ingredients-display">${recipe.makeIngredients()}</p>
+              <p><b>Total Cost of Ingredients</b></p>
+              <p class="ingredients-display">${recipe.calculateCost(ingredientsData)}</p>
             </div>
-              <div class="flex-row">
               <div class="card-effect"
-                <h2>Ingredients</h2>
-                <p class="ingredients-display">${recipe.makeIngredients(ingredientsData)}</p>
-                <p><b>Total Cost of Ingredients</b></p>
-                <p class="ingredients-display">${recipe.calculateCost(ingredientsData)}</p>
-              </div>
-                <div class="card-effect"
-                  <h2>How To Cook This</h2>
-                  <p>${recipe.getInstructions()}<p>
-                </div>
+                <h2>How To Cook This</h2>
+                <p>${recipe.getInstructions()}<p>
               </div>
             </div>
-           </div>
+          </div>
          </div>
-      </div>`
-      return recipeCardContainer.insertAdjacentHTML('afterbegin', recipeCard);
-    });
+       </div>
+    </div>`
+    return recipeCard
   }
 
 function displayIngredients() {
@@ -126,86 +168,78 @@ function displayIngredients() {
   });
 }
 
+
 function showAllRecipes() {
+  allRecipesContainer.classList.remove('hidden');
   searchContainer.classList.remove('hidden');
-  recipeCardContainer.innerHTML = '';
+  favoritesContainer.innerHTML = '';
   pantryContainer.innerHTML = '';
-  displayRecipes(recipeBox.allRecipes);
-  highlightPageOnMenu('nav1');
+  whatsCookinContainer.innerHTML = '';
+  displayAllRecipes(recipeBox.allRecipes);
+  // highlightPageOnMenu('nav1');
 }
 
 function showFavorites() {
+  allRecipesContainer.classList.add('hidden');
   searchContainer.classList.remove('hidden');
-  recipeCardContainer.innerHTML = '';
+  favoritesContainer.innerHTML = '';
   pantryContainer.innerHTML = '';
-  displayRecipes(user.favoriteRecipes);
-  highlightPageOnMenu('nav2');
+  whatsCookinContainer.innerHTML = '';
+
+  recipeBox.allRecipes.forEach(recipe => {
+    if (recipe.isFavorite === true) {
+      displaySavedRecipes(recipe, 'favoritesContainer');
+    }
+  })
 }
 
+function displaySavedRecipes(recipe, container) {
+  let recipeCard = createRecipes(recipe)
+  if (container === 'favoritesContainer') {
+    favoritesContainer.insertAdjacentHTML('afterbegin', recipeCard);
+  } else if (container === 'whatsCookinContainer') {
+    whatsCookinContainer.insertAdjacentHTML('afterbegin', recipeCard);
+  }
+}
+
+// function displaySavedRecipes(recipe) {
+//   let recipeCard = createRecipes(recipe)
+//   recipeCardContainer.insertAdjacentHTML('afterbegin', recipeCard);
+// }
+
 function showMyPantry() {
+  allRecipesContainer.classList.add('hidden');
   searchContainer.classList.remove('hidden');
-  recipeCardContainer.innerHTML = '';
+  favoritesContainer.innerHTML = '';
+  pantryContainer.innerHTML = '';
+  whatsCookinContainer.innerHTML = '';
   displayIngredients();
-  highlightPageOnMenu('nav3');
+  // highlightPageOnMenu('nav3');
 }
 
 function showWhatsCookin() {
+  allRecipesContainer.classList.add('hidden');
   searchContainer.classList.add('hidden');
-  recipeCardContainer.innerHTML = '';
+  favoritesContainer.innerHTML = '';
   pantryContainer.innerHTML = '';
-  displayRecipes(user.recipesToCook);
-  highlightPageOnMenu('nav4');
-}
-
-// function addRecipeToFavorites(target) {
-//   recipeBox.allRecipes.forEach(recipe => {
-//     if (event.target.id === `favorite-btn-${recipe.id}`) {
-//       console.log(`added ${recipe.name} to favorites`)
-//       user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', recipe);
-//     }
-//   })
-// }
-//
-// function addRecipeToWhatsCookin(target) {
-//   recipeBox.allRecipes.forEach(recipe => {
-//     if (event.target.id === `whats-cookin-btn-${recipe.id}`) {
-//       console.log(`added ${recipe.name} to whats cookin`)
-//       user.toggleRecipeStatus(user.recipesToCook, 'readyToCook', recipe);
-//     }
-//   })
-// }
-
-function addRemoveFavorites(target) {
+  whatsCookinContainer.innerHTML = '';
   recipeBox.allRecipes.forEach(recipe => {
-    if ((event.target.id === `favorite-btn-${recipe.id}`) && (recipe.isFavorite === false)) {
-      console.log(`added ${recipe.name} to favorites`)
-      user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', recipe);
-      toggleHeartImg(recipe);
-    } else if ((event.target.id === `favorite-btn-${recipe.id}`) && (recipe.isFavorite === true)) {
-      user.toggleRecipeStatus(user.favoriteRecipes, 'isFavorite', recipe);
-      removeRecipeCard(recipe);
-      recipeBox.allRecipes.push(recipe);
+    if (recipe.readyToCook === true) {
+      displaySavedRecipes(recipe, 'whatsCookinContainer');
     }
   })
 }
 
-function addRemoveWhatsCookin(target) {
+function removeRecipeCard(event) {
   recipeBox.allRecipes.forEach(recipe => {
-    if ((event.target.id === `whats-cookin-btn-${recipe.id}`) && (recipe.readyToCook === false)) {
-      console.log(`added ${recipe.name} to What's Cookin'`)
-      user.toggleRecipeStatus(user.readyToCook, 'readyToCook', recipe);
-      togglePlusImg(recipe);
-    } else if ((event.target.id === `whats-cookin-btn-${recipe.id}`) && (recipe.readyToCook === true)) {
-      user.toggleRecipeStatus(user.readyToCook, 'readyToCook', recipe);
-      removeRecipeCard(recipe);
-      recipeBox.allRecipes.push(recipe);
+    if (event.target.id === `favorite-btn-${recipe.id}`) {
+      let toRemove = document.querySelector(`.favorites-container .recipe-${recipe.id}`);
+      toRemove.remove(event.target.id === `favorite-btn-${recipe.id}`);
+    } else if (event.target.id === `whats-cookin-btn-${recipe.id}`) {
+      let toRemove = document.querySelector(`.whats-cookin-container .recipe-${recipe.id}`);
+      toRemove.remove(event.target.id === `whats-cookin-btn-${recipe.id}`);
     }
   })
-}
-
-function removeRecipeCard(recipe) {
-  let toRemove = document.querySelector(`.recipe-${recipe.id}`)
-  toRemove.remove();
 }
 
 function toggleHeartImg(recipe) {
@@ -218,9 +252,9 @@ function toggleHeartImg(recipe) {
 
 function togglePlusImg(recipe) {
   if (recipe.readyToCook === true) {
-    document.querySelector(`#whats-cookin-btn-${recipe.id}`).src = `../assets/plus-icon-${recipe.readyToCook}.png`
+    document.querySelector(`#whats-cookin-btn-${recipe.id}`).src = `../assets/plus-icon-true.png`
   } else {
-    document.querySelector(`#whats-cookin-btn-${recipe.id}`).src = `../assets/plus-icon-${recipe.readyToCook}.png`
+    document.querySelector(`#whats-cookin-btn-${recipe.id}`).src = `../assets/plus-icon-false.png`
   }
 }
 
@@ -233,7 +267,7 @@ function addToWhatsCookin(target) {
   })
 }
 
-function openModel() {
+function openModal() {
   recipeBox.allRecipes.forEach(recipe => {
     if (event.target.className === `show-recipe-btn-${recipe.id}`) {
       modal = document.querySelector('.modal');
