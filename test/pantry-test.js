@@ -2,10 +2,11 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const Ingredient = require('../src/ingredient');
+const IngredientInventory = require('../src/ingredientInventory');
 const RecipeBox = require('../src/recipeBox');
 const Pantry = require('../src/pantry');
 
-describe('Pantry', () => {
+describe.only('Pantry', () => {
   let pantry;
   let recipeBox;
   let pantryItems = [{
@@ -167,6 +168,10 @@ describe('Pantry', () => {
     it('should contain an empty array of ingredients needed', () => {
       expect(pantry.ingredientsNeeded).to.deep.equal([]);
     });
+
+    it('should have an ingredient inventory', () => {
+      expect(pantry.ingredientInventory).to.be.an.instanceof(IngredientInventory)
+    });
   });
 
   describe('Make Ingredients', () => {
@@ -186,10 +191,9 @@ describe('Pantry', () => {
     });
   });
 
-  describe.skip('Check Stock For Recipe', () => {
+  describe('Check Stock For Recipe', () => {
     it('should check if there are enough ingredients to make a recipe', () => {
       pantry.makeIngredients();
-      pantry.updateIngredientData(pantry.rawPantryData, 'amount');
 
       let result = pantry.checkStock(recipeBox.allRecipes[0]);
       let result2 = pantry.checkStock(recipeBox.allRecipes[1]);
@@ -199,10 +203,9 @@ describe('Pantry', () => {
     });
   });
 
-    describe.skip('Return Shopping List', () => {
+    describe('Return Shopping List', () => {
       it('should return ingredients needed to make a recipe', () => {
         pantry.makeIngredients();
-        pantry.updateIngredientData(pantry.rawPantryData, 'amount');
 
         let result = pantry.returnIngredientsNeeded(recipeBox.allRecipes[1]);
 
@@ -219,10 +222,9 @@ describe('Pantry', () => {
       // this.ingredients = pantry w/ amount #
 
       it('should only show the amount needed on the shopping list', () => {
-        pantry.makeIngredients();
-        pantry.updateIngredientData(pantry.rawPantryData, 'amount');
+        pantry2.makeIngredients();
 
-        let result = pantry.returnIngredientsNeeded(recipeBox.allRecipes[1]);
+        let result = pantry2.returnIngredientsNeeded(recipeBox.allRecipes[1]);
 
         expect(result[0]).to.deep.equal('pasta: 1 box');
         expect(result[1]).to.deep.equal('tomato: 1 ');

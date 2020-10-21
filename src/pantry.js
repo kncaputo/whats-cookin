@@ -1,5 +1,4 @@
-// const Ingredient = require('../src/ingredient');
-// const IngredientInventory = require('./ingredientInventory.js');
+const IngredientInventory = require('./ingredientInventory.js');
 
 class Pantry {
   constructor(pantry, ingredientsData) {
@@ -28,6 +27,7 @@ class Pantry {
         }
       })
     })
+    this.updateIngredientData(this.rawPantryData, 'amount');
   }
 
   updateIngredientData(array, key) {
@@ -38,15 +38,18 @@ class Pantry {
 
   checkStock(recipe) {
     let ingredientsInStock = [];
-    recipe.makeIngredients();
-    recipe.updateIngredientData(recipe.rawRecipeIngredientData, 'quantity');
-    recipe.ingredients.forEach(recipeIngredient => {
-      this.ingredients.forEach(pantryIngredient => {
+    this.ingredients.forEach(pantryIngredient => {
+      recipe.ingredients.forEach(recipeIngredient => {
         if ((recipeIngredient.id === pantryIngredient.id) && (recipeIngredient.quantity.amount <= pantryIngredient.amount)) {
           ingredientsInStock.push(true);
-        } else {
-          this.ingredientsNeeded.push(recipeIngredient);
         }
+        // else if ((recipeIngredient.id === pantryIngredient.id) && (recipeIngredient.quantity.amount > pantryIngredient.amount)) {
+        //   recipeIngredient.amountNeeded = recipeIngredient.quantity.amount - pantryIngredient.amount
+        //   this.ingredientsNeeded.push(recipeIngredient);
+        // } else {
+        //   recipeIngredient.amountNeeded = recipeIngredient.quantity.amount
+        //   this.ingredientsNeeded.push(recipeIngredient);
+        // }
       });
     });
 
@@ -60,6 +63,7 @@ class Pantry {
   returnIngredientsNeeded(recipe) {
     this.checkStock(recipe);
     let amountNeeded;
+    console.log(this.ingredientsNeeded)
     return this.ingredientsNeeded.reduce((shoppingList, recipeIngredient) => {
       this.ingredients.forEach(pantryIngredient => {
 

@@ -241,9 +241,9 @@ describe('User', () => {
   });
 
   describe('Filter Recipes', () => {
-    it.only('should be able to filter recipe by input', () => {
+    it('should be able to filter recipe by input', () => {
 
-    user.recipeBox.makeRecipes();  
+    user.recipeBox.makeRecipes();
     expect(user.filterRecipeByType('side dish')).to.be.an('array');
     expect(user.filterRecipeByType('side dish').length).to.deep.equal(1);
     })
