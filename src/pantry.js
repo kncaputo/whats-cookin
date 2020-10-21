@@ -8,15 +8,15 @@ class Pantry {
     this.ingredientInventory = new IngredientInventory(ingredientsData);
   }
 
-  extractValues(array, itemCriteria) {
-    if (array !== undefined) {
-      let allValues = array.reduce((values, item) => {
-        values.push(item[itemCriteria]);
-        return values;
-      }, []);
-      return allValues;
-    }
-  }
+  // extractValues(array, itemCriteria) {
+  //   if (array !== undefined) {
+  //     let allValues = array.reduce((values, item) => {
+  //       values.push(item[itemCriteria]);
+  //       return values;
+  //     }, []);
+  //     return allValues;
+  //   }
+  // }
 
   makeIngredients() {
     this.ingredientInventory.makeIngredients()
@@ -34,6 +34,20 @@ class Pantry {
     this.ingredients.forEach(ingredient => {
       this.ingredientInventory.updateIngredientData(array, key);
     });
+  }
+
+  checkStock(recipe) {
+    let ingredientsInStock = [];
+    recipe.ingredients.forEach(recipeIngredient => {
+      this.ingredients.forEach(pantryIngredient => {
+        if (recipeIngredient.id === pantryIngredient.id && !ingredientsInStock.includes(recipeIngredient)) {
+          ingredientsInStock.push(recipeIngredient);
+        } else if (recipeIngredient.id !== pantryIngredient.id && !this.ingredientsNeeded.includes(recipeIngredient)) {
+          this.ingredientsNeeded.push(recipeIngredient);
+        }
+      })
+    })
+    return this.ingredientsNeeded;
   }
 
   // checkStock(recipe) {

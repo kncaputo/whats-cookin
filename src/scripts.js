@@ -20,7 +20,7 @@ const reset = document.querySelector('#reset');
 const aside = document.querySelector('aside');
 
 let user = new User(usersData[Math.floor(Math.random() * 49)], ingredientsData, recipeData);
-// eventListeners
+
 window.onload = loadPage();
 window.addEventListener('click', closeModal);
 
@@ -71,21 +71,13 @@ function executeSearch() {
   event.preventDefault();
   let userInput = searchBar.value;
   let resultRecipes = user.searchRecipes(userInput);
-  // allRecipesContainer.innerHTML = '';
   clearRecipeContainers();
   displayAllRecipes(resultRecipes);
   searchBar.value = '';
 }
-//
-// function clearFormValues() {
-//   radios.forEach(filter => {
-//     filter.checked = false;
-//   })
-// }
 
 function determineClickInWhatsCookin(event) {
   markUnmarkAsFavorite(event);
-  // openModal(event);
 
   user.recipeBox.allRecipes.forEach(recipe => {
     if (event.target.id === `whats-cookin-btn-${recipe.id}`) {
@@ -97,22 +89,17 @@ function determineClickInWhatsCookin(event) {
 }
 
 function displayWhatsCookinRecipe(event) {
+  aside.classList.remove('hidden');
   user.recipeBox.allRecipes.forEach(recipe => {
     if (event.target.id === `show-recipe-btn-${recipe.id}`) {
       document.querySelector('#aside-img').src = `${recipe.image}`
       document.querySelector('#recipe-title-whats-cookin').innerText = `${recipe.name}`;
       document.querySelector('#recipe-ingredients-whats-cookin').innerText = `${recipe.returnIngredients()}`;
       document.querySelector('#total-cost-whats-cookin').innerText = `${recipe.calculateCost()}`;
+      document.querySelector('#shopping-list').innerText = `${user.pantry.checkStock(recipe)}`
     }
   })
 }
-
-// if (event.target.id === ) {
-//   markUnmarkisReadyToCook(event);
-//   //
-//   removeRecipeCard(event);
-// }
-// // removeRecipeCard(event);
 
 function getValues() {
   clearRecipeContainers();
@@ -254,7 +241,6 @@ function showAllRecipes() {
   whatsCookinPage.classList.add('hidden');
   clearRecipeContainers();
   displayAllRecipes(user.recipeBox.allRecipes);
-  // highlightPageOnMenu('nav1');
 }
 
 function showFavorites() {
@@ -285,7 +271,6 @@ function showMyPantry() {
   searchContainer.classList.remove('hidden');
   clearRecipeContainers();
   displayIngredients();
-  // highlightPageOnMenu('nav3');
 }
 
 function showWhatsCookin() {

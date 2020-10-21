@@ -53,17 +53,19 @@
         <section class="whats-cookin-page flex-row">
           <div class="whats-cookin-container flex-row">
           </div>
-          <aside>
+          <aside class="hidden">
             <article class="flex-row" id="aside-recipe-box">
               <div class="flex-column" id="aside-contents">
-                <img src="../assets/main-background.jpg" id="aside-img" alt="cutting board image">
+                <div>
+                  <img src="../assets/main-background.jpg" id="aside-img" alt="cutting board image">
+                </div>
                 <h2 id="recipe-title-whats-cookin"></h2>
                 <p id="recipe-ingredients-whats-cookin"></p>
                 <p id="total-cost-whats-cookin">Total cost of all ingredients: $0.00</p>
-              </div>
-              <div class="flex-column">
-                <h2>Shopping List</h2>
-                <p id="shopping-list"></p>
+                <div class="shopping-list-div flex-column">
+                  <h2>Shopping List</h2>
+                  <p id="shopping-list"></p>
+                </div>
               </div>
             </article>
           </aside>
