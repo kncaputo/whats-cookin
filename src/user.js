@@ -1,5 +1,5 @@
-// const Pantry = require('./pantry.js');
-// const RecipeBox = require('./recipeBox.js');
+const Pantry = require('./pantry.js');
+const RecipeBox = require('./recipeBox.js');
 
 class User {
   constructor(user, ingredientsData, recipeData) {
@@ -23,7 +23,6 @@ class User {
 
   searchRecipes(input) {
     input = input.toLowerCase();
-    console.log(input)
     let results = [];
     this.recipeBox.allRecipes.forEach(recipe => {
       recipe.ingredients.forEach(ingredient => {
@@ -32,7 +31,6 @@ class User {
         }
       })
     })
-    console.log(results)
     return results;
   }
 

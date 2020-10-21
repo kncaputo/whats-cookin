@@ -259,5 +259,4 @@ describe('User', () => {
     expect(user.filterRecipeByType('side dish').length).to.deep.equal(1);
     })
   });
-
 });

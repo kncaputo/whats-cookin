@@ -1,4 +1,4 @@
-// const IngredientInventory = require('./ingredientInventory.js');
+const IngredientInventory = require('./ingredientInventory.js');
 
 class Pantry {
   constructor(pantry, ingredientsData) {
@@ -36,22 +36,22 @@ class Pantry {
     });
   }
 
-  checkStock(recipe) {
-    let ingredientsInStock = [];
-    this.ingredients.forEach(pantryIngredient => {
-      recipe.ingredients.forEach(recipeIngredient => {
-        if ((recipeIngredient.id === pantryIngredient.id) && (recipeIngredient.quantity.amount <= pantryIngredient.amount)) {
-          ingredientsInStock.push(true);
-        }
-        // else if ((recipeIngredient.id === pantryIngredient.id) && (recipeIngredient.quantity.amount > pantryIngredient.amount)) {
-        //   recipeIngredient.amountNeeded = recipeIngredient.quantity.amount - pantryIngredient.amount
-        //   this.ingredientsNeeded.push(recipeIngredient);
-        // } else {
-        //   recipeIngredient.amountNeeded = recipeIngredient.quantity.amount
-        //   this.ingredientsNeeded.push(recipeIngredient);
-        // }
-      });
-    });
+  // checkStock(recipe) {
+  //   let ingredientsInStock = [];
+  //   this.ingredients.forEach(pantryIngredient => {
+  //     recipe.ingredients.forEach(recipeIngredient => {
+  //       if ((recipeIngredient.id === pantryIngredient.id) && (recipeIngredient.quantity.amount <= pantryIngredient.amount)) {
+  //         ingredientsInStock.push(true);
+  //       }
+  //       // else if ((recipeIngredient.id === pantryIngredient.id) && (recipeIngredient.quantity.amount > pantryIngredient.amount)) {
+  //       //   recipeIngredient.amountNeeded = recipeIngredient.quantity.amount - pantryIngredient.amount
+  //       //   this.ingredientsNeeded.push(recipeIngredient);
+  //       // } else {
+  //       //   recipeIngredient.amountNeeded = recipeIngredient.quantity.amount
+  //       //   this.ingredientsNeeded.push(recipeIngredient);
+  //       // }
+  //     });
+  //   });
 
     if (ingredientsInStock.length === recipe.ingredients.length) {
        return true;
