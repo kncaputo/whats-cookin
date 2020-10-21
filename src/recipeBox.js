@@ -5,8 +5,6 @@ class RecipeBox {
     this.rawRecipeData = rawRecipeData;
     this.rawIngredientsData = rawIngredientsData;
     this.allRecipes = [];
-    this.favoriteRecipes = [];
-    this.whatsCookinRecipes = [];
   }
 
   makeRecipes() {

@@ -41,6 +41,7 @@ class Recipe {
         }
       })
     })
+    this.ingredientInventory.updateIngredientData(this.rawRecipeIngredientData, 'quantity')
   }
 
   updateIngredientData(array, key) {
