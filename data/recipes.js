@@ -448,7 +448,8 @@ const recipeData = [
     ],
     "name": "Elvis Pancakes",
     "tags": [
-      "side dish"
+      "breakfast",
+      "morning meal"
     ]
   },
   {
@@ -704,7 +705,8 @@ const recipeData = [
     ],
     "name": "Ambrosia Cupcakes",
     "tags": [
-      "side dish"
+      "side dish",
+      "dessert"
     ]
   },
   {
@@ -914,7 +916,8 @@ const recipeData = [
       "snack",
       "appetizer",
       "antipasto",
-      "hor d'oeuvre"
+      "hor d'oeuvre",
+      "dessert"
     ]
   },
   {
@@ -1835,7 +1838,7 @@ const recipeData = [
     ],
     "name": "Puppy Chow Cookies",
     "tags": [
-      "side dish"
+      "dessert"
     ]
   },
   {
@@ -2522,7 +2525,8 @@ const recipeData = [
       "snack",
       "appetizer",
       "antipasto",
-      "hor d'oeuvre"
+      "hor d'oeuvre",
+      "dessert"
     ]
   },
   {
@@ -3124,12 +3128,7 @@ const recipeData = [
     ],
     "name": "A Cake To Warm Any Heart \u2013 Banana Split Cake",
     "tags": [
-      "antipasti",
-      "starter",
-      "snack",
-      "appetizer",
-      "antipasto",
-      "hor d'oeuvre"
+      "dessert"
     ]
   },
   {
@@ -5059,12 +5058,7 @@ const recipeData = [
     ],
     "name": "Reese's Pieces Peanut Butter Cookies",
     "tags": [
-      "antipasti",
-      "starter",
-      "snack",
-      "appetizer",
-      "antipasto",
-      "hor d'oeuvre"
+      "dessert"
     ]
   },
   {

@@ -1,4 +1,4 @@
-const IngredientInventory = require('./ingredientInventory.js');
+// const IngredientInventory = require('./ingredientInventory.js');
 
 class Pantry {
   constructor(pantry, ingredientsData) {
@@ -8,15 +8,15 @@ class Pantry {
     this.ingredientInventory = new IngredientInventory(ingredientsData);
   }
 
-  extractValues(array, itemCriteria) {
-    if (array !== undefined) {
-      let allValues = array.reduce((values, item) => {
-        values.push(item[itemCriteria]);
-        return values;
-      }, []);
-      return allValues;
-    }
-  }
+  // extractValues(array, itemCriteria) {
+  //   if (array !== undefined) {
+  //     let allValues = array.reduce((values, item) => {
+  //       values.push(item[itemCriteria]);
+  //       return values;
+  //     }, []);
+  //     return allValues;
+  //   }
+  // }
 
   makeIngredients() {
     this.ingredientInventory.makeIngredients()
@@ -36,6 +36,20 @@ class Pantry {
     });
   }
 
+  checkStock(recipe) {
+    let ingredientsInStock = [];
+    recipe.ingredients.forEach(recipeIngredient => {
+      this.ingredients.forEach(pantryIngredient => {
+        if (recipeIngredient.id === pantryIngredient.id && !ingredientsInStock.includes(recipeIngredient)) {
+          ingredientsInStock.push(recipeIngredient);
+        } else if (recipeIngredient.id !== pantryIngredient.id && !this.ingredientsNeeded.includes(recipeIngredient)) {
+          this.ingredientsNeeded.push(recipeIngredient);
+        }
+      })
+    })
+    return this.ingredientsNeeded;
+  }
+
   // checkStock(recipe) {
   //   let ingredientsInStock = [];
   //   this.ingredients.forEach(pantryIngredient => {
@@ -52,13 +66,13 @@ class Pantry {
   //       // }
   //     });
   //   });
-
-    if (ingredientsInStock.length === recipe.ingredients.length) {
-       return true;
-     } else {
-       return false;
-     }
-  }
+  //
+  //   if (ingredientsInStock.length === recipe.ingredients.length) {
+  //      return true;
+  //    } else {
+  //      return false;
+  //    }
+  // }
 
   returnIngredientsNeeded(recipe) {
     this.checkStock(recipe);
