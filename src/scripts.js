@@ -12,11 +12,12 @@ const searchContainer = document.querySelector('#search-container');
 const pantryContainer = document.querySelector('.pantry-container');
 const allRecipesContainer = document.querySelector('.all-recipes-container');
 const radios = document.querySelectorAll('.filters');
-const form = document.querySelector('.form');
-const searchBar = document.querySelector('#form-search');
+const filterSearch = document.querySelector('#filter-search');
+const searchBar = document.querySelector('#search-bar');
+const searchBtn = document.querySelector('#search-btn');
+const reset = document.querySelector('#reset');
 
-let user = new User(usersData[0], ingredientsData, recipeData);
-
+let user = new User(usersData[Math.floor(Math.random() * 49)], ingredientsData, recipeData);
 // eventListeners
 window.onload = loadPage();
 window.addEventListener('click', closeModal);
@@ -25,7 +26,10 @@ myFavoritesNav.addEventListener('click', showFavorites);
 allRecipesNav.addEventListener('click', showAllRecipes);
 myPantryNav.addEventListener('click', showMyPantry);
 whatsCookinNav.addEventListener('click', showWhatsCookin);
-form.addEventListener('click', getValues);
+filterSearch.addEventListener('click', getValues);
+searchBtn.addEventListener('click', executeSearch);
+reset.addEventListener('click', resetFilters);
+
 
 allRecipesContainer.addEventListener('click', () => {
   determineClickOnAllRecipes(event);
@@ -56,11 +60,26 @@ function determineClickInFavorites(event) {
   })
 }
 
-function clearFormValues() {
-  radios.forEach(filter => {
-    filter.checked = false;
-  })
+function resetFilters() {
+  clearRecipeContainers();
+  displayAllRecipes(user.recipeBox.allRecipes);
 }
+
+function executeSearch() {
+  event.preventDefault();
+  let userInput = searchBar.value;
+  let resultRecipes = user.searchRecipes(userInput);
+  // allRecipesContainer.innerHTML = '';
+  clearRecipeContainers();
+  displayAllRecipes(resultRecipes);
+  searchBar.value = '';
+}
+//
+// function clearFormValues() {
+//   radios.forEach(filter => {
+//     filter.checked = false;
+//   })
+// }
 
 function determineClickInWhatsCookin(event) {
   markUnmarkAsFavorite(event);
@@ -84,7 +103,9 @@ function getValues() {
   clearRecipeContainers();
 
   let selection = document.getElementById('filter-search').elements['filter-search'].value;
-
+  if (selection === 'all') {
+    clearFilters();
+  }
   const appetizers = ["antipasti", "starter", "snack", "appetizer", "antipasto", "hor d'oeuvre"];
   const breakfast = ["morning meal", "brunch", "breakfast", "morning meal", "brunch", "breakfast"];
   const dessert = [];
@@ -206,6 +227,7 @@ function displayIngredients() {
 }
 
 function clearRecipeContainers() {
+  allRecipesContainer.innerHTML = '';
   favoritesContainer.innerHTML = '';
   pantryContainer.innerHTML = '';
   whatsCookinContainer.innerHTML = '';
@@ -227,8 +249,6 @@ function showFavorites() {
   user.recipeBox.allRecipes.forEach(recipe => {
     if (recipe.isFavorite === true) {
       displaySavedRecipes(recipe, 'favoritesContainer');
-      // document.querySelector(`#show-recipe-btn-${recipe.id}`).insertAdjacentHTML('afterbegin', createModals(recipe));
-
     }
   })
 }

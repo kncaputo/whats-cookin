@@ -23,14 +23,16 @@ class User {
 
   searchRecipes(input) {
     input = input.toLowerCase();
+    console.log(input)
     let results = [];
     this.recipeBox.allRecipes.forEach(recipe => {
       recipe.ingredients.forEach(ingredient => {
-        if ((ingredient.name === input) && (!results.includes(recipe))) {
+        if ((ingredient.name.includes(input)) && (!results.includes(recipe))) {
           results.push(recipe)
         }
       })
     })
+    console.log(results)
     return results;
   }
 
