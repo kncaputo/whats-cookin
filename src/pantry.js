@@ -8,16 +8,6 @@ class Pantry {
     this.ingredientInventory = new IngredientInventory(ingredientsData);
   }
 
-  extractValues(array, itemCriteria) {
-    if (array !== undefined) {
-      let allValues = array.reduce((values, item) => {
-        values.push(item[itemCriteria]);
-        return values;
-      }, []);
-      return allValues;
-    }
-  }
-
   makeIngredients() {
     this.ingredientInventory.makeIngredients()
     this.ingredientInventory.allIngredients.forEach(ingredient => {
