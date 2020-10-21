@@ -96,7 +96,7 @@ function displayWhatsCookinRecipe(event) {
       document.querySelector('#recipe-title-whats-cookin').innerText = `${recipe.name}`;
       document.querySelector('#recipe-ingredients-whats-cookin').innerText = `${recipe.returnIngredients()}`;
       document.querySelector('#total-cost-whats-cookin').innerText = `${recipe.calculateCost()}`;
-      document.querySelector('#shopping-list').innerText = `${user.pantry.checkStock(recipe)}`
+      document.querySelector('#shopping-list').innerText = `${user.pantry.parseShoppingList(recipe)}`
     }
   })
 }

@@ -28,6 +28,7 @@ class Pantry {
 
   checkStock(recipe) {
     let ingredientsInStock = [];
+    this.ingredientsNeeded = [];
     recipe.ingredients.forEach(recipeIngredient => {
       this.ingredients.forEach(pantryIngredient => {
         if (recipeIngredient.id === pantryIngredient.id && !ingredientsInStock.includes(recipeIngredient)) {
@@ -40,21 +41,20 @@ class Pantry {
     return this.ingredientsNeeded;
   }
 
-  // returnIngredientsNeeded(recipe) {
-  //   this.checkStock(recipe);
-  //   let amountNeeded;
-  //   console.log(this.ingredientsNeeded)
-  //   return this.ingredientsNeeded.reduce((shoppingList, recipeIngredient) => {
-  //     this.ingredients.forEach(pantryIngredient => {
-  //       if (recipeIngredient.id === pantryIngredient.id && !ingredientsInStock.includes(recipeIngredient)) {
-  //         ingredientsInStock.push(recipeIngredient);
-  //       } else if (recipeIngredient.id !== pantryIngredient.id && !this.ingredientsNeeded.includes(recipeIngredient)) {
-  //         this.ingredientsNeeded.push(recipeIngredient);
-  //       }
-  //     })
-  //   })
-  //   return this.ingredientsNeeded;
-  // }
+  parseShoppingList(recipe) {
+    this.checkStock(recipe);
+    if (this.ingredientsNeeded.length > 0) {
+      return this.ingredientsNeeded.reduce((shoppingList, ingredient) => {
+        console.log(ingredient)
+        if (!shoppingList.includes(ingredient.name)) {
+          shoppingList.push(`${ingredient.name}`);
+        }
+        return shoppingList;
+        }, []);
+    } else {
+      return 'You have everything you need!'
+    }
+  }
 }
 
 if (typeof module !== 'undefined') {
