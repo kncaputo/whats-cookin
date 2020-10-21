@@ -21,7 +21,7 @@
     </section>
     <main class="flex-row">
       <section class="flex-column" id="main">
-        <div class="flex-column form" id="search-container">
+        <section class="flex-column form" id="search-container">
           <form class= id="form-search">
                <input type="text" placeholder="Search by ingredient" id="search-bar" name="form-search">
                <button id="search-btn">Search</button>
@@ -43,50 +43,32 @@
             <label for="sides" class="filters"><div class="grow"><img src="../assets/avo-dip-small.png" class="img-icon grow"></div><br>Sides</label>
             <button id="reset">Reset Filters</button>
           </form>
-        </div>
-        <div class="all-recipes-container flex-row">
-        </div>
-        <div class="favorites-container flex-row">
-        </div>
-        <div class="pantry-container flex-row">
-        </div>
-        <div class="whats-cookin-container flex-row">
-        </div>
-        <div class="flex-column whats-cookin-container hidden">
-          <div class="whats-cookin-img">
-            <img src="../assets/main-background.jpg" id="whats-cookin-img" alt="cutting board image">
+        </section>
+        <section class="all-recipes-container flex-row">
+        </section>
+        <section class="favorites-container flex-row">
+        </section>
+        <section class="pantry-container flex-row">
+        </section>
+        <section class="whats-cookin-page flex-row">
+          <div class="whats-cookin-container flex-row">
           </div>
-          <h2 id="whats-cookin-recipe-title">Recipe Title</h2>
-          <h3>Ingredients</h3>
-          <ul>
-            <li>Ingredient</li>
-            <li>Ingredient</li>
-            <li>Ingredient</li>
-            <li>Ingredient</li>
-          </ul>
-          <p>This is how to cook this bad boy</p>
-        </div>
+          <aside>
+            <article class="flex-row" id="aside-recipe-box">
+              <div class="flex-column" id="aside-contents">
+                <img src="../assets/main-background.jpg" id="aside-img" alt="cutting board image">
+                <h2 id="recipe-title-whats-cookin"></h2>
+                <p id="recipe-ingredients-whats-cookin"></p>
+                <p id="total-cost-whats-cookin">Total cost of all ingredients: $0.00</p>
+              </div>
+              <div class="flex-column">
+                <h2>Shopping List</h2>
+                <p id="shopping-list"></p>
+              </div>
+            </article>
+          </aside>
+        </section>
       </section>
-      <aside class="hidden">
-          </div>
-        </article>
-        <article class="flex-column hidden">
-          <div class="flex-column">
-            <h2>Shopping List</h2>
-            <ul>
-              <li>Ingredient</li>
-              <li>Ingredient</li>
-              <li>Ingredient</li>
-              <li>Ingredient</li>
-              <li>Ingredient</li>
-            </ul>
-          </div>
-          <div class="flex-column">
-            <h2></h2>
-            <p></p>
-          </div>
-        </article>
-      </aside>
     </main>
     <script type="text/javascript" src="../data/users.js"></script>
     <script type="text/javascript" src="../data/recipes.js"></script>

@@ -348,3 +348,19 @@ transition: .5s ease;
   border: lightgray 1px solid;
   box-shadow: 6px 6px 6px darkgray;
 }
+
+.whats-cookin-container {
+  flex-wrap: wrap;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+aside {
+  flex-grow: 2;
+}
+
+.whatsCookinImg {
+  width: 600px;
+  height: auto;
+
+}

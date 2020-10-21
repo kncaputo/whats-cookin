@@ -1,4 +1,4 @@
-const IngredientInventory = require('./ingredientInventory.js');
+// const IngredientInventory = require('./ingredientInventory.js');
 
 class Pantry {
   constructor(pantry, ingredientsData) {
@@ -52,13 +52,13 @@ class Pantry {
   //       // }
   //     });
   //   });
-
-    if (ingredientsInStock.length === recipe.ingredients.length) {
-       return true;
-     } else {
-       return false;
-     }
-  }
+  //
+  //   if (ingredientsInStock.length === recipe.ingredients.length) {
+  //      return true;
+  //    } else {
+  //      return false;
+  //    }
+  // }
 
   returnIngredientsNeeded(recipe) {
     this.checkStock(recipe);

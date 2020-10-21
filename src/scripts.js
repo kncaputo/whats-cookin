@@ -2,6 +2,7 @@
 let modal;
 const favoritesContainer = document.querySelector('.favorites-container');
 const whatsCookinContainer = document.querySelector('.whats-cookin-container');
+const whatsCookinPage = document.querySelector('.whats-cookin-page');
 const myFavoritesNav = document.querySelector('#my-favorites-nav');
 const allRecipesNav = document.querySelector('#all-recipes-nav');
 const myPantryNav = document.querySelector('#my-pantry-nav');
@@ -16,6 +17,7 @@ const filterSearch = document.querySelector('#filter-search');
 const searchBar = document.querySelector('#search-bar');
 const searchBtn = document.querySelector('#search-btn');
 const reset = document.querySelector('#reset');
+const aside = document.querySelector('aside');
 
 let user = new User(usersData[Math.floor(Math.random() * 49)], ingredientsData, recipeData);
 // eventListeners
@@ -83,11 +85,24 @@ function executeSearch() {
 
 function determineClickInWhatsCookin(event) {
   markUnmarkAsFavorite(event);
-  openModal(event);
+  // openModal(event);
+
   user.recipeBox.allRecipes.forEach(recipe => {
     if (event.target.id === `whats-cookin-btn-${recipe.id}`) {
       markUnmarkReadyToCook(event);
       removeRecipeCard(event);
+    }
+  })
+  displayWhatsCookinRecipe(event);
+}
+
+function displayWhatsCookinRecipe(event) {
+  user.recipeBox.allRecipes.forEach(recipe => {
+    if (event.target.id === `show-recipe-btn-${recipe.id}`) {
+      document.querySelector('#aside-img').src = `${recipe.image}`
+      document.querySelector('#recipe-title-whats-cookin').innerText = `${recipe.name}`;
+      document.querySelector('#recipe-ingredients-whats-cookin').innerText = `${recipe.returnIngredients()}`;
+      document.querySelector('#total-cost-whats-cookin').innerText = `${recipe.calculateCost()}`;
     }
   })
 }
@@ -236,6 +251,7 @@ function clearRecipeContainers() {
 function showAllRecipes() {
   allRecipesContainer.classList.remove('hidden');
   searchContainer.classList.remove('hidden');
+  whatsCookinPage.classList.add('hidden');
   clearRecipeContainers();
   displayAllRecipes(user.recipeBox.allRecipes);
   // highlightPageOnMenu('nav1');
@@ -244,6 +260,7 @@ function showAllRecipes() {
 function showFavorites() {
   allRecipesContainer.classList.add('hidden');
   searchContainer.classList.remove('hidden');
+  whatsCookinPage.classList.add('hidden');
   clearRecipeContainers();
 
   user.recipeBox.allRecipes.forEach(recipe => {
@@ -263,6 +280,7 @@ function displaySavedRecipes(recipe, container) {
 }
 
 function showMyPantry() {
+  whatsCookinPage.classList.add('hidden');
   allRecipesContainer.classList.add('hidden');
   searchContainer.classList.remove('hidden');
   clearRecipeContainers();
@@ -279,6 +297,21 @@ function showWhatsCookin() {
       displaySavedRecipes(recipe, 'whatsCookinContainer');
     }
   })
+  displayWhatsCookinAside()
+}
+
+function displayWhatsCookinAside() {
+  let asideContents = document.querySelector('#aside-contents');
+
+  user.recipeBox.allRecipes.forEach(recipe => {
+    if (recipe.isReadyToCook === true) {
+      document.querySelector('#aside-img').src = `${recipe.image}`
+      document.querySelector('#recipe-title-whats-cookin').innerText = `${recipe.name}`;
+      document.querySelector('#recipe-ingredients-whats-cookin').innerText = `${recipe.returnIngredients()}`;
+      document.querySelector('#total-cost-whats-cookin').innerText = `${recipe.calculateCost()}`;
+    }
+  })
+  whatsCookinPage.classList.remove('hidden');
 }
 
 function removeRecipeCard(event) {
