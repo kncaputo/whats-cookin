@@ -80,25 +80,31 @@ function determineClickInWhatsCookin(event) {
 // }
 // // removeRecipeCard(event);
 
-function filterRecipes() {
+function getValues() {
   clearRecipeContainers();
-  let selection = document.getElementById(‘filter-search’).elements[‘filter-search’].value;
-  const appetizers = [“antipasti”, “starter”, “snack”, “appetizer”, “antipasto”, “hor d’oeuvre”];
-  const breakfast = [“morning meal”, “brunch”, “breakfast”, “morning meal”, “brunch”, “breakfast”];
+
+  let selection = document.getElementById('filter-search').elements['filter-search'].value;
+
+  const appetizers = ["antipasti", "starter", "snack", "appetizer", "antipasto", "hor d'oeuvre"];
+  const breakfast = ["morning meal", "brunch", "breakfast", "morning meal", "brunch", "breakfast"];
   const dessert = [];
-  const dinner = [“main course”, “main dish”, “dinner”];
-  const dips = [“condiment”, “dip”, “spread”, “sauce”];
-  const lunch = [“lunch”, “main course”, “main dish”, “salad”, “dinner”];
-  const sides = [“salad”, “side”, “side dish”, “snack”];
+  const dinner = ["main course", "main dish", "dinner"];
+  const dips = ["condiment", "dip", "spread", "sauce"];
+  const lunch = ["lunch", "main course", "main dish", "salad", "dinner"];
+  const sides = ["salad", "side", "side dish", "snack"];
+
   let filteredRecipes = [];
-  if (selection === ‘appetizers’) {appetizers.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
-  if (selection === ‘breakfast’) {breakfast.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
-  if (selection === ‘dessert’) {dessert.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
-  if (selection === ‘dinner’) {dinner.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
-  if (selection === ‘dips’) {dips.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
-  if (selection === ‘lunch’) {lunch.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
-  if (selection === ‘sides’) {sides.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
-  let recipes = (filteredRecipes.flat()).reduce((recipes, recipe) => {
+
+  if (selection === 'appetizers') {appetizers.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === 'breakfast') {breakfast.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === 'dessert') {dessert.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === 'dinner') {dinner.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === 'dips') {dips.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === 'lunch') {lunch.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === 'sides') {sides.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  filteredRecipes = filteredRecipes.flat()
+
+  let recipes = filteredRecipes.reduce((recipes, recipe) => {
     if (!recipes.includes(recipe)) {
       recipes.push(recipe);
     }
