@@ -11,7 +11,9 @@ const closeModalBtn = document.querySelector('.close');
 const searchContainer = document.querySelector('#search-container');
 const pantryContainer = document.querySelector('.pantry-container');
 const allRecipesContainer = document.querySelector('.all-recipes-container');
+const radios = document.querySelectorAll('.filters');
 const form = document.querySelector('.form');
+const searchBar = document.querySelector('#form-search');
 
 let user = new User(usersData[0], ingredientsData, recipeData);
 
@@ -51,6 +53,12 @@ function determineClickInFavorites(event) {
       markUnmarkAsFavorite(event);
       removeRecipeCard(event);
     }
+  })
+}
+
+function clearFormValues() {
+  radios.forEach(filter => {
+    filter.checked = false;
   })
 }
 
@@ -94,23 +102,16 @@ function getValues() {
   if (selection === 'dips') {dips.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
   if (selection === 'lunch') {lunch.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
   if (selection === 'sides') {sides.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  filteredRecipes = filteredRecipes.flat()
 
+  let recipes = filteredRecipes.reduce((recipes, recipe) => {
+    if (!recipes.includes(recipe)) {
+      recipes.push(recipe);
+    }
+    return recipes;
+  }, [])
   clearRecipeContainers();
-  displayAllRecipes(filteredRecipes.flat());
- // var randomSelection;
-  // assign a var 'selection' to a query selector of the form
-  // get values
-  // declare arrys based on the value name
-    // with strings of corresponding tag names inside
-  // if value === arr name,
-      // declare a var recipes to display asign to an empty arr
-      // (forEach) iterate over the array of tags
-        // user.filterRecipes(tag) .. push these into empty arr
-      // flatten result arr
-      // invoke clearRecipeContainers
-      // forEach recipe in variable arr
-        // create recipes
-        // display recipes
+  displayAllRecipes(recipes);
 }
 
 function markUnmarkAsFavorite(event) {
