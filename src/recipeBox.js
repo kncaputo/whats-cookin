@@ -1,4 +1,4 @@
-// const Recipe = require('./recipe');
+const Recipe = require('./recipe');
 
 class RecipeBox {
   constructor(rawRecipeData, rawIngredientsData) {
@@ -17,6 +17,7 @@ class RecipeBox {
 
       this.allRecipes.forEach(recipe => {
         recipe.makeIngredients();
+        recipe.updateIngredientData(recipe.rawRecipeIngredientData, 'quantity');
       })
     }
   }
