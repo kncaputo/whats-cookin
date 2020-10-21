@@ -448,7 +448,8 @@ const recipeData = [
     ],
     "name": "Elvis Pancakes",
     "tags": [
-      "side dish"
+      "side dish",
+      "breakfast"
     ]
   },
   {
@@ -3546,6 +3547,7 @@ const recipeData = [
     ],
     "name": "Cereal Marshmallow Bars",
     "tags": [
+      "breakfast",
       "dessert"
     ]
   },
