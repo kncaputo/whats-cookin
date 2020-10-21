@@ -11,6 +11,7 @@ class Recipe {
     this.tags = recipe.tags;
     this.isFavorite = false;
     this.isReadyToCook = false;
+    this.isHidden = false;
     this.ingredientInventory = new IngredientInventory(rawIngredientsData);
   }
 
