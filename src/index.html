@@ -22,24 +22,24 @@
     <main class="flex-row">
       <section class="flex-column" id="main">
         <div class="flex-column form" id="search-container">
-          <div>
-            <input type="text" placeholder="Search" id="search-bar">
-          </div>
+          <form id="form-search">
+               <input type="text" placeholder="Search" id="search-bar" name="form-search">
+          </form>
           <form class="flex-row radio-filter" id="filter-search" name="filter-search">
-            <input type="radio" id="breakfast" name="filter-search" value="breakfast">
-            <label for="breakfast"><div class="grow"><img src="../assets/egg-on-toast.png" class="img-icon" data-attribute=""></div><span class="btn-labels"><br>Breakfast</span></label>
-            <input type="radio" id="lunch" name="filter-search" value="lunch">
-            <label for="lunch"><div class="grow"><img src="../assets/panini.png" class="img-icon grow"></div><span class="btn-labels"><span class="btn-labels"><br>Lunch</span></label>
-            <input type="radio" id="dinner" name="filter-search" value="dinner">
-            <label for="dinner"><div class="grow"><img src="../assets/fish-dinner.png" class="img-icon grow"></div><br>Dinner</label>
-            <input type="radio" id="dessert" name="filter-search" value="dessert">
-            <label for="dessert"><div class="grow"><img src="../assets/tiramisu.png" class="img-icon grow"></div><br>Dessert</label>
-            <input type="radio" id="dips" name="filter-search" value="dips">
-            <label for="dips"><div class="grow"><img src="../assets/hummus-dip.png" class="img-icon grow"></div><br>Dips</label>
-            <input type="radio" id="appetizers" name="filter-search" value="appetizers">
-            <label for="appetizers"><div class="grow"><img src="../assets/appetizers.png" class="img-icon grow"></div><br>Appetizers</label>
-            <input type="radio" id="sides" name="filter-search" value="sides">
-            <label for="sides"><div class="grow"><img src="../assets/avo-dip-small.png" class="img-icon grow"></div><br>Sides</label>
+            <input type="radio" class="filters" id="breakfast" name="filter-search" value="breakfast">
+            <label for="breakfast" class="filters"><div class="grow"><img src="../assets/egg-on-toast.png" class="img-icon" data-attribute=""></div><span class="btn-labels"><br>Breakfast</span></label>
+            <input type="radio" class="filters" id="lunch" name="filter-search" value="lunch">
+            <label for="lunch" class="filters"><div class="grow"><img src="../assets/panini.png" class="img-icon grow"></div><span class="btn-labels"><span class="btn-labels"><br>Lunch</span></label>
+            <input type="radio" class="filters"id="dinner" name="filter-search" value="dinner">
+            <label for="dinner" class="filters"><div class="grow"><img src="../assets/fish-dinner.png" class="img-icon grow"></div><br>Dinner</label>
+            <input type="radio" class="filters" id="dessert" name="filter-search" value="dessert">
+            <label for="dessert" class="filters"><div class="grow"><img src="../assets/tiramisu.png" class="img-icon grow"></div><br>Dessert</label>
+            <input type="radio" class="filters" id="dips" name="filter-search" value="dips">
+            <label for="dips" class="filters"><div class="grow"><img src="../assets/hummus-dip.png" class="img-icon grow"></div><br>Dips</label>
+            <input type="radio" class="filters" id="appetizers" name="filter-search" value="appetizers">
+            <label for="appetizers" class="filters"><div class="grow"><img src="../assets/appetizers.png" class="img-icon grow"></div><br>Appetizers</label>
+            <input type="radio" class="filters" id="sides" name="filter-search" value="sides">
+            <label for="sides" class="filters"><div class="grow"><img src="../assets/avo-dip-small.png" class="img-icon grow"></div><br>Sides</label>
           </form>
         </div>
         <div class="all-recipes-container flex-row">

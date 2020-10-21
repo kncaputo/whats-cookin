@@ -1,4 +1,4 @@
-const IngredientInventory = require('./ingredientInventory.js');
+// const IngredientInventory = require('./ingredientInventory.js');
 
 class Recipe {
   constructor(recipe, rawIngredientsData) {
@@ -56,7 +56,7 @@ class Recipe {
     this.ingredients.forEach(ingredient => {
       return totalCost += ingredient.estimatedCostInCents;
     })
-    return totalCost;
+    return `$${totalCost / 100}`;
   }
 }
 

@@ -11,7 +11,9 @@ const closeModalBtn = document.querySelector('.close');
 const searchContainer = document.querySelector('#search-container');
 const pantryContainer = document.querySelector('.pantry-container');
 const allRecipesContainer = document.querySelector('.all-recipes-container');
+const radios = document.querySelectorAll('.filters');
 const form = document.querySelector('.form');
+const searchBar = document.querySelector('#form-search');
 
 let user = new User(usersData[0], ingredientsData, recipeData);
 
@@ -54,6 +56,12 @@ function determineClickInFavorites(event) {
   })
 }
 
+function clearFormValues() {
+  radios.forEach(filter => {
+    filter.checked = false;
+  })
+}
+
 function determineClickInWhatsCookin(event) {
   markUnmarkAsFavorite(event);
   openModal(event);
@@ -72,45 +80,32 @@ function determineClickInWhatsCookin(event) {
 // }
 // // removeRecipeCard(event);
 
-function getValues() {
+function filterRecipes() {
   clearRecipeContainers();
-
-  let selection = document.getElementById('filter-search').elements['filter-search'].value;
-
-  const appetizers = ["antipasti", "starter", "snack", "appetizer", "antipasto", "hor d'oeuvre"];
-  const breakfast = ["morning meal", "brunch", "breakfast", "morning meal", "brunch", "breakfast"];
+  let selection = document.getElementById(‘filter-search’).elements[‘filter-search’].value;
+  const appetizers = [“antipasti”, “starter”, “snack”, “appetizer”, “antipasto”, “hor d’oeuvre”];
+  const breakfast = [“morning meal”, “brunch”, “breakfast”, “morning meal”, “brunch”, “breakfast”];
   const dessert = [];
-  const dinner = ["main course", "main dish", "dinner"];
-  const dips = ["condiment", "dip", "spread", "sauce"];
-  const lunch = ["lunch", "main course", "main dish", "salad", "dinner"];
-  const sides = ["salad", "side", "side dish", "snack"];
-
+  const dinner = [“main course”, “main dish”, “dinner”];
+  const dips = [“condiment”, “dip”, “spread”, “sauce”];
+  const lunch = [“lunch”, “main course”, “main dish”, “salad”, “dinner”];
+  const sides = [“salad”, “side”, “side dish”, “snack”];
   let filteredRecipes = [];
-
-  if (selection === 'appetizers') {appetizers.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
-  if (selection === 'breakfast') {breakfast.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
-  if (selection === 'dessert') {dessert.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
-  if (selection === 'dinner') {dinner.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
-  if (selection === 'dips') {dips.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
-  if (selection === 'lunch') {lunch.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
-  if (selection === 'sides') {sides.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
-
+  if (selection === ‘appetizers’) {appetizers.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === ‘breakfast’) {breakfast.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === ‘dessert’) {dessert.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === ‘dinner’) {dinner.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === ‘dips’) {dips.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === ‘lunch’) {lunch.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  if (selection === ‘sides’) {sides.forEach(tag => {filteredRecipes.push(user.filterRecipeByType(tag))})}
+  let recipes = (filteredRecipes.flat()).reduce((recipes, recipe) => {
+    if (!recipes.includes(recipe)) {
+      recipes.push(recipe);
+    }
+    return recipes;
+  }, [])
   clearRecipeContainers();
-  displayAllRecipes(filteredRecipes.flat());
- // var randomSelection;
-  // assign a var 'selection' to a query selector of the form
-  // get values
-  // declare arrys based on the value name
-    // with strings of corresponding tag names inside
-  // if value === arr name,
-      // declare a var recipes to display asign to an empty arr
-      // (forEach) iterate over the array of tags
-        // user.filterRecipes(tag) .. push these into empty arr
-      // flatten result arr
-      // invoke clearRecipeContainers
-      // forEach recipe in variable arr
-        // create recipes
-        // display recipes
+  displayAllRecipes(recipes);
 }
 
 function markUnmarkAsFavorite(event) {

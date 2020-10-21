@@ -1,5 +1,5 @@
-const chai = require('chai');
-const expect = chai.expect;
+// const chai = require('chai');
+// const expect = chai.expect;
 
 const Ingredient = require('../src/ingredient');
 const IngredientInventory = require('../src/ingredientInventory');
