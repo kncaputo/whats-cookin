@@ -34,7 +34,7 @@ h3 {
 }
 
 p {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 100;
 }
 
@@ -347,4 +347,21 @@ transition: .5s ease;
 .card-effect {
   border: lightgray 1px solid;
   box-shadow: 6px 6px 6px darkgray;
+}
+
+.whats-cookin-container {
+  flex-wrap: wrap;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+aside {
+  flex-grow: 2;
+  justify-content: center;
+}
+
+.whatsCookinImg {
+  width: 600px;
+  height: auto;
+
 }

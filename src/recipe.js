@@ -1,4 +1,4 @@
-const IngredientInventory = require('./ingredientInventory.js');
+// const IngredientInventory = require('./ingredientInventory.js');
 
 class Recipe {
   constructor(recipe, rawIngredientsData) {
@@ -27,7 +27,9 @@ class Recipe {
 
   returnIngredients() {
     return this.ingredients.reduce((ingredients, ingredient) => {
-      ingredients.push(`${ingredient.name}`);
+      if (!ingredients.includes(ingredient.name)) {
+        ingredients.push(`${ingredient.name}`);
+      }
       return ingredients;
     }, []);
   }
