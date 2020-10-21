@@ -13,7 +13,7 @@ const pantryContainer = document.querySelector('.pantry-container');
 const allRecipesContainer = document.querySelector('.all-recipes-container');
 const form = document.querySelector('.form');
 
-let user = new User(usersData[0], ingredientsData, recipeData);
+let user = new User(usersData[Math.floor(Math.random() * 49)], ingredientsData, recipeData);
 
 // eventListeners
 window.onload = loadPage();
@@ -24,6 +24,7 @@ allRecipesNav.addEventListener('click', showAllRecipes);
 myPantryNav.addEventListener('click', showMyPantry);
 whatsCookinNav.addEventListener('click', showWhatsCookin);
 form.addEventListener('click', getValues);
+// form.addEventListener('input', clearRecipeContainers);
 
 allRecipesContainer.addEventListener('click', () => {
   determineClickOnAllRecipes(event);
@@ -143,8 +144,8 @@ function displayAllRecipes(recipes) {
   })
 }
 
-function createRecipes(recipe) {
-let recipeCard = `<div class="recipe-card recipe-${recipe.id}" id="recipe-${recipe.id}">
+function createRecipes(recipe, hidden) {
+let recipeCard = `<div class="recipe-card recipe-${recipe.id} ${hidden}" id="recipe-${recipe.id}">
   <div class="recipe-img-box">
     <img src=${recipe.image} alt="recipe image" class="recipe-display-img">
   </div>

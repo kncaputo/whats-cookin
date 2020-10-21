@@ -1836,7 +1836,6 @@ const recipeData = [
     ],
     "name": "Puppy Chow Cookies",
     "tags": [
-      "side dish",
       "dessert"
     ]
   },
@@ -3127,12 +3126,6 @@ const recipeData = [
     ],
     "name": "A Cake To Warm Any Heart \u2013 Banana Split Cake",
     "tags": [
-      "antipasti",
-      "starter",
-      "snack",
-      "appetizer",
-      "antipasto",
-      "hor d'oeuvre",
       "dessert"
     ]
   },
@@ -3553,7 +3546,6 @@ const recipeData = [
     ],
     "name": "Cereal Marshmallow Bars",
     "tags": [
-      "side dish",
       "dessert"
     ]
   },
@@ -5065,12 +5057,6 @@ const recipeData = [
     ],
     "name": "Reese's Pieces Peanut Butter Cookies",
     "tags": [
-      "antipasti",
-      "starter",
-      "snack",
-      "appetizer",
-      "antipasto",
-      "hor d'oeuvre",
       "dessert"
     ]
   },
