@@ -6,33 +6,28 @@ const IngredientInventory = require('../src/ingredientInventory');
 const RecipeBox = require('../src/recipeBox');
 const Pantry = require('../src/pantry');
 
-describe.skip('Pantry', () => {
+describe('Pantry', () => {
   let pantry;
   let recipeBox;
   let pantryItems = [{
     "ingredient": 1,
-    // pumpkin
     "amount": 3
   },
   {
     "ingredient": 2,
-    // sugar
     "amount": 7
   }];
 
   let pantryItems2 = [{
     "ingredient": 5,
-    // tomato
     "amount": 2
   },
   {
     "ingredient": 3,
-    // bread
     "amount": 7
   },
   {
     "ingredient": 1,
-    // pumpkin
     "amount": 10
   }];
 
@@ -90,7 +85,7 @@ describe.skip('Pantry', () => {
     "number": 2
   }]},
   {
-    id: 123,
+    id: 124,
     image: 'https://exampleimage.com/1/1/1',
     ingredients: [{
       "id": 3,
@@ -117,7 +112,7 @@ describe.skip('Pantry', () => {
     }]
   },
   {
-    id: 12,
+    id: 125,
     image: 'https://exampleimage.com/1/1/1',
     ingredients: [{
     "id": 4,
@@ -192,42 +187,14 @@ describe.skip('Pantry', () => {
   });
 
   describe('Check Stock For Recipe', () => {
-    it('should check if there are enough ingredients to make a recipe', () => {
-      pantry.makeIngredients();
+    it('should return ingredients needed to make a recipe', () => {
+      pantry2.makeIngredients();
 
-      let result = pantry.checkStock(recipeBox.allRecipes[0]);
-      let result2 = pantry.checkStock(recipeBox.allRecipes[1]);
+      let result = pantry2.checkStock(recipeBox.allRecipes[2]);
 
-      expect(result).to.deep.equal(true);
-      expect(result2).to.deep.equal(false);
-    });
-  });
-
-    describe('Return Shopping List', () => {
-      it('should return ingredients needed to make a recipe', () => {
-        pantry.makeIngredients();
-
-        let result = pantry.returnIngredientsNeeded(recipeBox.allRecipes[1]);
-
-        expect(result).to.be.an('array');
-        expect(result[0]).to.deep.equal('pasta: 1 box');
-        expect(result[1]).to.deep.equal('tomato: 3 ');
-        expect(result[2]).to.deep.equal(undefined);
-      });
-
-      // 3 tomatoes in recipe
-      // we have 2 in our pantry
-      // we dont have pasta in our pantry
-      // this.Ingredients Needed = recipe ingredient w/ quantity
-      // this.ingredients = pantry w/ amount #
-
-      it('should only show the amount needed on the shopping list', () => {
-        pantry2.makeIngredients();
-
-        let result = pantry2.returnIngredientsNeeded(recipeBox.allRecipes[1]);
-
-        expect(result[0]).to.deep.equal('pasta: 1 box');
-        expect(result[1]).to.deep.equal('tomato: 1 ');
+      expect(result).to.be.an('array');
+      expect(result.length).to.deep.equal(2);
+      expect(result[0]).to.be.an('object');
     });
   });
 });
