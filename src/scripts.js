@@ -173,8 +173,8 @@ let recipeCard = `<div class="recipe-card recipe-${recipe.id}" id="recipe-${reci
     <img src=${recipe.image} alt="recipe image" class="recipe-display-img">
   </div>
   <div class="recipe-action-btns flex-row">
-    <button id="favorite-btn"><img src="../assets/heart-icon-${recipe.isFavorite}.png" id="favorite-btn-${recipe.id}" alt="favorite button"></button>
-    <button class="whats-cookin-btn" id="whats-cookin-btn"><img class="whats-cookin-btn" src="../assets/plus-icon-${recipe.isReadyToCook}.png" id="whats-cookin-btn-${recipe.id}" alt="save button"></button>
+    <button id="favorite-btn"><img src="./assets/heart-icon-${recipe.isFavorite}.png" id="favorite-btn-${recipe.id}" alt="favorite button"></button>
+    <button class="whats-cookin-btn" id="whats-cookin-btn"><img class="whats-cookin-btn" src="./assets/plus-icon-${recipe.isReadyToCook}.png" id="whats-cookin-btn-${recipe.id}" alt="save button"></button>
   </div>
   <h3>${recipe.name}</h3>
   <button class="show-recipe-btn-${recipe.id}" id="show-recipe-btn-${recipe.id}"><h3 class="show-recipe-btn-${recipe.id}" id="show-recipe-btn-${recipe.id}">Show Recipe</h3></button>
@@ -313,17 +313,17 @@ function removeRecipeCard(event) {
 
 function toggleHeartImg(recipe) {
   if (recipe.isFavorite === true) {
-    document.querySelector(`#favorite-btn-${recipe.id}`).src = `../assets/heart-icon-true.png`
+    document.querySelector(`#favorite-btn-${recipe.id}`).src = `./assets/heart-icon-true.png`
   } else {
-    document.querySelector(`#favorite-btn-${recipe.id}`).src = `../assets/heart-icon-false.png`
+    document.querySelector(`#favorite-btn-${recipe.id}`).src = `./assets/heart-icon-false.png`
   }
 }
 
 function togglePlusImg(recipe) {
   if (recipe.isReadyToCook === true) {
-    document.querySelector(`#whats-cookin-btn-${recipe.id}`).src = `../assets/plus-icon-true.png`
+    document.querySelector(`#whats-cookin-btn-${recipe.id}`).src = `./assets/plus-icon-true.png`
   } else {
-    document.querySelector(`#whats-cookin-btn-${recipe.id}`).src = `../assets/plus-icon-false.png`
+    document.querySelector(`#whats-cookin-btn-${recipe.id}`).src = `./assets/plus-icon-false.png`
   }
 }
 

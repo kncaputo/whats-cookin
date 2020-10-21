@@ -7,7 +7,7 @@ class Pantry {
     this.ingredientsNeeded = [];
     this.ingredientInventory = new IngredientInventory(ingredientsData);
   }
-  
+
   makeIngredients() {
     this.ingredientInventory.makeIngredients()
     this.ingredientInventory.allIngredients.forEach(ingredient => {
@@ -29,7 +29,6 @@ class Pantry {
   checkStock(recipe) {
     let ingredientsInStock = [];
     recipe.ingredients.forEach(recipeIngredient => {
-    recipe.ingredients.forEach(recipeIngredient => {
       this.ingredients.forEach(pantryIngredient => {
         if (recipeIngredient.id === pantryIngredient.id && !ingredientsInStock.includes(recipeIngredient)) {
           ingredientsInStock.push(recipeIngredient);
@@ -41,23 +40,23 @@ class Pantry {
     return this.ingredientsNeeded;
   }
 
-  returnIngredientsNeeded(recipe) {
-    this.checkStock(recipe);
-    let amountNeeded;
-    console.log(this.ingredientsNeeded)
-    return this.ingredientsNeeded.reduce((shoppingList, recipeIngredient) => {
-      this.ingredients.forEach(pantryIngredient => {
-        if (recipeIngredient.id === pantryIngredient.id && !ingredientsInStock.includes(recipeIngredient)) {
-          ingredientsInStock.push(recipeIngredient);
-        } else if (recipeIngredient.id !== pantryIngredient.id && !this.ingredientsNeeded.includes(recipeIngredient)) {
-          this.ingredientsNeeded.push(recipeIngredient);
-        }
-      })
-    })
-    return this.ingredientsNeeded;
-  }
+  // returnIngredientsNeeded(recipe) {
+  //   this.checkStock(recipe);
+  //   let amountNeeded;
+  //   console.log(this.ingredientsNeeded)
+  //   return this.ingredientsNeeded.reduce((shoppingList, recipeIngredient) => {
+  //     this.ingredients.forEach(pantryIngredient => {
+  //       if (recipeIngredient.id === pantryIngredient.id && !ingredientsInStock.includes(recipeIngredient)) {
+  //         ingredientsInStock.push(recipeIngredient);
+  //       } else if (recipeIngredient.id !== pantryIngredient.id && !this.ingredientsNeeded.includes(recipeIngredient)) {
+  //         this.ingredientsNeeded.push(recipeIngredient);
+  //       }
+  //     })
+  //   })
+  //   return this.ingredientsNeeded;
+  // }
 }
-  
+
 if (typeof module !== 'undefined') {
   module.exports = Pantry;
 }
