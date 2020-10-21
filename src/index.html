@@ -22,8 +22,9 @@
     <main class="flex-row">
       <section class="flex-column" id="main">
         <div class="flex-column form" id="search-container">
-          <form id="form-search">
-               <input type="text" placeholder="Search" id="search-bar" name="form-search">
+          <form class= id="form-search">
+               <input type="text" placeholder="Search by ingredient" id="search-bar" name="form-search">
+               <button id="search-btn">Search</button>
           </form>
           <form class="flex-row radio-filter" id="filter-search">
             <input type="radio" class="filters" id="breakfast" name="filter-search" value="breakfast">
@@ -40,6 +41,7 @@
             <label for="appetizers" class="filters"><div class="grow"><img src="../assets/appetizers.png" class="img-icon grow"></div><br>Appetizers</label>
             <input type="radio" class="filters" id="sides" name="filter-search" value="sides">
             <label for="sides" class="filters"><div class="grow"><img src="../assets/avo-dip-small.png" class="img-icon grow"></div><br>Sides</label>
+            <button id="reset">Reset Filters</button>
           </form>
         </div>
         <div class="all-recipes-container flex-row">
