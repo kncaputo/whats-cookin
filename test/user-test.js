@@ -2,6 +2,8 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const Ingredient = require('../src/ingredient');
+const IngredientInventory = require('../src/ingredientInventory');
+const Recipe = require('../src/recipe');
 const RecipeBox = require('../src/recipeBox');
 const Pantry = require('../src/pantry');
 const User = require('../src/user');
@@ -22,6 +24,10 @@ describe('User', () => {
     {
       "ingredient": 3,
       "amount": 10
+    },
+    {
+      "ingredient": 666,
+      "amount": 9
     }]
   };
 
@@ -49,7 +55,17 @@ describe('User', () => {
     "id": 5,
     "name": "salt",
     "estimatedCostInCents": 320
-  }];
+  },
+{
+  "id": 666,
+  "name": "watermelon",
+  "estimatedCostInCents": 320
+},
+{
+  "id": 777,
+  "name": "salt",
+  "estimatedCostInCents": 120
+}];
 
   let sampleRecipeData = [
     {
@@ -123,47 +139,43 @@ describe('User', () => {
         "main dish",
         "dinner"
       ]
+    },
+    {
+      id: 123,
+      image: 'https://exampleimage.com/1/1/1',
+      ingredients: [{
+        "id": 666,
+        "quantity": {
+          "amount": 1,
+          "unit": "c"
+        }
+      },
+      {
+        "id": 777,
+        "quantity": {
+          "amount": 1.5,
+          "unit": "tsp"
+        }
+      }],
+      name: 'Watermelon Juice',
+      instructions: [{
+        "instruction": "Get a cup.",
+        "number": 1
+      },
+      {
+        "instruction": "Put in smashed watermelon.",
+        "number": 2
+      }],
+      tags: [
+        "snack",
+        "drink",
+      ]
     }
-    // , {
-    //   id: 13,
-    //   image: 'https://exampleimage.com/1/1/1',
-    //   ingredients: [{
-    //   "id": 1,
-    //   "quantity": {
-    //     "amount": 0.75,
-    //     "unit": "cup"
-    //   }
-    //   },
-    //   {
-    //     "id": 3,
-    //     "quantity": {
-    //       "amount": 1,
-    //       "unit": "tortilla"
-    //     }
-    //   }],
-    //   name: 'Cheese Quesadilla',
-    //   instructions: [{
-    //     "instruction": "Put cheese on tortilla.",
-    //     "number": 1
-    //   },
-    //   {
-    //     "instruction": "Fry in pan",
-    //     "number": 2
-    //   }],
-    //   "tags": [
-    //     "lunch",
-    //     "main course",
-    //     "main dish",
-    //     "dinner"
-    //   ]
-    // }
   ];
 
   beforeEach(() => {
     user = new User(bob, sampleIngredientsData, sampleRecipeData);
-    // burrito = new Recipe(burrito, sampleIngredientsData);
-    // cheeseQuesadilla = new Recipe(cheeseQuesadilla, sampleIngredientsData);
-    // watermelonJuice = new Recipe(watermelonJuice, sampleIngredientsData);
+    user.start();
   });
 
   describe('Constructor', () => {
@@ -192,58 +204,57 @@ describe('User', () => {
     });
   });
 
-  describe('Make Ingredients', () => {
-    it('should have instances of Ingredients in the pantry', () => {
-      user.pantry.makeIngredients();
-
+  describe('Start', () => {
+    it('should make ingredients with pantry', () => {
+      expect(user.pantry.ingredientInventory).to.be.an.instanceof(IngredientInventory);
       expect(user.pantry.ingredients[0]).to.be.an.instanceof(Ingredient);
     });
 
-    it('should have ingredients that match array in object passed as argument', () => {
-      user.pantry.makeIngredients();
-
-      expect(user.pantry.ingredients[0].name).to.deep.equal('cheese');
-    });
-  });
-
-  describe('Add Recipe To List', () => {
-    it('should add a recipe to favorites', () => {
-
+    it('should make recipes with recipeBox', () => {
+      expect(user.recipeBox.allRecipes[1]).to.be.an.instanceof(Recipe);
     });
 
-    it('should add a recipe to cook', () => {
-
+    it('should make ingredients and an inventory for every recipe', () => {
+      expect(user.recipeBox.allRecipes[0].ingredientInventory).to.be.an.instanceof(IngredientInventory);
+      expect(user.recipeBox.allRecipes[0].ingredients[0]).to.be.an.instanceof(Ingredient);
     });
 
-    it('should indicate that recipe has been favorited when added to favorite recipes', () => {
+    it('should update amount value for a pantry ingredient', () => {
+      const result = user.pantry.ingredients[0];
 
+      expect(result.amount).to.deep.equal(2);
+      expect(result.name).to.deep.equal('cheese');
     });
 
-    it('should indicate that recipe is ready to cook when added to recipes to cook', () => {
+    it('should update quantity value for a recipe ingredient', () => {
+      const result = user.recipeBox.allRecipes[0].ingredients[0];
 
-    });
-  });
-
-  describe('Remove Recipe From List', () => {
-    it('should be able to remove recipe from favorites', () => {
-
-    });
-
-    it('should be able to remove recipe from recipes to cook', () => {
-
+      expect(result.quantity.amount).to.deep.equal(0.75);
+      expect(result.quantity.unit).to.deep.equal("cup");
+      expect(result.name).to.deep.equal("cheese");
     });
   })
 
   describe('Search Recipes', () => {
     it('should be able to search recipes via input', () => {
+      const result = user.searchRecipes('Cheese');
 
+      expect(result.length).to.deep.equal(2);
+      expect(result[0].name).to.deep.equal('Burrito');
+      expect(result[1].name).to.deep.equal('Cheese Quesadilla');
     });
+
+    it('should be able to search by ingredient', () => {
+      const result = user.searchRecipes('waterMELON');
+
+      expect(result.length).to.deep.equal(1);
+      expect(result[0].name).to.deep.equal('Watermelon Juice');
+    })
   });
 
   describe('Filter Recipes', () => {
     it('should be able to filter recipe by input', () => {
 
-    user.recipeBox.makeRecipes();
     expect(user.filterRecipeByType('side dish')).to.be.an('array');
     expect(user.filterRecipeByType('side dish').length).to.deep.equal(1);
     })

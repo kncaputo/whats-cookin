@@ -132,12 +132,7 @@ function markUnmarkReadyToCook(event) {
 }
 
 function loadPage() {
-  user.recipeBox.makeRecipes()
-  user.pantry.makeIngredients();
-  user.pantry.ingredientInventory.updateIngredientData(user.pantry.rawPantryData, 'amount');
-  user.recipeBox.allRecipes.forEach(recipe => {
-    recipe.ingredientInventory.updateIngredientData(user.recipeBox.rawRecipeData, 'quantity');
-  })
+  user.start();
   displayAllRecipes(user.recipeBox.allRecipes);
 }
 

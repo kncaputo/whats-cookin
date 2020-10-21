@@ -6,7 +6,7 @@ const IngredientInventory = require('../src/ingredientInventory');
 const RecipeBox = require('../src/recipeBox');
 const Pantry = require('../src/pantry');
 
-describe.only('Pantry', () => {
+describe.skip('Pantry', () => {
   let pantry;
   let recipeBox;
   let pantryItems = [{
