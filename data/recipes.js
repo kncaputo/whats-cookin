@@ -914,7 +914,8 @@ const recipeData = [
       "snack",
       "appetizer",
       "antipasto",
-      "hor d'oeuvre"
+      "hor d'oeuvre",
+      "dessert"
     ]
   },
   {
@@ -1835,7 +1836,8 @@ const recipeData = [
     ],
     "name": "Puppy Chow Cookies",
     "tags": [
-      "side dish"
+      "side dish",
+      "dessert"
     ]
   },
   {
@@ -2522,7 +2524,8 @@ const recipeData = [
       "snack",
       "appetizer",
       "antipasto",
-      "hor d'oeuvre"
+      "hor d'oeuvre",
+      "dessert"
     ]
   },
   {
@@ -3129,7 +3132,8 @@ const recipeData = [
       "snack",
       "appetizer",
       "antipasto",
-      "hor d'oeuvre"
+      "hor d'oeuvre",
+      "dessert"
     ]
   },
   {
@@ -3549,7 +3553,8 @@ const recipeData = [
     ],
     "name": "Cereal Marshmallow Bars",
     "tags": [
-      "side dish"
+      "side dish",
+      "dessert"
     ]
   },
   {
@@ -4888,7 +4893,8 @@ const recipeData = [
     ],
     "name": "Rolo Cookie Bars",
     "tags": [
-      "side dish"
+      "side dish",
+      "dessert"
     ]
   },
   {
@@ -5064,7 +5070,8 @@ const recipeData = [
       "snack",
       "appetizer",
       "antipasto",
-      "hor d'oeuvre"
+      "hor d'oeuvre",
+      "dessert"
     ]
   },
   {

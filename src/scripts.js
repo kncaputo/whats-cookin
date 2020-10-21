@@ -79,7 +79,7 @@ function getValues() {
 
   const appetizers = ["antipasti", "starter", "snack", "appetizer", "antipasto", "hor d'oeuvre"];
   const breakfast = ["morning meal", "brunch", "breakfast", "morning meal", "brunch", "breakfast"];
-  const dessert = [];
+  const dessert = ["dessert"];
   const dinner = ["main course", "main dish", "dinner"];
   const dips = ["condiment", "dip", "spread", "sauce"];
   const lunch = ["lunch", "main course", "main dish", "salad", "dinner"];
