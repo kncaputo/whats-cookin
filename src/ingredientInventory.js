@@ -36,7 +36,6 @@ class IngredientInventory {
   }
 }
 
-
 if (typeof module !== 'undefined') {
   module.exports = IngredientInventory;
-};
+}
