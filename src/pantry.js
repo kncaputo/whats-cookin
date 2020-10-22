@@ -12,7 +12,7 @@ class Pantry {
     this.ingredientInventory.makeIngredients()
     this.ingredientInventory.allIngredients.forEach(ingredient => {
       this.rawPantryData.forEach(pantryIngredient => {
-        if (pantryIngredient.ingredient === ingredient.id && ingredient.amount !== null) {
+        if (pantryIngredient.ingredient === ingredient.id) {
           this.ingredients.push(ingredient);
         }
       })

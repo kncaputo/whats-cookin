@@ -214,7 +214,7 @@ function createModals(recipe) {
 }
 
 function displayIngredients() {
-  user.pantry.updateIngredientData(user.pantry.rawPantryData, 'amount');
+  // user.pantry.updateIngredientData(user.pantry.rawPantryData, 'amount');
   user.pantry.ingredients.forEach(ingredient => {
     let ingredientCard = `<div class="ingredient-card flex-row">
     <div>
