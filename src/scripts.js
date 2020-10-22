@@ -46,6 +46,7 @@ whatsCookinContainer.addEventListener('click', () => {
 });
 
 function loadPage() {
+  document.querySelector('.header').innerText = `${user.name}'s Kitchen`
   user.start();
   displayAllRecipes(user.recipeBox.allRecipes);
 }
