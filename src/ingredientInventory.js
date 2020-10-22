@@ -10,7 +10,9 @@ class IngredientInventory {
   makeIngredients() {
     if (this.rawIngredientsData !== undefined) {
       this.rawIngredientsData.forEach(ingredient => {
-        this.allIngredients.push(new Ingredient(ingredient));
+        if (ingredient !== null) {
+          this.allIngredients.push(new Ingredient(ingredient));
+        }
       });
     }
   }
@@ -29,8 +31,8 @@ class IngredientInventory {
         if ((object.ingredient === ingredient.id) || (object.id === ingredient.id)) {
           return this.foundIngredient[key] = object[key];
         }
-      })
-    })
+      });
+    });
   }
 }
 
