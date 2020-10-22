@@ -72,7 +72,15 @@ function executeSearch() {
   let userInput = searchBar.value;
   let resultRecipes = user.searchRecipes(userInput);
   clearRecipeContainers();
-  displayAllRecipes(resultRecipes);
+  if (!favoritesContainer.classList.contains('hidden')) {
+    resultRecipes.forEach(recipe => {
+      if (recipe.isFavorite === true) {
+      displaySavedRecipes(recipe, 'favoritesContainer')
+      }
+    })
+  } else {
+    displayAllRecipes(resultRecipes);
+  }
   searchBar.value = '';
 }
 
@@ -96,7 +104,7 @@ function displayWhatsCookinRecipe(event) {
       document.querySelector('#recipe-title-whats-cookin').innerText = `${recipe.name}`;
       document.querySelector('#recipe-ingredients-whats-cookin').innerText = `${recipe.returnIngredients()}`;
       document.querySelector('#total-cost-whats-cookin').innerText = `${recipe.calculateCost()}`;
-      document.querySelector('#shopping-list').innerText = `${user.pantry.checkStock(recipe)}`
+      document.querySelector('#shopping-list').innerText = `${user.pantry.parseShoppingList(recipe)}`
     }
   })
 }
@@ -157,6 +165,8 @@ function markUnmarkReadyToCook(event) {
 
 function loadPage() {
   user.start();
+  // TODO
+  favoritesContainer.classList.add('hidden')
   displayAllRecipes(user.recipeBox.allRecipes);
 }
 
@@ -188,7 +198,7 @@ function createModals(recipe) {
     <div class="modal-content flex-column">
       <div class="modal-header">
         <div>
-          <img src=${recipe.image} alt="recipe image" class="modal-banner">
+          <img id="modal-img" src=${recipe.image} alt="recipe image" class="modal-banner">
         </div>
       </div>
       <div class="modal-body flex-column">
@@ -238,12 +248,14 @@ function clearRecipeContainers() {
 function showAllRecipes() {
   allRecipesContainer.classList.remove('hidden');
   searchContainer.classList.remove('hidden');
+  favoritesContainer.classList.add('hidden')
   whatsCookinPage.classList.add('hidden');
   clearRecipeContainers();
   displayAllRecipes(user.recipeBox.allRecipes);
 }
 
 function showFavorites() {
+  favoritesContainer.classList.remove('hidden')
   allRecipesContainer.classList.add('hidden');
   searchContainer.classList.remove('hidden');
   whatsCookinPage.classList.add('hidden');
@@ -266,14 +278,16 @@ function displaySavedRecipes(recipe, container) {
 }
 
 function showMyPantry() {
+  favoritesContainer.classList.add('hidden');
   whatsCookinPage.classList.add('hidden');
   allRecipesContainer.classList.add('hidden');
-  searchContainer.classList.remove('hidden');
+  searchContainer.classList.add('hidden');
   clearRecipeContainers();
   displayIngredients();
 }
 
 function showWhatsCookin() {
+  favoritesContainer.classList.add('hidden');
   allRecipesContainer.classList.add('hidden');
   searchContainer.classList.add('hidden');
   clearRecipeContainers();
