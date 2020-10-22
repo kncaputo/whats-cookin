@@ -27,18 +27,18 @@ class Recipe {
 
   returnIngredients() {
     return this.ingredients.reduce((ingredients, ingredient) => {
-    ingredient.name = ingredient.name.toLowerCase();
-    ingredient.quantity.unit = ingredient.quantity.unit.toLowerCase();
-    let recipeIngredientString = ` ${ingredient.name} [ ${ingredient.quantity.amount.toFixed(2)} ${ingredient.quantity.unit}]`
-      if (!ingredients.includes(recipeIngredientString)) {
-        ingredients.push(recipeIngredientString);
-      }
-      return ingredients
+      ingredient.name = ingredient.name.toLowerCase();
+      ingredient.quantity.unit = ingredient.quantity.unit.toLowerCase();
+      let recipeIngredientString = ` ${ingredient.name} [ ${ingredient.quantity.amount.toFixed(2)} ${ingredient.quantity.unit}]`
+        if (!ingredients.includes(recipeIngredientString)) {
+          ingredients.push(recipeIngredientString);
+        }
+      return ingredients;
     }, []);
   }
 
   makeIngredients() {
-    this.ingredientInventory.makeIngredients()
+    this.ingredientInventory.makeIngredients();
     this.ingredientInventory.allIngredients.forEach(ingredient => {
       this.rawRecipeIngredientData.forEach(recipeIngredient => {
         if (recipeIngredient.id === ingredient.id && ingredient.quantity !== null) {
