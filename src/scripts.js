@@ -45,6 +45,12 @@ whatsCookinContainer.addEventListener('click', () => {
   determineClickInWhatsCookin(event);
 });
 
+function loadPage() {
+  document.querySelector('.header').innerText = `${user.name}'s Kitchen`
+  user.start();
+  displayAllRecipes(user.recipeBox.allRecipes);
+}
+
 function determineClickOnAllRecipes(event) {
   markUnmarkAsFavorite(event);
   markUnmarkReadyToCook(event);
@@ -104,7 +110,7 @@ function displayWhatsCookinRecipe(event) {
       document.querySelector('#recipe-title-whats-cookin').innerText = `${recipe.name}`;
       document.querySelector('#recipe-ingredients-whats-cookin').innerText = `${recipe.returnIngredients()}`;
       document.querySelector('#total-cost-whats-cookin').innerText = `${recipe.calculateCost()}`;
-      document.querySelector('#shopping-list').innerText = `${user.pantry.parseShoppingList(recipe)}`
+      // document.querySelector('#shopping-list').innerText = `${user.pantry.checkStock(recipe)}`
     }
   })
 }
@@ -118,7 +124,7 @@ function getValues() {
   }
   const appetizers = ["antipasti", "starter", "snack", "appetizer", "antipasto", "hor d'oeuvre"];
   const breakfast = ["morning meal", "brunch", "breakfast", "morning meal", "brunch", "breakfast"];
-  const dessert = [];
+  const dessert = ["dessert"];
   const dinner = ["main course", "main dish", "dinner"];
   const dips = ["condiment", "dip", "spread", "sauce"];
   const lunch = ["lunch", "main course", "main dish", "salad", "dinner"];
@@ -165,7 +171,6 @@ function markUnmarkReadyToCook(event) {
 
 function loadPage() {
   user.start();
-  // TODO
   favoritesContainer.classList.add('hidden')
   displayAllRecipes(user.recipeBox.allRecipes);
 }
@@ -224,7 +229,6 @@ function createModals(recipe) {
 }
 
 function displayIngredients() {
-  user.pantry.updateIngredientData(user.pantry.rawPantryData, 'amount');
   user.pantry.ingredients.forEach(ingredient => {
     let ingredientCard = `<div class="ingredient-card flex-row">
     <div>
@@ -308,6 +312,7 @@ function displayWhatsCookinAside() {
       document.querySelector('#recipe-title-whats-cookin').innerText = `${recipe.name}`;
       document.querySelector('#recipe-ingredients-whats-cookin').innerText = `${recipe.returnIngredients()}`;
       document.querySelector('#total-cost-whats-cookin').innerText = `${recipe.calculateCost()}`;
+      // document.querySelector('#shopping-list').innerText = `${user.pantry.checkStock(recipe)}`;
     }
   })
   whatsCookinPage.classList.remove('hidden');

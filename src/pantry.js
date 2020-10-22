@@ -26,43 +26,21 @@ class Pantry {
     });
   }
 
-  checkStock(recipe) {
-    let ingredientsInStock = [];
-    this.ingredientsNeeded = [];
-    recipe.ingredients.forEach(recipeIngredient => {
-      this.ingredients.forEach(pantryIngredient => {
-        console.log("recipeIngredient:", recipeIngredient)
-        // console.log("recipeIngredient.quantity.amount: ", recipeIngredient.quantity.amount)
-        console.log("pantryIngredient.amount: ", pantryIngredient.amount)
-        if (recipeIngredient.id === pantryIngredient.id && recipeIngredient.quantity.amount <= pantryIngredient.amount && !ingredientsInStock.includes(recipeIngredient)) {
-          ingredientsInStock.push(recipeIngredient);
-        } else if (recipeIngredient.id === pantryIngredient.id && recipeIngredient.quantity.amount > pantryIngredient.amount && !ingredientsInStock.includes(recipeIngredient)) {
-          recipeIngredient.amountNeeded = recipeIngredient.quantity.amount - pantryIngredient.amount;
-        } else if (recipeIngredient.id !== pantryIngredient.id && !this.ingredientsNeeded.includes(recipeIngredient)) {
-          this.ingredientsNeeded.push(recipeIngredient);
-        }
-      })
-    })
-    // iterate over ingredients in stock
-      // iterate over the recipe
-        // compare (pantry this.ingredients.amount
-    return this.ingredientsNeeded;
-  }
-
-  parseShoppingList(recipe) {
-    this.checkStock(recipe);
-    if (this.ingredientsNeeded.length > 0) {
-      return this.ingredientsNeeded.reduce((shoppingList, ingredient) => {
-        console.log(ingredient)
-        if (!shoppingList.includes(ingredient.name)) {
-          shoppingList.push(`${ingredient.name}`);
-        }
-        return shoppingList;
-        }, []);
-    } else {
-      return 'You have everything you need!'
-    }
-  }
+  // checkStock(recipe) {
+  //   let ingredientsInStock = [];
+  //   recipe.ingredients.forEach(recipeIngredient => {
+  //     this.ingredients.forEach(pantryIngredient => {
+  //       if (recipeIngredient.id === pantryIngredient.id && !ingredientsInStock.includes(recipeIngredient)) {
+  //         ingredientsInStock.push(recipeIngredient);
+  //       } else if (recipeIngredient.id !== pantryIngredient.id && !this.ingredientsNeeded.includes(recipeIngredient)) {
+  //         this.ingredientsNeeded.push(recipeIngredient);
+  //       }
+  //     })
+  //   })
+  //   return this.ingredientsNeeded.map(ingredient => {
+  //     ingredient = `${ingredient.name.toLowerCase()}`
+  //   });
+  // }
 }
 
 if (typeof module !== 'undefined') {
