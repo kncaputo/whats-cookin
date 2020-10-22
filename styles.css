@@ -106,23 +106,16 @@ button, .radio-filter label:hover {
 #search-container {
   background: #dedede;
   height: auto;
-  max-width: 1000px;
-  min-width: 700px;
+  max-width: 967px;
+  min-width: 933px;
   align-content: space-around;
   box-shadow: 6px 6px 6px darkgrey;
   margin: -200px 15px 30px 15px;
   z-index: 1;
 }
 
-/* @media only screen and (max-width: 1075px) {
-  #search-container {
-    height: 325px !important;
-    align-content: space-around;
-  }
-} */
-
 #search-bar {
-  width: 90%;
+  width: 83%;
   height: 40px;
   margin: 30px 0 0 30px;
 }
@@ -158,6 +151,24 @@ input[type=radio]:checked + label {
 
 .btn-labels {
   margin-top: 10px;
+}
+
+#reset {
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 5px 5px 5px;
+  height: 30px;
+  width: 50px;
+  align-self: center;
+}
+
+#search-btn {
+  border-radius: 5px;
+  padding: 5px 5px 5px 5px;
+  height: 30px;
+  width: 50px;
+  margin-left: 9px;
 }
 
 .recipes-container, .pantry-container, .all-recipes-container {
@@ -331,8 +342,7 @@ transition: .5s ease;
 
 .modal-banner {
   object-fit: cover;
-  width: 100%;
-  height: 420px;
+  height: 350px;
 }
 
 .modal-header {
