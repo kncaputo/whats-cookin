@@ -26,25 +26,9 @@ class Pantry {
     });
   }
 
-  checkStock(recipe) {
-    let ingredientsInStock = [];
-    recipe.ingredients.forEach(recipeIngredient => {
-      this.ingredients.forEach(pantryIngredient => {
-        if (recipeIngredient.id === pantryIngredient.id && !ingredientsInStock.includes(recipeIngredient)) {
-          ingredientsInStock.push(recipeIngredient);
-        } else if (recipeIngredient.id !== pantryIngredient.id && !this.ingredientsNeeded.includes(recipeIngredient)) {
-          this.ingredientsNeeded.push(recipeIngredient);
-        }
-      })
-    })
-    return this.ingredientsNeeded;
-  }
-
-  // returnIngredientsNeeded(recipe) {
-  //   this.checkStock(recipe);
-  //   let amountNeeded;
-  //   console.log(this.ingredientsNeeded)
-  //   return this.ingredientsNeeded.reduce((shoppingList, recipeIngredient) => {
+  // checkStock(recipe) {
+  //   let ingredientsInStock = [];
+  //   recipe.ingredients.forEach(recipeIngredient => {
   //     this.ingredients.forEach(pantryIngredient => {
   //       if (recipeIngredient.id === pantryIngredient.id && !ingredientsInStock.includes(recipeIngredient)) {
   //         ingredientsInStock.push(recipeIngredient);
@@ -53,8 +37,11 @@ class Pantry {
   //       }
   //     })
   //   })
-  //   return this.ingredientsNeeded;
+  //   return this.ingredientsNeeded.map(ingredient => {
+  //     ingredient = `${ingredient.name.toLowerCase()}`
+  //   });
   // }
+
 }
 
 if (typeof module !== 'undefined') {
