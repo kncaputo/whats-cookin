@@ -34,7 +34,7 @@ h3 {
 }
 
 p {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 100;
 }
 
@@ -106,8 +106,8 @@ button, .radio-filter label:hover {
 #search-container {
   background: #dedede;
   height: auto;
-  max-width: 967px;
-  min-width: 933px;
+  max-width: 1000px;
+  min-width: 950px;
   align-content: space-around;
   box-shadow: 6px 6px 6px darkgrey;
   margin: -200px 15px 30px 15px;
@@ -115,7 +115,7 @@ button, .radio-filter label:hover {
 }
 
 #search-bar {
-  width: 83%;
+  width: 80%;
   height: 40px;
   margin: 30px 0 0 30px;
 }
@@ -151,24 +151,6 @@ input[type=radio]:checked + label {
 
 .btn-labels {
   margin-top: 10px;
-}
-
-#reset {
-  color: black;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 5px 5px 5px;
-  height: 30px;
-  width: 50px;
-  align-self: center;
-}
-
-#search-btn {
-  border-radius: 5px;
-  padding: 5px 5px 5px 5px;
-  height: 30px;
-  width: 50px;
-  margin-left: 9px;
 }
 
 .recipes-container, .pantry-container, .all-recipes-container {
@@ -326,8 +308,8 @@ transition: .5s ease;
   z-index: 1;
   left: 0;
   top: 0;
-  width: 100%;
-  height: 100%;
+  width: 900px;
+  height: 600px;
   overflow: auto;
   background-color: rgba(0,0,0,0.4);
 }
@@ -342,7 +324,8 @@ transition: .5s ease;
 
 .modal-banner {
   object-fit: cover;
-  height: 350px;
+  width: 600px;
+  height: 420px;
 }
 
 .modal-header {
@@ -357,21 +340,4 @@ transition: .5s ease;
 .card-effect {
   border: lightgray 1px solid;
   box-shadow: 6px 6px 6px darkgray;
-}
-
-.whats-cookin-container {
-  flex-wrap: wrap;
-  flex-grow: 1;
-  justify-content: flex-start;
-}
-
-aside {
-  flex-grow: 2;
-  justify-content: center;
-}
-
-.whatsCookinImg {
-  width: 600px;
-  height: auto;
-
 }

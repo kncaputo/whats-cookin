@@ -41,7 +41,6 @@ class Pantry {
   //     ingredient = `${ingredient.name.toLowerCase()}`
   //   });
   // }
-
 }
 
 if (typeof module !== 'undefined') {
