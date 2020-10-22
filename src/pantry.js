@@ -31,13 +31,21 @@ class Pantry {
     this.ingredientsNeeded = [];
     recipe.ingredients.forEach(recipeIngredient => {
       this.ingredients.forEach(pantryIngredient => {
-        if (recipeIngredient.id === pantryIngredient.id && !ingredientsInStock.includes(recipeIngredient)) {
+        console.log("recipeIngredient:", recipeIngredient)
+        // console.log("recipeIngredient.quantity.amount: ", recipeIngredient.quantity.amount)
+        console.log("pantryIngredient.amount: ", pantryIngredient.amount)
+        if (recipeIngredient.id === pantryIngredient.id && recipeIngredient.quantity.amount <= pantryIngredient.amount && !ingredientsInStock.includes(recipeIngredient)) {
           ingredientsInStock.push(recipeIngredient);
+        } else if (recipeIngredient.id === pantryIngredient.id && recipeIngredient.quantity.amount > pantryIngredient.amount && !ingredientsInStock.includes(recipeIngredient)) {
+          recipeIngredient.amountNeeded = recipeIngredient.quantity.amount - pantryIngredient.amount;
         } else if (recipeIngredient.id !== pantryIngredient.id && !this.ingredientsNeeded.includes(recipeIngredient)) {
           this.ingredientsNeeded.push(recipeIngredient);
         }
       })
     })
+    // iterate over ingredients in stock
+      // iterate over the recipe
+        // compare (pantry this.ingredients.amount
     return this.ingredientsNeeded;
   }
 
