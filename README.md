@@ -8,7 +8,7 @@
 
 ### How To Access This Application
 
-+ [GitHub Pages](https://kncaputo.github.io/whats-cookin/) (If it's not working, try incognito mode on Chrome)
++ [GitHub Pages](https://kncaputo.github.io/whats-cookin/)
 + Or:
   + On your Terminal: `git clone git@github.com:kncaputo/whats-cookin.git`
   + `cd` into the repository, then run the command: `open src/index.html`
